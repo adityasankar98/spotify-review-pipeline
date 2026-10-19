@@ -1,0 +1,141 @@
+{
+ "unit_rates": {
+  "enrich_cost_per_text": 8.8162e-06,
+  "enrich_std_cost_per_text": 1.7632399999999997e-05,
+  "enrich_in_tokens_per_text": 45.37,
+  "enrich_out_tokens_per_text": 17.81,
+  "enrich_cache_tokens_per_request": 3104.0,
+  "retry_rate": 0.0,
+  "batch_turnaround_s": 424.688,
+  "verify_cost_per_review": 3.209640000000001e-05,
+  "verify_latency_s": 0.1002,
+  "group_cost": 0.0013855249999999999,
+  "memo_cost": 0.035721,
+  "group_s": 7.099,
+  "memo_s": 13.7,
+  "origins": 100,
+  "verify_sample": 20
+ },
+ "scenarios": {
+  "base": {
+   "texts_classified": 484189,
+   "retry_fraction": 0.01,
+   "requests": 9781,
+   "message_batches": 49,
+   "batch_turnaround_s": 424.7,
+   "cost_usd": {
+    "enrich (batch tier)": 4.311394132418,
+    "verify (Jev)": 0.006483472800000001,
+    "group+memo (once)": 0.037106525,
+    "total": 4.354984130218
+   },
+   "enrich_if_standard_tier": 8.622788264835998,
+   "worst_case_enrich_at_output_cap": 6.602067000000001,
+   "by_provider": {
+    "anthropic": 4.3485006574180005,
+    "typesafe": 0.006483472800000001
+   },
+   "hours": {
+    "enrich": 1.5335955555555554,
+    "verify": 0.006944444444444444,
+    "fixed": 0.008555277777777778,
+    "total": 1.5490952777777776
+   },
+   "over_budget": false,
+   "over_provider_caps": {
+    "anthropic": false,
+    "typesafe": false
+   }
+  },
+  "base_no_reuse": {
+   "texts_classified": 660609,
+   "retry_fraction": 0.01,
+   "requests": 13345,
+   "message_batches": 67,
+   "batch_turnaround_s": 424.7,
+   "cost_usd": {
+    "enrich (batch tier)": 5.882301676458,
+    "verify (Jev)": 0.006483472800000001,
+    "group+memo (once)": 0.037106525,
+    "total": 5.925891674258001
+   },
+   "enrich_if_standard_tier": 11.764603352915998,
+   "worst_case_enrich_at_output_cap": 9.00796275,
+   "by_provider": {
+    "anthropic": 5.919408201457999,
+    "typesafe": 0.006483472800000001
+   },
+   "hours": {
+    "enrich": 2.005471111111111,
+    "verify": 0.006944444444444444,
+    "fixed": 0.008555277777777778,
+    "total": 2.0209708333333336
+   },
+   "over_budget": false,
+   "over_provider_caps": {
+    "anthropic": true,
+    "typesafe": false
+   }
+  },
+  "conservative": {
+   "texts_classified": 484189,
+   "retry_fraction": 0.05,
+   "requests": 10168,
+   "message_batches": 51,
+   "batch_turnaround_s": 1274.1,
+   "cost_usd": {
+    "enrich (batch tier)": 4.48214241489,
+    "verify (Jev)": 0.006740244000000001,
+    "group+memo (once)": 0.037106525,
+    "total": 4.525989183890001
+   },
+   "enrich_if_standard_tier": 8.964284829779999,
+   "worst_case_enrich_at_output_cap": 6.863535000000001,
+   "by_provider": {
+    "anthropic": 4.51924893989,
+    "typesafe": 0.006740244000000001
+   },
+   "hours": {
+    "enrich": 4.600786666666666,
+    "verify": 0.006944444444444444,
+    "fixed": 0.008555277777777778,
+    "total": 4.616286388888889
+   },
+   "over_budget": false,
+   "over_provider_caps": {
+    "anthropic": true,
+    "typesafe": false
+   }
+  },
+  "conservative_no_reuse": {
+   "texts_classified": 660609,
+   "retry_fraction": 0.05,
+   "requests": 13874,
+   "message_batches": 70,
+   "batch_turnaround_s": 1274.1,
+   "cost_usd": {
+    "enrich (batch tier)": 6.115264119090001,
+    "verify (Jev)": 0.006740244000000001,
+    "group+memo (once)": 0.037106525,
+    "total": 6.159110888090002
+   },
+   "enrich_if_standard_tier": 12.23052823818,
+   "worst_case_enrich_at_output_cap": 9.364713750000002,
+   "by_provider": {
+    "anthropic": 6.15237064409,
+    "typesafe": 0.006740244000000001
+   },
+   "hours": {
+    "enrich": 6.3703199999999995,
+    "verify": 0.006944444444444444,
+    "fixed": 0.008555277777777778,
+    "total": 6.385819722222222
+   },
+   "over_budget": false,
+   "over_provider_caps": {
+    "anthropic": true,
+    "typesafe": false
+   }
+  }
+ }
+}

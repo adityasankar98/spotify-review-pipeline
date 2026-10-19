@@ -1,0 +1,48 @@
+{
+ "input_sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
+ "ids": 100,
+ "verify_sample": 20,
+ "pilot_started": "2026-10-18 20:04:55 PDT",
+ "command": "-m pipeline run --input /Users/adityasankar/code/AgenticAI/spotify-review-pipeline/data/raw/cost_100.csv --run pilot100 --workers 1 --transport batch --poll-seconds 10 --verify-sample 20 --budget-usd 0.5",
+ "cold": {
+  "wall_clock_s": 449.28,
+  "exit_code": 0,
+  "workers": 1,
+  "completed": 100,
+  "quarantined": 0,
+  "pending": 0,
+  "cache_hits": 0,
+  "stage_seconds": {
+   "ingest": 0.0,
+   "enrich": 425.75,
+   "verify": 2.48,
+   "group": 7.11,
+   "rank": 0.0,
+   "recommend": 13.71,
+   "export": 0.07,
+   "wall_clock_total": 449.14
+  }
+ },
+ "warm": {
+  "wall_clock_s": 0.13,
+  "exit_code": 0,
+  "workers": 1,
+  "completed": 100,
+  "quarantined": 0,
+  "pending": 0,
+  "cache_hits": 0,
+  "stage_seconds": {
+   "ingest": 0.0,
+   "enrich": 0.0,
+   "verify": 0.0,
+   "group": 0.0,
+   "rank": 0.0,
+   "recommend": 0.0,
+   "export": 0.03,
+   "wall_clock_total": 0.06
+  },
+  "new_enrich_calls": 0,
+  "new_other_calls": 0
+ },
+ "unique_texts": 100
+}

@@ -1,0 +1,725 @@
+{
+ "question": "Where should next quarter's product effort go: access, usability, playback, or billing/support?",
+ "baseline_rule": "priority_score = complaint_count x mean_severity = severity_sum over complaint+cancellation records; one issue per review",
+ "issue_ranking_top12": [
+  {
+   "rank": "1",
+   "issue_id": "ISS-billing-free_tier_restrictions",
+   "name": "Free tier restricts skipping, shuffling and song choice",
+   "description": "Free users feel basic playback controls such as skipping, replaying, and picking specific songs were removed or locked behind Premium.",
+   "complaint_count": {
+    "value": "8",
+    "claim_id": "C001"
+   },
+   "severity_sum": {
+    "value": "23",
+    "claim_id": "C002"
+   },
+   "mean_severity": {
+    "value": "2.875000",
+    "claim_id": "C003"
+   },
+   "priority_score": {
+    "value": "23",
+    "claim_id": "C004"
+   }
+  },
+  {
+   "rank": "2",
+   "issue_id": "ISS-other-general_negative",
+   "name": "General dissatisfaction with app quality",
+   "description": "Users express broad dissatisfaction, calling the app bad or disappointing, often tied to restrictions, without naming a specific problem.",
+   "complaint_count": {
+    "value": "9",
+    "claim_id": "C005"
+   },
+   "severity_sum": {
+    "value": "18",
+    "claim_id": "C006"
+   },
+   "mean_severity": {
+    "value": "2.000000",
+    "claim_id": "C007"
+   },
+   "priority_score": {
+    "value": "18",
+    "claim_id": "C008"
+   }
+  },
+  {
+   "rank": "3",
+   "issue_id": "ISS-usability-ads_frequency",
+   "name": "Ads are too frequent and too loud",
+   "description": "Users feel ads play too often, back to back, and at high volume, interrupting listening for free users.",
+   "complaint_count": {
+    "value": "6",
+    "claim_id": "C009"
+   },
+   "severity_sum": {
+    "value": "13",
+    "claim_id": "C010"
+   },
+   "mean_severity": {
+    "value": "2.166667",
+    "claim_id": "C011"
+   },
+   "priority_score": {
+    "value": "13",
+    "claim_id": "C012"
+   }
+  },
+  {
+   "rank": "4",
+   "issue_id": "ISS-usability-ui_navigation",
+   "name": "Redesigns make the app harder to use",
+   "description": "Users dislike the new home screen and frequent design changes, which feel unintuitive and clunky.",
+   "complaint_count": {
+    "value": "5",
+    "claim_id": "C013"
+   },
+   "severity_sum": {
+    "value": "12",
+    "claim_id": "C014"
+   },
+   "mean_severity": {
+    "value": "2.400000",
+    "claim_id": "C015"
+   },
+   "priority_score": {
+    "value": "12",
+    "claim_id": "C016"
+   }
+  },
+  {
+   "rank": "5",
+   "issue_id": "ISS-access-login_failure",
+   "name": "Cannot log in or reset password",
+   "description": "Users are unable to log into their accounts or get their password accepted, locking them out of the app.",
+   "complaint_count": {
+    "value": "2",
+    "claim_id": "C017"
+   },
+   "severity_sum": {
+    "value": "8",
+    "claim_id": "C018"
+   },
+   "mean_severity": {
+    "value": "4.000000",
+    "claim_id": "C019"
+   },
+   "priority_score": {
+    "value": "8",
+    "claim_id": "C020"
+   }
+  },
+  {
+   "rank": "6",
+   "issue_id": "ISS-playback-crash_freeze",
+   "name": "App crashes or stuck on loading screen",
+   "description": "The app crashes after updates or freezes on the logo screen, preventing users from opening it.",
+   "complaint_count": {
+    "value": "2",
+    "claim_id": "C021"
+   },
+   "severity_sum": {
+    "value": "8",
+    "claim_id": "C022"
+   },
+   "mean_severity": {
+    "value": "4.000000",
+    "claim_id": "C023"
+   },
+   "priority_score": {
+    "value": "8",
+    "claim_id": "C024"
+   }
+  },
+  {
+   "rank": "7",
+   "issue_id": "ISS-catalog-missing_content",
+   "name": "Catalog lacks songs and genres",
+   "description": "Users find that many songs or certain genres such as gospel and reggae are not available in the library.",
+   "complaint_count": {
+    "value": "3",
+    "claim_id": "C025"
+   },
+   "severity_sum": {
+    "value": "7",
+    "claim_id": "C026"
+   },
+   "mean_severity": {
+    "value": "2.333333",
+    "claim_id": "C027"
+   },
+   "priority_score": {
+    "value": "7",
+    "claim_id": "C028"
+   }
+  },
+  {
+   "rank": "8",
+   "issue_id": "ISS-playback-stops_pauses_skips",
+   "name": "Playback stops or songs fail to play",
+   "description": "Music halts partway through, does not resume where it left off, or fails to play through voice assistant requests.",
+   "complaint_count": {
+    "value": "2",
+    "claim_id": "C029"
+   },
+   "severity_sum": {
+    "value": "7",
+    "claim_id": "C030"
+   },
+   "mean_severity": {
+    "value": "3.500000",
+    "claim_id": "C031"
+   },
+   "priority_score": {
+    "value": "7",
+    "claim_id": "C032"
+   }
+  },
+  {
+   "rank": "9",
+   "issue_id": "ISS-usability-library_playlist_queue",
+   "name": "Playlist playback ignores order and limits skips",
+   "description": "Playlists play in random order and users can only skip a limited number of songs, frustrating attempts to listen to specific tracks.",
+   "complaint_count": {
+    "value": "2",
+    "claim_id": "C033"
+   },
+   "severity_sum": {
+    "value": "6",
+    "claim_id": "C034"
+   },
+   "mean_severity": {
+    "value": "3.000000",
+    "claim_id": "C035"
+   },
+   "priority_score": {
+    "value": "6",
+    "claim_id": "C036"
+   }
+  },
+  {
+   "rank": "10",
+   "issue_id": "ISS-catalog-lyrics",
+   "name": "Lyrics missing or fail to display",
+   "description": "Lyrics are unavailable for some songs or do not show up when expected, making the lyrics feature unreliable.",
+   "complaint_count": {
+    "value": "2",
+    "claim_id": "C037"
+   },
+   "severity_sum": {
+    "value": "5",
+    "claim_id": "C038"
+   },
+   "mean_severity": {
+    "value": "2.500000",
+    "claim_id": "C039"
+   },
+   "priority_score": {
+    "value": "5",
+    "claim_id": "C040"
+   }
+  },
+  {
+   "rank": "11",
+   "issue_id": "ISS-downloads-download_failure_offline",
+   "name": "Offline mode and downloads not working",
+   "description": "Users cannot download music or play it offline because the offline feature fails.",
+   "complaint_count": {
+    "value": "1",
+    "claim_id": null
+   },
+   "severity_sum": {
+    "value": "4",
+    "claim_id": null
+   },
+   "mean_severity": {
+    "value": "4.000000",
+    "claim_id": null
+   },
+   "priority_score": {
+    "value": "4",
+    "claim_id": null
+   }
+  },
+  {
+   "rank": "12",
+   "issue_id": "ISS-downloads-downloads_disappear",
+   "name": "Downloads get stuck and stall in background",
+   "description": "Song downloads stall in the background and only complete when the app is reopened.",
+   "complaint_count": {
+    "value": "1",
+    "claim_id": null
+   },
+   "severity_sum": {
+    "value": "3",
+    "claim_id": null
+   },
+   "mean_severity": {
+    "value": "3.000000",
+    "claim_id": null
+   },
+   "priority_score": {
+    "value": "3",
+    "claim_id": null
+   }
+  }
+ ],
+ "topic_group_claims": [
+  {
+   "claim_id": "T001",
+   "group": "usability",
+   "metric": "complaint_count",
+   "value": "13"
+  },
+  {
+   "claim_id": "T002",
+   "group": "usability",
+   "metric": "severity_sum",
+   "value": "31"
+  },
+  {
+   "claim_id": "T003",
+   "group": "usability",
+   "metric": "mean_severity",
+   "value": "2.384615"
+  },
+  {
+   "claim_id": "T004",
+   "group": "usability",
+   "metric": "severity_4plus_count",
+   "value": "0"
+  },
+  {
+   "claim_id": "T005",
+   "group": "usability",
+   "metric": "cancellation_count",
+   "value": "1"
+  },
+  {
+   "claim_id": "T006",
+   "group": "usability",
+   "metric": "share_of_all_complaints_pct",
+   "value": "27.1"
+  },
+  {
+   "claim_id": "T007",
+   "group": "billing_support",
+   "metric": "complaint_count",
+   "value": "8"
+  },
+  {
+   "claim_id": "T008",
+   "group": "billing_support",
+   "metric": "severity_sum",
+   "value": "23"
+  },
+  {
+   "claim_id": "T009",
+   "group": "billing_support",
+   "metric": "mean_severity",
+   "value": "2.875000"
+  },
+  {
+   "claim_id": "T010",
+   "group": "billing_support",
+   "metric": "severity_4plus_count",
+   "value": "0"
+  },
+  {
+   "claim_id": "T011",
+   "group": "billing_support",
+   "metric": "cancellation_count",
+   "value": "2"
+  },
+  {
+   "claim_id": "T012",
+   "group": "billing_support",
+   "metric": "share_of_all_complaints_pct",
+   "value": "16.7"
+  },
+  {
+   "claim_id": "T013",
+   "group": "playback",
+   "metric": "complaint_count",
+   "value": "7"
+  },
+  {
+   "claim_id": "T014",
+   "group": "playback",
+   "metric": "severity_sum",
+   "value": "23"
+  },
+  {
+   "claim_id": "T015",
+   "group": "playback",
+   "metric": "mean_severity",
+   "value": "3.285714"
+  },
+  {
+   "claim_id": "T016",
+   "group": "playback",
+   "metric": "severity_4plus_count",
+   "value": "3"
+  },
+  {
+   "claim_id": "T017",
+   "group": "playback",
+   "metric": "cancellation_count",
+   "value": "0"
+  },
+  {
+   "claim_id": "T018",
+   "group": "playback",
+   "metric": "share_of_all_complaints_pct",
+   "value": "14.6"
+  },
+  {
+   "claim_id": "T019",
+   "group": "other",
+   "metric": "complaint_count",
+   "value": "10"
+  },
+  {
+   "claim_id": "T020",
+   "group": "other",
+   "metric": "severity_sum",
+   "value": "19"
+  },
+  {
+   "claim_id": "T021",
+   "group": "other",
+   "metric": "mean_severity",
+   "value": "1.900000"
+  },
+  {
+   "claim_id": "T022",
+   "group": "other",
+   "metric": "severity_4plus_count",
+   "value": "0"
+  },
+  {
+   "claim_id": "T023",
+   "group": "other",
+   "metric": "cancellation_count",
+   "value": "1"
+  },
+  {
+   "claim_id": "T024",
+   "group": "other",
+   "metric": "share_of_all_complaints_pct",
+   "value": "20.8"
+  },
+  {
+   "claim_id": "T025",
+   "group": "catalog",
+   "metric": "complaint_count",
+   "value": "6"
+  },
+  {
+   "claim_id": "T026",
+   "group": "catalog",
+   "metric": "severity_sum",
+   "value": "14"
+  },
+  {
+   "claim_id": "T027",
+   "group": "catalog",
+   "metric": "mean_severity",
+   "value": "2.333333"
+  },
+  {
+   "claim_id": "T028",
+   "group": "catalog",
+   "metric": "severity_4plus_count",
+   "value": "0"
+  },
+  {
+   "claim_id": "T029",
+   "group": "catalog",
+   "metric": "cancellation_count",
+   "value": "1"
+  },
+  {
+   "claim_id": "T030",
+   "group": "catalog",
+   "metric": "share_of_all_complaints_pct",
+   "value": "12.5"
+  },
+  {
+   "claim_id": "T031",
+   "group": "access",
+   "metric": "complaint_count",
+   "value": "2"
+  },
+  {
+   "claim_id": "T032",
+   "group": "access",
+   "metric": "severity_sum",
+   "value": "8"
+  },
+  {
+   "claim_id": "T033",
+   "group": "access",
+   "metric": "mean_severity",
+   "value": "4.000000"
+  },
+  {
+   "claim_id": "T034",
+   "group": "access",
+   "metric": "severity_4plus_count",
+   "value": "2"
+  },
+  {
+   "claim_id": "T035",
+   "group": "access",
+   "metric": "cancellation_count",
+   "value": "0"
+  },
+  {
+   "claim_id": "T036",
+   "group": "access",
+   "metric": "share_of_all_complaints_pct",
+   "value": "4.2"
+  },
+  {
+   "claim_id": "T037",
+   "group": "downloads",
+   "metric": "complaint_count",
+   "value": "2"
+  },
+  {
+   "claim_id": "T038",
+   "group": "downloads",
+   "metric": "severity_sum",
+   "value": "7"
+  },
+  {
+   "claim_id": "T039",
+   "group": "downloads",
+   "metric": "mean_severity",
+   "value": "3.500000"
+  },
+  {
+   "claim_id": "T040",
+   "group": "downloads",
+   "metric": "severity_4plus_count",
+   "value": "1"
+  },
+  {
+   "claim_id": "T041",
+   "group": "downloads",
+   "metric": "cancellation_count",
+   "value": "0"
+  },
+  {
+   "claim_id": "T042",
+   "group": "downloads",
+   "metric": "share_of_all_complaints_pct",
+   "value": "4.2"
+  }
+ ],
+ "trend_comparison_full_months": {
+  "excluded_partial_months": [
+   "2022-06",
+   "2023-11"
+  ],
+  "early": {
+   "months": [
+    "2022-07",
+    "2022-08",
+    "2022-09",
+    "2022-10",
+    "2022-11",
+    "2022-12"
+   ],
+   "completed_records": 23,
+   "access": {
+    "complaints": 0,
+    "share_pct": "0.00"
+   },
+   "billing_support": {
+    "complaints": 1,
+    "share_pct": "4.35"
+   },
+   "catalog": {
+    "complaints": 1,
+    "share_pct": "4.35"
+   },
+   "downloads": {
+    "complaints": 0,
+    "share_pct": "0.00"
+   },
+   "other": {
+    "complaints": 0,
+    "share_pct": "0.00"
+   },
+   "playback": {
+    "complaints": 1,
+    "share_pct": "4.35"
+   },
+   "usability": {
+    "complaints": 4,
+    "share_pct": "17.39"
+   }
+  },
+  "late": {
+   "months": [
+    "2023-05",
+    "2023-06",
+    "2023-07",
+    "2023-08",
+    "2023-09",
+    "2023-10"
+   ],
+   "completed_records": 48,
+   "access": {
+    "complaints": 1,
+    "share_pct": "2.08"
+   },
+   "billing_support": {
+    "complaints": 5,
+    "share_pct": "10.42"
+   },
+   "catalog": {
+    "complaints": 4,
+    "share_pct": "8.33"
+   },
+   "downloads": {
+    "complaints": 1,
+    "share_pct": "2.08"
+   },
+   "other": {
+    "complaints": 8,
+    "share_pct": "16.67"
+   },
+   "playback": {
+    "complaints": 3,
+    "share_pct": "6.25"
+   },
+   "usability": {
+    "complaints": 5,
+    "share_pct": "10.42"
+   }
+  }
+ },
+ "coverage": {
+  "source_rows": 100,
+  "completed": 100,
+  "quarantined": 0,
+  "pending_unresolved": 0,
+  "empty_text_quarantines": 0,
+  "completed_via_exact_text_reuse": 0,
+  "needs_review_flagged": 14,
+  "complaint_or_cancellation_records": 48
+ },
+ "verifier_agreement": {
+  "topic": 0.9,
+  "intent": 0.85,
+  "severity_exact": 0.75,
+  "severity_mae": 0.25,
+  "sentiment_within_0.5": 1.0
+ },
+ "verifier_sample_size": 20,
+ "golden_set_agreement": {},
+ "example_quotes": [
+  {
+   "issue_id": "ISS-billing-free_tier_restrictions",
+   "review_id": "035213ba-b1b9-411c-b028-70296e5f0e73",
+   "quote": "I m using this app from 5 to 6 year but now m uninstald this app cz his premium adds are everywhere now .",
+   "severity": 2
+  },
+  {
+   "issue_id": "ISS-billing-free_tier_restrictions",
+   "review_id": "21915fcd-9a35-48ba-b277-6296c4154603",
+   "quote": "This has become premium just for the creator of spotify to earn money anyways it is a very bad app usless since this new update!",
+   "severity": 3
+  },
+  {
+   "issue_id": "ISS-billing-free_tier_restrictions",
+   "review_id": "7084ced1-0428-4093-9328-442f74719b4f",
+   "quote": "I am using Spotify from past two years From last update they removed basic features of music player",
+   "severity": 3
+  },
+  {
+   "issue_id": "ISS-other-general_negative",
+   "review_id": "06a45bd5-3ed9-43af-b7f2-8b9487e2ffff",
+   "quote": "Worst app",
+   "severity": 2
+  },
+  {
+   "issue_id": "ISS-other-general_negative",
+   "review_id": "178c3b49-b689-4fe4-92a2-2257a58e6d95",
+   "quote": "Worst app.",
+   "severity": 2
+  },
+  {
+   "issue_id": "ISS-other-general_negative",
+   "review_id": "2d5cdd20-3094-40a5-bc6e-653302b59b56",
+   "quote": "Noob app",
+   "severity": 2
+  },
+  {
+   "issue_id": "ISS-usability-ads_frequency",
+   "review_id": "3e8bdc92-4934-457e-85cc-8b9d14bf51c0",
+   "quote": "Decent,just let me have a solid 4-5 songs without an ad bro, it's always every 1 or 2 song then instant ads, that's all thanks",
+   "severity": 2
+  },
+  {
+   "issue_id": "ISS-usability-ads_frequency",
+   "review_id": "85383985-844d-4f9b-bcd9-d6016ac35f6b",
+   "quote": "This app is nice but adds are too much",
+   "severity": 2
+  },
+  {
+   "issue_id": "ISS-usability-ads_frequency",
+   "review_id": "ab67a772-c3b7-42ba-9b80-8d21d3857018",
+   "quote": "The ads are so loud :'(",
+   "severity": 2
+  },
+  {
+   "issue_id": "ISS-usability-ui_navigation",
+   "review_id": "d455c11e-c530-4c03-a395-38f5a5cdb8d3",
+   "quote": "Spotify constantly rolls out new major UX updates without any use of their beta program.",
+   "severity": 2
+  },
+  {
+   "issue_id": "ISS-usability-ui_navigation",
+   "review_id": "94c9f2f9-36fa-4c11-936e-660514fe7a35",
+   "quote": "Spotify is great, but the new homescreen update is horrible. You're not tiktok or Instagram. I don't want to scroll through 1 playlist or album or artist at a time.",
+   "severity": 2
+  },
+  {
+   "issue_id": "ISS-usability-ui_navigation",
+   "review_id": "b47c203f-366e-4409-922d-cd52aa8bbef6",
+   "quote": "Used to love the app but recent update is very disappointing bye Spotify",
+   "severity": 2
+  },
+  {
+   "issue_id": "ISS-access-login_failure",
+   "review_id": "32fb340f-4f9f-4551-8dae-755221e58d6a",
+   "quote": "It not letting me into my account and there are to many ads",
+   "severity": 4
+  },
+  {
+   "issue_id": "ISS-access-login_failure",
+   "review_id": "de0a9cdf-8974-48bc-802f-331228df4619",
+   "quote": "Will not except my password",
+   "severity": 4
+  },
+  {
+   "issue_id": "ISS-playback-crash_freeze",
+   "review_id": "55cc3abf-c295-4591-8c3a-78085cfdefaa",
+   "quote": "The latest update has caused my app to crash I cant open the app please fix.",
+   "severity": 4
+  },
+  {
+   "issue_id": "ISS-playback-crash_freeze",
+   "review_id": "66a29b3c-c14d-440e-b722-b23e0c99ae82",
+   "quote": "App is stuck on loading/logo screen",
+   "severity": 4
+  }
+ ]
+}

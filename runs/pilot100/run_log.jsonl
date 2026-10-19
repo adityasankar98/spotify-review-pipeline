@@ -1,0 +1,67 @@
+{"t": 1792379095.293, "ts": "2026-10-18 20:04:55", "msg": "=== invocation 1 (initial) run=pilot100 stages=['ingest', 'enrich', 'verify', 'group', 'rank', 'recommend', 'export'] opts={'batch_size': 50, 'transport': 'batch', 'batch_requests': 200, 'poll_seconds': 10, 'workers': 1, 'jev_rps': 8.0, 'jev_concurrency': 16, 'budget_usd': 0.5, 'max_attempts': 4, 'max_minutes': 0, 'verify_sample': 20, 'verify_seed': 'verify-seed-v1'}", "invocation": 1, "phase": "initial"}
+{"t": 1792379095.3, "ts": "2026-10-18 20:04:55", "msg": "ingest: 100 rows, 100 nonempty, 0 empty quarantined, 100 distinct texts (0.0s)"}
+{"t": 1792379095.315, "ts": "2026-10-18 20:04:55", "msg": "enrich: 100 distinct pending texts -> 2 requests (<= 50 reviews each); transport=batch workers=1 retry_round=0; label_config=enrich-v2|claude-haiku-5-5:effort=low,thinking=disabled,max_tokens=2000:enrich-codes-v1|extract-v2|schema-v1|prompts=48fd9d6b"}
+{"t": 1792379096.368, "ts": "2026-10-18 20:04:56", "msg": "enrich: submitted batch 1/1 msgbatch_014gtH5NDy4wo46BuZvQKxny (2 requests, 100 reviews, reserved $0.0017)"}
+{"t": 1792379106.647, "ts": "2026-10-18 20:05:06", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379116.945, "ts": "2026-10-18 20:05:16", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379127.272, "ts": "2026-10-18 20:05:27", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379137.573, "ts": "2026-10-18 20:05:37", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379147.889, "ts": "2026-10-18 20:05:47", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379158.288, "ts": "2026-10-18 20:05:58", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379168.559, "ts": "2026-10-18 20:06:08", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379178.986, "ts": "2026-10-18 20:06:18", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379189.251, "ts": "2026-10-18 20:06:29", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379199.592, "ts": "2026-10-18 20:06:39", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379209.909, "ts": "2026-10-18 20:06:49", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379220.254, "ts": "2026-10-18 20:07:00", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379230.699, "ts": "2026-10-18 20:07:10", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379241.045, "ts": "2026-10-18 20:07:21", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379251.399, "ts": "2026-10-18 20:07:31", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379261.723, "ts": "2026-10-18 20:07:41", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379272.173, "ts": "2026-10-18 20:07:52", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379282.539, "ts": "2026-10-18 20:08:02", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379292.932, "ts": "2026-10-18 20:08:12", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379303.254, "ts": "2026-10-18 20:08:23", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379313.57, "ts": "2026-10-18 20:08:33", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379323.816, "ts": "2026-10-18 20:08:43", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379334.227, "ts": "2026-10-18 20:08:54", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379344.515, "ts": "2026-10-18 20:09:04", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379354.793, "ts": "2026-10-18 20:09:14", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379365.066, "ts": "2026-10-18 20:09:25", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379375.434, "ts": "2026-10-18 20:09:35", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379385.729, "ts": "2026-10-18 20:09:45", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379396.182, "ts": "2026-10-18 20:09:56", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379406.521, "ts": "2026-10-18 20:10:06", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379416.966, "ts": "2026-10-18 20:10:16", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379427.281, "ts": "2026-10-18 20:10:27", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379437.65, "ts": "2026-10-18 20:10:37", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379448.0, "ts": "2026-10-18 20:10:48", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379458.336, "ts": "2026-10-18 20:10:58", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379468.742, "ts": "2026-10-18 20:11:08", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379479.07, "ts": "2026-10-18 20:11:19", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379489.37, "ts": "2026-10-18 20:11:29", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379499.754, "ts": "2026-10-18 20:11:39", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379510.096, "ts": "2026-10-18 20:11:50", "msg": "enrich: msgbatch_014gtH5NDy4wo46BuZvQKxny in_progress: processing=2 succeeded=0 errored=0"}
+{"t": 1792379521.064, "ts": "2026-10-18 20:12:01", "msg": "enrich: collected msgbatch_014gtH5NDy4wo46BuZvQKxny | texts done 100 failed 0 | spent $0.0009 | 0.2 texts/s overall"}
+{"t": 1792379523.544, "ts": "2026-10-18 20:12:03", "msg": "verify: 20 sampled; agreement {'topic': 0.9, 'intent': 0.85, 'severity_exact': 0.75, 'severity_mae': 0.25, 'sentiment_within_0.5': 1.0}; 4 disagreements flagged"}
+{"t": 1792379530.65, "ts": "2026-10-18 20:12:10", "msg": "group: 48 complaint/cancellation records -> 17 issues (membership.csv, issues.json)"}
+{"t": 1792379530.653, "ts": "2026-10-18 20:12:10", "msg": "rank: 17 issues ranked from 48 memberships; top = ISS-billing-free_tier_restrictions(23), ISS-other-general_negative(18), ISS-usability-ads_frequency(13)"}
+{"t": 1792379544.364, "ts": "2026-10-18 20:12:24", "msg": "memo: priority=billing_support; check=pass"}
+{"t": 1792379544.38, "ts": "2026-10-18 20:12:24", "msg": "export: no interrupted invocation found - checkpoint_before/after not written"}
+{"t": 1792379544.439, "ts": "2026-10-18 20:12:24", "msg": "export: wrote ingestion_report.json and data_manifest.json (git 3c3b9635, uncommitted pipeline changes: False)"}
+{"t": 1792379544.439, "ts": "2026-10-18 20:12:24", "msg": "export: {'completed': 100, 'quarantined': 0, 'pending': 0} -> /Users/adityasankar/code/AgenticAI/spotify-review-pipeline/runs/pilot100/grading"}
+{"t": 1792379544.441, "ts": "2026-10-18 20:12:24", "msg": "=== invocation 1 ended: completed; completed=100 pending=0 quarantined=0 spent=$0.0386 wall=449.1s"}
+{"t": 1792379544.595, "ts": "2026-10-18 20:12:24", "msg": "=== invocation 2 (resume) run=pilot100 stages=['ingest', 'enrich', 'verify', 'group', 'rank', 'recommend', 'export'] opts={'batch_size': 50, 'transport': 'batch', 'batch_requests': 200, 'poll_seconds': 10, 'workers': 1, 'jev_rps': 8.0, 'jev_concurrency': 16, 'budget_usd': 0.5, 'max_attempts': 4, 'max_minutes': 0, 'verify_sample': 20, 'verify_seed': 'verify-seed-v1'}", "invocation": 2, "phase": "resume"}
+{"t": 1792379544.602, "ts": "2026-10-18 20:12:24", "msg": "ingest: already ingested /Users/adityasankar/code/AgenticAI/spotify-review-pipeline/data/raw/cost_100.csv - skipping (state is reused)"}
+{"t": 1792379544.624, "ts": "2026-10-18 20:12:24", "msg": "enrich: 0 distinct pending texts -> 0 requests (<= 50 reviews each); transport=batch workers=1 retry_round=0; label_config=enrich-v2|claude-haiku-5-5:effort=low,thinking=disabled,max_tokens=2000:enrich-codes-v1|extract-v2|schema-v1|prompts=48fd9d6b"}
+{"t": 1792379544.624, "ts": "2026-10-18 20:12:24", "msg": "verify: reusing cached verifier output for 20 sampled records (0 new calls)"}
+{"t": 1792379544.624, "ts": "2026-10-18 20:12:24", "msg": "verify: 20 sampled; agreement {'topic': 0.9, 'intent': 0.85, 'severity_exact': 0.75, 'severity_mae': 0.25, 'sentiment_within_0.5': 1.0}; 4 disagreements flagged"}
+{"t": 1792379544.627, "ts": "2026-10-18 20:12:24", "msg": "group: reusing cached issue names for 17 issues (0 new calls)"}
+{"t": 1792379544.627, "ts": "2026-10-18 20:12:24", "msg": "group: 48 complaint/cancellation records -> 17 issues (membership.csv, issues.json)"}
+{"t": 1792379544.628, "ts": "2026-10-18 20:12:24", "msg": "rank: 17 issues ranked from 48 memberships; top = ISS-billing-free_tier_restrictions(23), ISS-other-general_negative(18), ISS-usability-ads_frequency(13)"}
+{"t": 1792379544.629, "ts": "2026-10-18 20:12:24", "msg": "memo: reusing cached memo for identical evidence pack (0 new calls)"}
+{"t": 1792379544.63, "ts": "2026-10-18 20:12:24", "msg": "memo: priority=billing_support; check=pass"}
+{"t": 1792379544.634, "ts": "2026-10-18 20:12:24", "msg": "export: no interrupted invocation found - checkpoint_before/after not written"}
+{"t": 1792379544.657, "ts": "2026-10-18 20:12:24", "msg": "export: wrote ingestion_report.json and data_manifest.json (git 3c3b9635, uncommitted pipeline changes: False)"}
+{"t": 1792379544.657, "ts": "2026-10-18 20:12:24", "msg": "export: {'completed': 100, 'quarantined': 0, 'pending': 0} -> /Users/adityasankar/code/AgenticAI/spotify-review-pipeline/runs/pilot100/grading"}
+{"t": 1792379544.658, "ts": "2026-10-18 20:12:24", "msg": "=== invocation 2 ended: completed; completed=100 pending=0 quarantined=0 spent=$0.0386 wall=0.1s"}

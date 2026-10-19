@@ -1,0 +1,17 @@
+{
+  "sample_size": 20,
+  "sample_rule": "lowest sha256('verify-seed-v1:'+review_id) among completed origin records",
+  "verifier_model": "jev-latest",
+  "verifier_prompt": "jev-q-v2",
+  "first_model": "claude-haiku-5-5",
+  "verifier_failed_ids": [],
+  "agreement": {
+    "topic": 0.9,
+    "intent": 0.85,
+    "severity_exact": 0.75,
+    "severity_mae": 0.25,
+    "sentiment_within_0.5": 1.0
+  },
+  "disagreements_flagged": 4,
+  "flag_rule": "topic or intent differs, or severity differs by >= 2"
+}

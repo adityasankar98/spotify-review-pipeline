@@ -1,0 +1,127 @@
+{
+  "run": "pilot100",
+  "label_config": "enrich-v2|claude-haiku-5-5:effort=low,thinking=disabled,max_tokens=2000:enrich-codes-v1|extract-v2|schema-v1|prompts=48fd9d6b",
+  "input": "/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/data/raw/cost_100.csv",
+  "input_sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
+  "records": {
+    "total": 100,
+    "completed": 100,
+    "pending": 0,
+    "quarantined": 0,
+    "completed_via_cache": 0,
+    "completed_origin_by_source": {
+      "haiku": 100
+    },
+    "needs_review": 14
+  },
+  "quarantine_reasons": {},
+  "calls": [
+    {
+      "role": "enrich",
+      "model": "claude-haiku-5-5",
+      "outcome": "succeeded",
+      "n": 2,
+      "i": 4537,
+      "o": 1781,
+      "cr": 3104,
+      "cw": 3104,
+      "c": 0.0008816200000000001
+    },
+    {
+      "role": "group",
+      "model": "claude-haiku-5-5",
+      "outcome": "succeeded",
+      "n": 1,
+      "i": 5134,
+      "o": 1569,
+      "cr": 0,
+      "cw": 701,
+      "c": 0.0013855249999999999
+    },
+    {
+      "role": "memo",
+      "model": "claude-sonnet-5-5",
+      "outcome": "succeeded",
+      "n": 1,
+      "i": 6223,
+      "o": 2028,
+      "cr": 0,
+      "cw": 1198,
+      "c": 0.035721
+    },
+    {
+      "role": "verify",
+      "model": "jev-latest",
+      "outcome": "succeeded",
+      "n": 20,
+      "i": 15284,
+      "o": 3927,
+      "cr": null,
+      "cw": null,
+      "c": 0.000641928
+    }
+  ],
+  "spent_usd_total": 0.03863,
+  "controls": {
+    "batch_size": 50,
+    "transport": "batch",
+    "batch_requests": 200,
+    "poll_seconds": 10,
+    "workers": 1,
+    "jev_rps": 8.0,
+    "jev_concurrency": 16,
+    "budget_usd": 0.5,
+    "max_attempts": 4,
+    "max_minutes": 0,
+    "verify_sample": 20,
+    "verify_seed": "verify-seed-v1"
+  },
+  "last_invocation_timings_s": {
+    "ingest": 0.0,
+    "enrich": 0.0,
+    "verify": 0.0,
+    "group": 0.0,
+    "rank": 0.0,
+    "recommend": 0.0,
+    "export": 0.03,
+    "wall_clock_total": 0.06
+  },
+  "invocations": [
+    {
+      "invocation": 1,
+      "phase": "initial",
+      "started_at": 1792379095.293082,
+      "ended_at": 1792379544.440793,
+      "status": "completed",
+      "argv": "[\"/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/pipeline/__main__.py\", \"run\", \"--input\", \"/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/data/raw/cost_100.csv\", \"--run\", \"pilot100\", \"--workers\", \"1\", \"--transport\", \"batch\", \"--poll-seconds\", \"10\", \"--verify-sample\", \"20\", \"--budget-usd\", \"0.5\"]",
+      "completed_before": 0,
+      "completed_after": 100
+    },
+    {
+      "invocation": 2,
+      "phase": "resume",
+      "started_at": 1792379544.5952241,
+      "ended_at": 1792379544.657862,
+      "status": "completed",
+      "argv": "[\"/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/pipeline/__main__.py\", \"run\", \"--input\", \"/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/data/raw/cost_100.csv\", \"--run\", \"pilot100\", \"--workers\", \"1\", \"--transport\", \"batch\", \"--poll-seconds\", \"10\", \"--verify-sample\", \"20\", \"--budget-usd\", \"0.5\"]",
+      "completed_before": 100,
+      "completed_after": 100
+    }
+  ],
+  "models": {
+    "enrich_primary": "jev-latest",
+    "enrich_fallback": "claude-haiku-5-5",
+    "verify": "claude-haiku-5-5",
+    "group": "claude-haiku-5-5",
+    "memo": "claude-sonnet-5-5"
+  },
+  "prompt_versions": {
+    "jev": "jev-q-v2",
+    "fallback": "fallback-v1",
+    "verify": "verify-v1",
+    "group": "group-v1",
+    "memo": "memo-v1",
+    "schema": "schema-v1",
+    "extract": "extract-v2"
+  }
+}

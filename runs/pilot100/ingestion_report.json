@@ -1,0 +1,99 @@
+{
+ "input_path": "/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/data/raw/cost_100.csv",
+ "file_sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
+ "bytes": 15466,
+ "records": 100,
+ "unique_review_ids": 100,
+ "duplicate_review_ids": 0,
+ "empty_review_text": 0,
+ "nonempty_review_text": 100,
+ "missing_app_version": 18,
+ "distinct_nonempty_texts": 100,
+ "reviews_with_repeated_text": 0,
+ "texts_repeated": 0,
+ "top_repeated_texts": [
+  {
+   "text": "Thik thak hi hai",
+   "count": 1
+  },
+  {
+   "text": "Good at all",
+   "count": 1
+  },
+  {
+   "text": "Great",
+   "count": 1
+  },
+  {
+   "text": "You can't even listen to music you want it just shuffles it,",
+   "count": 1
+  },
+  {
+   "text": "This was fine till the last update, now you can't even pick ",
+   "count": 1
+  },
+  {
+   "text": "Love it",
+   "count": 1
+  },
+  {
+   "text": "Fantastic experience",
+   "count": 1
+  },
+  {
+   "text": "Awesome app and music",
+   "count": 1
+  },
+  {
+   "text": "Best for listening songs",
+   "count": 1
+  },
+  {
+   "text": "Kudos spotify",
+   "count": 1
+  }
+ ],
+ "reviews_by_rating": {
+  "1": 33,
+  "2": 8,
+  "3": 6,
+  "4": 10,
+  "5": 43
+ },
+ "reviews_by_month": {
+  "2022-06": 5,
+  "2022-07": 5,
+  "2022-08": 6,
+  "2022-09": 5,
+  "2022-10": 4,
+  "2022-11": 1,
+  "2022-12": 2,
+  "2023-01": 4,
+  "2023-02": 4,
+  "2023-03": 7,
+  "2023-04": 4,
+  "2023-05": 5,
+  "2023-06": 4,
+  "2023-07": 11,
+  "2023-08": 3,
+  "2023-09": 6,
+  "2023-10": 19,
+  "2023-11": 5
+ },
+ "first_review": "2022-06-02 10:30:18",
+ "last_review": "2023-11-13 15:07:19",
+ "text_length_chars": {
+  "min": 4,
+  "p25": 16,
+  "median": 46,
+  "p75": 117,
+  "p90": 186,
+  "p99": 486,
+  "max": 486,
+  "mean": 80.4
+ },
+ "quarantined": [],
+ "pending_queue": 100,
+ "seconds": 0.0,
+ "note": "All source rows retained; empty/whitespace-only texts quarantined with reason empty_review_text; missing app_version does not block classification."
+}

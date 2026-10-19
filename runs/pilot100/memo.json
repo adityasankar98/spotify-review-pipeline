@@ -1,0 +1,58 @@
+{
+ "priority_area": "billing_support",
+ "recommendation": "Fund billing_support first, focused on the free-tier restrictions issue (rank 1), with ads frequency and a clear explanation of free vs. Premium controls as secondary items. Fund the access/login fix as a small parallel hotfix because of its high severity, but keep the main quarter on billing_support.",
+ "memo_markdown": "## Recommendation\n\n**Priority area: billing_support.** Fund first: (1) **Free tier restricts skipping, shuffling and song choice** (ISS-billing-free_tier_restrictions), the top-ranked issue; (2) **Ads too frequent and loud** (ISS-usability-ads_frequency), which is closely tied to the same free-vs-Premium frustration; (3) a small parallel **login failure hotfix** (ISS-access-login_failure) given its severity.\n\n## Why\n\nFree tier restrictions has 8 complaints [C001], a severity sum of 23 [C002], a mean severity of 2.875000 [C003] and a priority score of 23 [C004]. It ranks above every other issue. The billing_support group has 8 complaints [T007], severity sum 23 [T008], and 2 cancellation records [T011], the most of any group. Ads frequency adds 6 complaints [C009] with a priority score of 13 [C012]. In the trend comparison, billing_support grew from 1 complaint in the early window to 5 in the late window, though the windows contain different record counts (23 early, 48 late).\n\nCustomers say:\n- \"I am using Spotify from past two years From last update they removed basic features of music player\" [R:7084ced1-0428-4093-9328-442f74719b4f]\n- \"This has become premium just for the creator of spotify to earn money anyways it is a very bad app usless since this new update!\" [R:21915fcd-9a35-48ba-b277-6296c4154603]\n- \"The ads are so loud :'(\" [R:ab67a772-c3b7-42ba-9b80-8d21d3857018]\n- \"Will not except my password\" [R:de0a9cdf-8974-48bc-802f-331228df4619]\n\n## Alternatives considered\n\n**Usability** has the most complaints, 13 [T001], and a severity sum of 31 [T002], but its mean severity is only 2.384615 [T003] and it has 0 severity 4+ complaints [T004]. Much of it is ads, and redesign complaints (5 complaints [C013], priority score 12 [C016]) are milder. It would take priority if redesign complaints grew or severity rose.\n\n**Playback** has 7 complaints [T013], severity sum 23 [T014], mean severity 3.285714 [T015], and 3 severity 4+ complaints [T016]. It matches billing_support on severity sum, but with fewer complaints. Crash/freeze (2 complaints [C021], priority score 8 [C024]) is severe but low volume. Playback would win if crash reports increased.\n\n**Access** is the most severe per complaint, mean 4.000000 [T033] with 2 severity 4+ complaints [T034], but it has only 2 complaints [T031]. That is why it is a hotfix rather than the quarter's focus.\n\n## Limitations\n\n- Reviews are self-selected public reviews, not a representative customer sample.\n- There is no revenue, plan, or churn data. Cancellation language is stated intent, not observed churn.\n- Classification coverage: 100 of 100 source rows completed, 0 quarantined, and 14 flagged needs-review. Only 48 are complaint or cancellation records.\n- Verifier agreement on a 20-review sample: topic 0.9, intent 0.85, exact severity 0.75 (mean absolute error 0.25). Labels are noisy, and the golden-set agreement is empty.\n- The baseline score weights count by severity, so it favors frequent, moderate issues over rare, severe ones. The top issue has only 8 complaints, so rankings are sensitive to small samples.\n- The \"general dissatisfaction\" issue (9 complaints [C005]) is non-specific and is not actionable on its own, though it is often tied to restrictions.",
+ "cards": [
+  {
+   "title": "Clarify and rebalance free-tier controls",
+   "rationale": "Free tier restrictions is the top-ranked issue with 8 complaints [C001] and a priority score of 23 [C004]. The billing_support group has 2 cancellation records [T011].",
+   "claim_ids": [
+    "C001",
+    "C004",
+    "T011"
+   ],
+   "review_ids": [
+    "7084ced1-0428-4093-9328-442f74719b4f",
+    "21915fcd-9a35-48ba-b277-6296c4154603"
+   ]
+  },
+  {
+   "title": "Reduce ad frequency and loudness",
+   "rationale": "Ads frequency has 6 complaints [C009] and a priority score of 13 [C012], the third-ranked issue.",
+   "claim_ids": [
+    "C009",
+    "C012"
+   ],
+   "review_ids": [
+    "ab67a772-c3b7-42ba-9b80-8d21d3857018",
+    "85383985-844d-4f9b-bcd9-d6016ac35f6b"
+   ]
+  },
+  {
+   "title": "Hotfix login failures",
+   "rationale": "Access has a mean severity of 4.000000 [T033] and 2 severity 4+ complaints [T034], though volume is just 2 complaints [T031].",
+   "claim_ids": [
+    "T033",
+    "T034",
+    "T031"
+   ],
+   "review_ids": [
+    "32fb340f-4f9f-4551-8dae-755221e58d6a",
+    "de0a9cdf-8974-48bc-802f-331228df4619"
+   ]
+  },
+  {
+   "title": "Monitor playback crashes",
+   "rationale": "Playback has 3 severity 4+ complaints [T016] and a mean severity of 3.285714 [T015]. It would take priority if crash reports grow.",
+   "claim_ids": [
+    "T016",
+    "T015",
+    "C021"
+   ],
+   "review_ids": [
+    "55cc3abf-c295-4591-8c3a-78085cfdefaa",
+    "66a29b3c-c14d-440e-b722-b23e0c99ae82"
+   ]
+  }
+ ]
+}
