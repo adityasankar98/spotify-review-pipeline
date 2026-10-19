@@ -1,0 +1,198 @@
+{
+ "run_id": "dev10k",
+ "source": {
+  "path": "data/raw/analysis_10000.csv",
+  "sha256": "eaa62ca6d44d717302904a9c922e99b0b4584d174309cb45295ecbc2ba2a91b5",
+  "rows": 10000
+ },
+ "code_version": {
+  "git_commit": "19c036d5ef917471f9982ce47517669c9d4dc2dd",
+  "uncommitted_changes_in_pipeline_code": true
+ },
+ "label_config": "enrich-v2|claude-haiku-5-5:effort=low,thinking=disabled,max_tokens=2000:enrich-codes-v1|extract-v2|schema-v1|prompts=48fd9d6b",
+ "models": {
+  "enrich": "claude-haiku-5-5",
+  "verify": "jev-latest",
+  "group": "claude-haiku-5-5",
+  "memo": "claude-sonnet-5-5"
+ },
+ "resolved_models": [
+  "claude-haiku-5-5",
+  "claude-sonnet-5-5",
+  "jev-1.13.0"
+ ],
+ "prompts": {
+  "enrich_codes_v1.md": "48fd9d6bc4274c08813b6dfa4fcf99ab185775b6be9dc24de06a03367965a3d6",
+  "enrich_fallback_v1.md": "e9b8dea87c55bb35836a75d5e82a2a27f5672e6a7cd4ffdd46d3432abf1caaa6",
+  "group_v1.md": "f12b81d572bbb41591c9df4849615dcbbc86484c95eec6cb5283067edf548fb5",
+  "jev_questions_v1.json": "bbe2e169aed9fbe192ad281e8216231d3d76fbbdf4d35625099ac4f48059a77a",
+  "jev_questions_v2.json": "335ffb96e366aa4cc8be2d00e0c73eedd86e3e02b60ca40b009692363a313424",
+  "memo_v1.md": "46a8b6cbb089d368e87cc0c6eb081fa2d6b5c8465fb4243bb111e13dd8df9c6d",
+  "verify_v1.md": "1bc33b24dc0af3f0f3ab78fae263746e685fd30f4b1dbc06021f8933ccf81f40"
+ },
+ "labels": {
+  "schema.json": "1e78ce92a84e827a867b3f62408fdd2aeb1e3e779801737f75d3c8bfe1603044",
+  "subtopics.json": "0becd73ff9a2e6eae8b7c39375ff1a271164ffc990595b16456be840550e5c96",
+  "taxonomy.json": "e15a5edff5c59483aa83e40dd2a5cc6d0d6bcad7d21b7dc17b5035c56aabdde6"
+ },
+ "defaults": {
+  "batch_size": 50,
+  "transport": "batch",
+  "batch_requests": 200,
+  "poll_seconds": 20,
+  "workers": 1,
+  "jev_rps": 8.0,
+  "jev_concurrency": 16,
+  "budget_usd": 2.0,
+  "max_attempts": 4,
+  "max_minutes": 0,
+  "verify_sample": 200,
+  "verify_seed": "verify-seed-v1"
+ },
+ "provider_caps_usd": {
+  "anthropic": 4.5,
+  "typesafe": 4.5
+ },
+ "invocations": [
+  {
+   "invocation": 1,
+   "phase": "initial",
+   "status": "completed",
+   "started_at": 1792380231.556205,
+   "ended_at": 1792381458.8203032,
+   "completed_before": 0,
+   "completed_after": 9999
+  },
+  {
+   "invocation": 2,
+   "phase": "resume",
+   "status": "running",
+   "started_at": 1792381504.4840162,
+   "ended_at": null,
+   "completed_before": 9999,
+   "completed_after": null
+  }
+ ],
+ "outputs": {
+  "aggregates.csv": {
+   "bytes": 4068,
+   "sha256": "d498e0b31d1d7d6223b1e4b5f574329a835fac2a7f364e0a975fc6464a6bba51"
+  },
+  "calls_full.jsonl": {
+   "bytes": 611724,
+   "sha256": "41e7e78d8a43c539f07bdc74a348474e08e3ffdd7f21b6139823b04771807687"
+  },
+  "claims.csv": {
+   "bytes": 2268,
+   "sha256": "e4bbd2a3511188100983a53248b49f443e82fb5e06f9f570d59c6148beedd993"
+  },
+  "enriched.jsonl.gz": {
+   "bytes": 1194810,
+   "sha256": "96cfe9f49a32eb7fd3615fb4011b3a42bc8864fc85ad26fe7ced75f8a96a3cc0"
+  },
+  "grading/calls.jsonl.gz": {
+   "bytes": 203386,
+   "sha256": "73fcf2abf0e0200f25cbb017bfd9256117c0ad9f7fccb55be8bc83002286f3e7"
+  },
+  "grading/claims.csv": {
+   "bytes": 2268,
+   "sha256": "e4bbd2a3511188100983a53248b49f443e82fb5e06f9f570d59c6148beedd993"
+  },
+  "grading/ingestion.json": {
+   "bytes": 904,
+   "sha256": "4a3f72eda88e275aee3eaa9033cbdb7d058955f895d1432542f92a0fbc556111"
+  },
+  "grading/membership.csv": {
+   "bytes": 301648,
+   "sha256": "2ff8029ca9fdad49dc8cee155a42b8ff2566a2e5e806be3eb05e191c2168c7f3"
+  },
+  "grading/ranking.csv": {
+   "bytes": 1866,
+   "sha256": "669a9ad25f4ff862c4eef284094dbd054e3973b11a622906b059332111641f41"
+  },
+  "grading/records.jsonl.gz": {
+   "bytes": 1119130,
+   "sha256": "26ff627e12a589b84dbed2077fa574dee732a8c8df29c50ae048d8399a13d82a"
+  },
+  "grading/run.json": {
+   "bytes": 399,
+   "sha256": "e873203cf949b84578eedf126485710b90e644e3a1b13081b5a3a578db731b58"
+  },
+  "group_evidence_pack.json": {
+   "bytes": 65071,
+   "sha256": "bc04119415f103084b3bcd1030cb2ac4c6b255205942d3cd19ade8e1a79dc09a"
+  },
+  "ingestion_report.json": {
+   "bytes": 1795,
+   "sha256": "cc4c11901a3f5fb423ca0cfe9c97e1bb2d08c01b11fe1aa75f506a5ad0608ca2"
+  },
+  "issues.json": {
+   "bytes": 30697,
+   "sha256": "eef9202b927867aa1f4f6afa8358743b66df52959aa06af287b96ca4c89d76e8"
+  },
+  "membership.csv": {
+   "bytes": 301648,
+   "sha256": "2ff8029ca9fdad49dc8cee155a42b8ff2566a2e5e806be3eb05e191c2168c7f3"
+  },
+  "memo.json": {
+   "bytes": 5095,
+   "sha256": "ce82ab2074f1af1c25ff7ba47a4efa4ec81ad4ef9a30e35e32fdc7fb4d24a05f"
+  },
+  "memo.md": {
+   "bytes": 7954,
+   "sha256": "f11955e20d884a6f1f464aff02215a5e68b8334bfd90f7bf852f8f42d822e889"
+  },
+  "memo_check.json": {
+   "bytes": 114,
+   "sha256": "d09da142c3e111748572e1d75c3268841d2205dca1ecb0930b366ebbd76ba683"
+  },
+  "memo_evidence_pack.json": {
+   "bytes": 18134,
+   "sha256": "890de5a64fb78567b72fa0e8f57ff5889ba61dc8491e47f3df2a197d29e262d7"
+  },
+  "quarantine.jsonl": {
+   "bytes": 260,
+   "sha256": "b995eef0386f2c94b11788ac26f55cc0a5af65e81ef60f984fe3d725a7ffea5f"
+  },
+  "ranking.csv": {
+   "bytes": 1866,
+   "sha256": "669a9ad25f4ff862c4eef284094dbd054e3973b11a622906b059332111641f41"
+  },
+  "run_log.jsonl": {
+   "bytes": 20226,
+   "sha256": "11b16f861f47e1e9f60fb2e3dcf377a674b35ea311ea59ee5e919c7daca95c47"
+  },
+  "run_summary.json": {
+   "bytes": 2530,
+   "sha256": "4c6741f1d4ffa3087c8aa43828ae507ad93b3832bed6a739fa94b29d6adfd0d8"
+  },
+  "topic_aggregates.csv": {
+   "bytes": 1129,
+   "sha256": "e1a7ce10a6cac77b08d040e8b499176015274c7e29fe5daeb7f5bfeb0a0bc42a"
+  },
+  "topic_claims.csv": {
+   "bytes": 1652,
+   "sha256": "9a918f45beeabdd7afa9ca24797c89bc9e64aa459b77bf1b0a8c293d5bfe23c3"
+  },
+  "trends_comparison.json": {
+   "bytes": 1280,
+   "sha256": "2bde032672808b79cc25b1136f8ad1336002791ce09cf93d6bb8cbd705fb1524"
+  },
+  "trends_monthly.csv": {
+   "bytes": 1471,
+   "sha256": "b5e99763525b83760e1f560e4686db82825e47745d4ec1c0881e848539bd708e"
+  },
+  "verify/disagreements.csv": {
+   "bytes": 11165,
+   "sha256": "a9b1d7ae58a1a8fb5651f24543b59ac0cab2785526c908d21ce1f10745a3603b"
+  },
+  "verify/verifier_predictions.jsonl": {
+   "bytes": 85656,
+   "sha256": "2e5a6a23b8265cd471d16fe510127b34f92216156658dfeebe31e4e83cd64fb2"
+  },
+  "verify/verify_report.json": {
+   "bytes": 504,
+   "sha256": "809dd894de3005099d691b53208335c9e90549d44426bcbf7b347f649970f8f8"
+  }
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "input_path": "data/raw/analysis_10000.csv",
+ "file_sha256": "eaa62ca6d44d717302904a9c922e99b0b4584d174309cb45295ecbc2ba2a91b5",
+ "bytes": 1477793,
+ "records": 10000,
+ "unique_review_ids": 10000,
+ "duplicate_review_ids": 0,
+ "empty_review_text": 0,
+ "nonempty_review_text": 10000,
+ "missing_app_version": 2447,
+ "distinct_nonempty_texts": 8448,
+ "reviews_with_repeated_text": 1839,
+ "texts_repeated": 287,
+ "top_repeated_texts": [
+  {
+   "text": "Good",
+   "count": 214
+  },
+  {
+   "text": "Nice",
+   "count": 79
+  },
+  {
+   "text": "Great",
+   "count": 60
+  },
+  {
+   "text": "Awesome",
+   "count": 53
+  },
+  {
+   "text": "Love it",
+   "count": 48
+  },
+  {
+   "text": "Excellent",
+   "count": 48
+  },
+  {
+   "text": "Super",
+   "count": 37
+  },
+  {
+   "text": "Worst app",
+   "count": 34
+  },
+  {
+   "text": "Good app",
+   "count": 31
+  },
+  {
+   "text": "Very good",
+   "count": 30
+  }
+ ],
+ "reviews_by_rating": {
+  "1": 3685,
+  "2": 469,
+  "3": 498,
+  "4": 836,
+  "5": 4512
+ },
+ "reviews_by_month": {
+  "2022-05": 232,
+  "2022-06": 421,
+  "2022-07": 506,
+  "2022-08": 466,
+  "2022-09": 438,
+  "2022-10": 412,
+  "2022-11": 406,
+  "2022-12": 520,
+  "2023-01": 451,
+  "2023-02": 337,
+  "2023-03": 425,
+  "2023-04": 359,
+  "2023-05": 423,
+  "2023-06": 391,
+  "2023-07": 1246,
+  "2023-08": 459,
+  "2023-09": 625,
+  "2023-10": 1381,
+  "2023-11": 502
+ },
+ "first_review": "2022-05-17 02:29:15",
+ "last_review": "2023-11-15 22:13:05",
+ "text_length_chars": {
+  "min": 1,
+  "p25": 12,
+  "median": 32,
+  "p75": 94,
+  "p90": 210,
+  "p99": 492,
+  "max": 615,
+  "mean": 75.2
+ },
+ "quarantined": [],
+ "pending_queue": 10000,
+ "seconds": 0.15,
+ "note": "All source rows retained; empty/whitespace-only texts quarantined with reason empty_review_text; missing app_version does not block classification."
+}

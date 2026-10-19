@@ -1,0 +1,27 @@
+rank,issue_id,topic,name,complaint_count,severity_sum,mean_severity,priority_score,share_of_complaints_pct,cancellation_count,severity_4plus_count,needs_review_count
+1,ISS-billing-free_tier_restrictions,billing,Free users restricted by premium-only controls,39,116,2.974359,116,16.5,4,1,0
+2,ISS-other-general_negative,other,General dissatisfaction with the app,58,116,2.000000,116,24.6,4,0,6
+3,ISS-usability-ads_frequency,usability,Too many and unskippable ads,26,53,2.038462,53,11.0,1,0,2
+4,ISS-usability-ui_navigation,usability,Layout redesigns make the app harder to use,19,45,2.368421,45,8.1,2,0,0
+5,ISS-playback-stops_pauses_skips,playback,"Music stops, pauses, or changes on its own",12,42,3.500000,42,5.1,0,6,2
+6,ISS-playback-connection_errors,playback,False no-internet errors while online,9,32,3.555556,32,3.8,0,5,0
+7,ISS-playback-crash_freeze,playback,"App crashes, freezes, or won't load",8,32,4.000000,32,3.4,1,8,0
+8,ISS-access-login_failure,access,Unable to log in or stay logged in,7,28,4.000000,28,3.0,1,7,0
+9,ISS-billing-premium_entitlement,billing,Premium purchase not activating or applying,6,20,3.333333,20,2.5,1,3,1
+10,ISS-usability-library_playlist_queue,usability,Playlist and shuffle behaviour ignores user choice,7,20,2.857143,20,3.0,0,0,0
+11,ISS-catalog-missing_content,catalog,Songs and features missing from catalog,7,19,2.714286,19,3.0,0,0,1
+12,ISS-playback-devices_bluetooth_car_cast,playback,Failures connecting to other devices,6,18,3.000000,18,2.5,0,1,0
+13,ISS-catalog-recommendations,catalog,Unwanted or repetitive song recommendations,5,13,2.600000,13,2.1,1,0,0
+14,ISS-catalog-lyrics,catalog,Lyrics fail to load or appear inconsistently,3,9,3.000000,9,1.3,0,0,0
+15,ISS-billing-price_cost,billing,Premium pricing seen as too high,4,8,2.000000,8,1.7,1,0,0
+16,ISS-downloads-download_failure_offline,downloads,Downloads and offline mode not working,2,8,4.000000,8,0.8,0,2,0
+17,ISS-other-unrelated_unclear,other,Unrelated or boycott-driven negative text,4,8,2.000000,8,1.7,1,0,4
+18,ISS-catalog-content_policy,catalog,Objections to platform content decisions,2,6,3.000000,6,0.8,0,0,0
+19,ISS-playback-audio_quality_volume,playback,Audio glitches and volume control problems,3,6,2.000000,6,1.3,0,0,1
+20,ISS-playback-other,playback,Lyrics and repeat controls fail during playback,2,6,3.000000,6,0.8,0,0,0
+21,ISS-access-account_locked_or_hacked,access,Account hacked and playlists unrecoverable,1,5,5.000000,5,0.4,1,1,0
+22,ISS-playback-performance_battery_data,playback,Background downloads drain resources,2,5,2.500000,5,0.8,0,0,0
+23,ISS-downloads-downloads_disappear,downloads,Downloaded music disappears and must be redownloaded,1,4,4.000000,4,0.4,1,1,0
+24,ISS-usability-controls_widgets,usability,Cannot rewind or go back a few seconds,1,3,3.000000,3,0.4,0,0,0
+25,ISS-billing-charges_refunds,billing,Unexpected charges for listening,1,2,2.000000,2,0.4,0,0,1
+26,ISS-usability-other,usability,Too many restrictions in the app,1,2,2.000000,2,0.4,0,0,1

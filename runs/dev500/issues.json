@@ -1,0 +1,464 @@
+{
+ "membership_file": "membership.csv",
+ "issues": [
+  {
+   "issue_id": "ISS-access-account_locked_or_hacked",
+   "topic": "access",
+   "subtopic_definition": "Account hacked, stolen, disabled, banned or locked; unauthorised account changes",
+   "name": "Account hacked and playlists unrecoverable",
+   "description": "The customer says their account was hacked and they cannot recover playlists they had set up.",
+   "coherent": true,
+   "note": "",
+   "member_count": 1,
+   "example_review_ids": [
+    "d87536c5-6fe0-4b38-b0b1-c47936e4a0d8"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-access-login_failure",
+   "topic": "access",
+   "subtopic_definition": "Cannot log in or stay logged in; forced logouts; password reset fails",
+   "name": "Unable to log in or stay logged in",
+   "description": "Customers cannot log in, get logged out unexpectedly, or find password and login attempts keep failing.",
+   "coherent": true,
+   "note": "",
+   "member_count": 7,
+   "example_review_ids": [
+    "12efd15d-4d4f-4a71-8e71-69d03b6f983a",
+    "0a7f2420-1b49-41fa-8cfc-0b2e178bea6b",
+    "1f13c3a2-e57b-460c-b569-964e6b2b1f31",
+    "32fb340f-4f9f-4551-8dae-755221e58d6a",
+    "84acb6b0-dd91-4330-944f-2686cbd15ce0",
+    "de0a9cdf-8974-48bc-802f-331228df4619",
+    "f6f9c680-0970-443f-b422-b1a6ad85e7ce"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-billing-charges_refunds",
+   "topic": "billing",
+   "subtopic_definition": "Unexpected, duplicate or post-cancellation charges, refunds, payment problems",
+   "name": "Unexpected charges for listening",
+   "description": "The customer feels they are being charged in ways they did not expect when listening to or replaying music.",
+   "coherent": true,
+   "note": "",
+   "member_count": 1,
+   "example_review_ids": [
+    "58511d69-67c2-4432-84d8-f3c556592f2b"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-billing-free_tier_restrictions",
+   "topic": "billing",
+   "subtopic_definition": "Premium-only controls: forced shuffle, skip limits, can't pick songs, features moved behind the paywall",
+   "name": "Free users restricted by premium-only controls",
+   "description": "Free users find skips, song picking, repeat and other basic features limited or locked behind premium.",
+   "coherent": true,
+   "note": "",
+   "member_count": 39,
+   "example_review_ids": [
+    "11ad400f-4487-4dfa-a9da-c8d624f4f107",
+    "61e0ddbb-6ec4-4d3a-acd3-41eb5f64afb7",
+    "7a5919ad-16d4-4f29-8e6e-1041415d7eee",
+    "890aeb60-e7cf-4f0d-a321-03a1c8b65757",
+    "074efbfd-f69e-46ca-9cea-e5204a192a2a",
+    "21915fcd-9a35-48ba-b277-6296c4154603",
+    "2313bd8e-43bd-4777-bff9-3ae753288f0e",
+    "237e6174-4921-44df-828c-28f7b9d6196e"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-billing-premium_entitlement",
+   "topic": "billing",
+   "subtopic_definition": "Paid premium not activating, premium benefits missing, plan/trial not applied, cancellation difficulty",
+   "name": "Premium purchase not activating or applying",
+   "description": "Customers who paid or tried to subscribe to premium find it does not activate, benefits are missing, or the purchase prompt fails.",
+   "coherent": false,
+   "note": "Mixes failed purchase attempts with activated premium that still lacks access and lagging premium podcasts.",
+   "member_count": 6,
+   "example_review_ids": [
+    "3899ed22-7b96-4c4f-9706-42985b8d8049",
+    "16929558-ce1e-4b87-8738-a1de3f557f66",
+    "1d1480fb-0142-46da-8570-45bf3983bf6d",
+    "57aca404-d58b-4bb4-97b1-c64db92f054a",
+    "a7b7539a-c8d3-4f4e-9edd-d46cd1b1fd12",
+    "be84cf74-541f-49c8-8262-fe6e9faedfb8"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-billing-price_cost",
+   "topic": "billing",
+   "subtopic_definition": "Price too high, price increases, value for money, student/family plan pricing",
+   "name": "Premium pricing seen as too high",
+   "description": "Customers feel premium costs too much for the value, especially for features once free.",
+   "coherent": true,
+   "note": "",
+   "member_count": 4,
+   "example_review_ids": [
+    "a8170750-1671-4962-bba3-bd297d78f0bc",
+    "1d3f978e-b31f-4a4b-ab17-ec46ab4966b3",
+    "67835dbd-10ac-4325-b93e-453d1bd5ec36",
+    "6a4f84b4-18e2-47d9-adb8-2461a9319c11"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-catalog-content_policy",
+   "topic": "catalog",
+   "subtopic_definition": "Platform content decisions, artist bans, political or moral objections tied to content",
+   "name": "Objections to platform content decisions",
+   "description": "Customers object to how Spotify handles certain artists' streams and to the types of creators hosted on the platform.",
+   "coherent": false,
+   "note": "Mixes an artist-chart fairness complaint with an objection to hosting specific commentators.",
+   "member_count": 2,
+   "example_review_ids": [
+    "9f3626e0-1bcb-4788-a412-f812102502d1",
+    "d27e9b26-a7af-469c-9a4e-8deea2db72ae"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-catalog-lyrics",
+   "topic": "catalog",
+   "subtopic_definition": "Lyrics missing, paywalled or out of sync",
+   "name": "Lyrics fail to load or appear inconsistently",
+   "description": "Lyrics stop loading or are missing for some songs but present for others.",
+   "coherent": true,
+   "note": "",
+   "member_count": 3,
+   "example_review_ids": [
+    "59f31721-b2c8-40c5-ba3c-b9fe64a58d68",
+    "47becad0-8ae5-4a10-9731-fde8f2091862",
+    "e0127547-4edd-44a0-8d5e-e8398bc07086"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-catalog-missing_content",
+   "topic": "catalog",
+   "subtopic_definition": "Songs, albums, artists or podcasts missing, greyed out, removed or region-locked",
+   "name": "Songs and features missing from catalog",
+   "description": "Customers find songs, Canvas visuals, or Wrapped content missing or unavailable.",
+   "coherent": false,
+   "note": "Mixes missing songs with Canvas and Wrapped feature absence and general dislike of music quality.",
+   "member_count": 7,
+   "example_review_ids": [
+    "4b3ace8e-b199-40b3-8ad4-5c0580e38203",
+    "0658feaa-5bec-416e-b6b0-3de2a4c14580",
+    "384008ad-eb79-4525-a794-b0b67f7fb3f5",
+    "4d327494-7846-481a-bf00-f4b5abc099c4",
+    "5a4a0f00-ce5f-448d-8425-48eeeba76b4d",
+    "a1a28752-3256-4f81-b888-3e943343529f",
+    "c1726764-f0ce-4abc-ad9e-6cd143e1b2c7"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-catalog-recommendations",
+   "topic": "catalog",
+   "subtopic_definition": "Recommendations, algorithm, repetitive suggestions, Discover Weekly, autoplay/radio picks, shuffle repeating songs",
+   "name": "Unwanted or repetitive song recommendations",
+   "description": "Customers are frustrated by recommended songs they dislike or repeated suggestions that ignore their settings.",
+   "coherent": true,
+   "note": "",
+   "member_count": 5,
+   "example_review_ids": [
+    "618d1dbb-0186-4537-923a-7b4dabf19afb",
+    "145ea602-b8fb-41c1-bfdd-79293a18681f",
+    "544a8481-e12b-4878-92d0-ec3a5256e13a",
+    "7c5d9a4d-1bb1-4da3-bc3b-2500ae0246f1",
+    "ed8efdfe-43e3-4baa-bbed-317807663531"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-downloads-download_failure_offline",
+   "topic": "downloads",
+   "subtopic_definition": "Cannot download, downloads stuck, offline mode not working",
+   "name": "Downloads and offline mode not working",
+   "description": "Customers cannot download music or the offline mode fails to work.",
+   "coherent": true,
+   "note": "",
+   "member_count": 2,
+   "example_review_ids": [
+    "394b1e3e-205a-48a7-a9ca-64170fa5f6a0",
+    "dcff57c6-abd6-413b-b255-aec3dc34fcbd"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-downloads-downloads_disappear",
+   "topic": "downloads",
+   "subtopic_definition": "Downloaded/saved music or liked songs disappear or must be re-downloaded",
+   "name": "Downloaded music disappears and must be redownloaded",
+   "description": "Downloaded favourites vanish periodically, forcing customers to download them again.",
+   "coherent": true,
+   "note": "",
+   "member_count": 1,
+   "example_review_ids": [
+    "5be3399d-dcd2-405b-a931-29b02ffc966e"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-other-general_negative",
+   "topic": "other",
+   "subtopic_definition": "General criticism or 'bad app' without a specific supported topic",
+   "name": "General dissatisfaction with the app",
+   "description": "Customers express broad negative opinions about the app or recent updates without naming a specific problem.",
+   "coherent": true,
+   "note": "",
+   "member_count": 58,
+   "example_review_ids": [
+    "02777996-211f-447b-94c4-99b61f049f78",
+    "19effee5-bf96-4313-8cf9-1ac996c1c4f1",
+    "d3ddb3ad-e576-4638-a100-926ba56caabe",
+    "00363dc8-2117-4565-9af9-efadf8fa90cf",
+    "0575ce08-ab04-46f0-aa8a-fbf9cd27e8da",
+    "06a45bd5-3ed9-43af-b7f2-8b9487e2ffff",
+    "0b716a9d-85bf-4f4e-8e2e-be71e4a379a6",
+    "0d9c62d1-2b53-4887-8156-a28eeac86e82"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-other-unrelated_unclear",
+   "topic": "other",
+   "subtopic_definition": "Unrelated, meaningless, unsupported-language, or boycott-slogan text",
+   "name": "Unrelated or boycott-driven negative text",
+   "description": "Reviews contain boycott slogans, off-topic remarks, or unclear text not tied to a specific product problem.",
+   "coherent": false,
+   "note": "Mixes boycott slogans, off-topic comparisons, and unclear negative remarks.",
+   "member_count": 4,
+   "example_review_ids": [
+    "33526c6f-7a49-4b3d-bd20-d1bc191c494c",
+    "486d1d7a-d6f6-41ea-81ad-ed875452729c",
+    "9e3a706c-f502-4664-a23f-33f3480eca64",
+    "b9a3e661-0eac-4cc9-a30e-7b1e11ef1315"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-playback-audio_quality_volume",
+   "topic": "playback",
+   "subtopic_definition": "Sound quality, volume levels, equalizer, audio glitches",
+   "name": "Audio glitches and volume control problems",
+   "description": "Customers report noise, volume adjustment not working, or the app shouting during playback.",
+   "coherent": true,
+   "note": "",
+   "member_count": 3,
+   "example_review_ids": [
+    "0fcf89b2-0b81-4838-bf5f-41c684e43b2d",
+    "9c9757da-6b99-4c95-a0e7-0661ee858027",
+    "d767f1af-e8eb-41af-9cc4-8bfa35253870"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-playback-connection_errors",
+   "topic": "playback",
+   "subtopic_definition": "'No internet connection'/offline errors while online, failure to load or buffer",
+   "name": "False no-internet errors while online",
+   "description": "The app reports no internet connection or fails to load content even though the customer's connection works.",
+   "coherent": true,
+   "note": "",
+   "member_count": 9,
+   "example_review_ids": [
+    "98d936e1-fd1d-475a-89ee-0e1517cb60d3",
+    "05fa5b8a-a49b-43be-bab5-38af789a65a7",
+    "3df77a78-ad9a-4456-8be8-8178ffd43d67",
+    "4ab2089a-ffa8-49e7-a8a3-aeb583a96796",
+    "686fa8a8-f220-4ddd-b283-d61dd242051a",
+    "9ce5f16c-aef0-48eb-ace1-91905796bc3d",
+    "bcdf315e-c82d-41f0-9fcd-ba5933dfe77e",
+    "c64af4d8-ac17-48fe-ae38-fd54b41b16b1"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-playback-crash_freeze",
+   "topic": "playback",
+   "subtopic_definition": "App crashes, freezes, won't open, black screen",
+   "name": "App crashes, freezes, or won't load",
+   "description": "The app crashes, freezes on a loading screen, shows a black screen, or stops playback after updates.",
+   "coherent": true,
+   "note": "",
+   "member_count": 8,
+   "example_review_ids": [
+    "065c418e-7f18-42a3-b241-fe693b7a2b0c",
+    "651e6e7b-f93e-4369-9631-15c73ddcd4ad",
+    "4a806587-0dde-4fb4-b4f1-f5c7d197c927",
+    "55cc3abf-c295-4591-8c3a-78085cfdefaa",
+    "89be32ab-664a-4647-a5e3-e4006a67e4e1",
+    "06d4c78d-73b4-4b54-9ef3-3d5a0d18cb96",
+    "1cdc5bb2-8e8d-4267-8853-6c1dd4c7ef13",
+    "66a29b3c-c14d-440e-b722-b23e0c99ae82"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-playback-devices_bluetooth_car_cast",
+   "topic": "playback",
+   "subtopic_definition": "Bluetooth, car, Android Auto, Chromecast, Connect, smart speakers, watches",
+   "name": "Failures connecting to other devices",
+   "description": "Customers cannot cast, connect to smart speakers or assistants, or play through other devices reliably.",
+   "coherent": true,
+   "note": "",
+   "member_count": 6,
+   "example_review_ids": [
+    "01124066-b5dd-4c79-8618-d1bea99d197a",
+    "b03d6dc9-449a-4647-b112-559186656759",
+    "4526d439-a6e4-4e0a-b0bc-ae0f9ce5bd96",
+    "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e",
+    "8b9d84a8-f650-4272-b332-4d60cb42377d",
+    "c7df9cb8-7bec-4036-a6a1-1353d2d705d8"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-playback-other",
+   "topic": "playback",
+   "subtopic_definition": "Other playback issue",
+   "name": "Lyrics and repeat controls fail during playback",
+   "description": "Customers report lyrics not loading on playlists and inability to repeat or play specific parts of songs.",
+   "coherent": false,
+   "note": "Mixes a lyrics-loading problem with a repeat and seek control complaint.",
+   "member_count": 2,
+   "example_review_ids": [
+    "9f7a013a-082e-4ec1-8a65-a1e0a0395d20",
+    "e16a4550-43e7-4ae1-b538-a65cc652c31b"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-playback-performance_battery_data",
+   "topic": "playback",
+   "subtopic_definition": "Slow, laggy, battery drain, data or storage usage, overheating",
+   "name": "Background downloads drain resources",
+   "description": "Customers say the app keeps downloading in the background and wastes data and storage.",
+   "coherent": false,
+   "note": "Mixes a background download issue with a general data and storage waste complaint.",
+   "member_count": 2,
+   "example_review_ids": [
+    "2ffdf599-a0d5-4c01-bf26-025215d44c06",
+    "a862b037-7542-4a3e-94ef-836b7092f4ef"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-playback-stops_pauses_skips",
+   "topic": "playback",
+   "subtopic_definition": "Music stops, pauses, skips or jumps by itself; songs won't play",
+   "name": "Music stops, pauses, or changes on its own",
+   "description": "Songs pause, stop mid-show, or switch to different tracks without the customer choosing.",
+   "coherent": true,
+   "note": "",
+   "member_count": 12,
+   "example_review_ids": [
+    "a0cbc9d6-51bb-46f0-9ba9-ad4f4593c266",
+    "8cd35162-9223-42d1-8097-06e22fde94ea",
+    "f1abd13b-2391-4b04-8109-efa7f3cfed0b",
+    "039112fc-bbed-4540-83cc-890fcb129751",
+    "0e5a2a0d-7f67-48a5-9edd-27064f670656",
+    "179d79f7-d052-490f-a9d6-f97525b32642",
+    "4c34f240-76d4-451a-ac74-5bc6bd484825",
+    "509915ba-cf86-4baa-9bea-a73af229ca48"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-usability-ads_frequency",
+   "topic": "usability",
+   "subtopic_definition": "Too many, too long, too loud or repeated ads interrupting listening",
+   "name": "Too many and unskippable ads",
+   "description": "Customers feel ads are too frequent, too long, or unskippable, interrupting their listening.",
+   "coherent": true,
+   "note": "",
+   "member_count": 26,
+   "example_review_ids": [
+    "3bfefa06-133c-419b-a435-1fea919d6a44",
+    "5e42046c-b29b-4035-ba83-a8e222789e98",
+    "864e390b-135e-411a-9d03-f28648086cfd",
+    "a3c6d913-4b67-4025-b34e-3760e5f7795f",
+    "035213ba-b1b9-411c-b028-70296e5f0e73",
+    "3e8bdc92-4934-457e-85cc-8b9d14bf51c0",
+    "50626053-301c-42fa-91aa-2f88aef82e64",
+    "6a2cd434-9ad2-4e66-8968-ad066659d4df"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-usability-controls_widgets",
+   "topic": "usability",
+   "subtopic_definition": "Buttons, gestures, lockscreen/notification controls, widgets, sleep timer, settings",
+   "name": "Cannot rewind or go back a few seconds",
+   "description": "Customers cannot step back a few seconds in a track after an update.",
+   "coherent": true,
+   "note": "",
+   "member_count": 1,
+   "example_review_ids": [
+    "9e5f9745-f8be-48d3-b9de-4d118507d94a"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-usability-library_playlist_queue",
+   "topic": "usability",
+   "subtopic_definition": "Managing playlists, library, liked songs, queue order, sorting, editing",
+   "name": "Playlist and shuffle behaviour ignores user choice",
+   "description": "Playlists and liked songs play random or repeated tracks, and users cannot choose specific songs or view their liked list.",
+   "coherent": false,
+   "note": "Mixes shuffle and playback order issues with liked songs view problems.",
+   "member_count": 7,
+   "example_review_ids": [
+    "4f6a50a1-9440-468c-b35f-961bca94fd88",
+    "991dc66a-aba8-4844-be48-816539680877",
+    "08d3a5a9-1ec1-4b10-a5c8-393da33843e1",
+    "5c9c17d3-9d6a-4fa1-a2a4-ae98eefbbd25",
+    "c13dcedc-50da-48a8-a90d-cfb037a66478",
+    "d108ae38-c395-4789-9b6b-661d1efb60d7",
+    "e393cec1-67e8-4f58-a484-8d9d76dc8fd6"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-usability-other",
+   "topic": "usability",
+   "subtopic_definition": "Other usability issue not covered above",
+   "name": "Too many restrictions in the app",
+   "description": "The customer feels the app imposes excessive restrictions on how they use it.",
+   "coherent": true,
+   "note": "",
+   "member_count": 1,
+   "example_review_ids": [
+    "89a8e180-7846-4421-a2b6-fa7787e9d0d2"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  },
+  {
+   "issue_id": "ISS-usability-ui_navigation",
+   "topic": "usability",
+   "subtopic_definition": "Layout, redesigns, home feed, finding things, confusing navigation, design changes",
+   "name": "Layout redesigns make the app harder to use",
+   "description": "Customers find recent layout and home screen redesigns confusing, slow to navigate, and less user-friendly.",
+   "coherent": true,
+   "note": "",
+   "member_count": 19,
+   "example_review_ids": [
+    "2e2480c1-7799-4a66-be67-a947a2d99680",
+    "d455c11e-c530-4c03-a395-38f5a5cdb8d3",
+    "0070e713-4cb7-4d78-954f-1764d5593c91",
+    "2aae0ce4-ae4a-46ce-b2fe-0d901eb23c06",
+    "94c9f2f9-36fa-4c11-936e-660514fe7a35",
+    "b47c203f-366e-4409-922d-cd52aa8bbef6",
+    "e5e362d7-1057-43bf-a3ca-8ffd93f80789",
+    "0853c56b-0fa1-4d12-9cb9-6817d52233f5"
+   ],
+   "name_source": "model:claude-haiku-5-5"
+  }
+ ]
+}

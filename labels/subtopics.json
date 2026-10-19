@@ -5,6 +5,7 @@
     "access.login_failure": "Cannot log in or stay logged in; forced logouts; password reset fails",
     "access.account_locked_or_hacked": "Account hacked, stolen, disabled, banned or locked; unauthorised account changes",
     "access.signup_verification": "Signup, email/phone verification codes, linking Facebook/Google accounts",
+    "access.other": "Other access/account issue not covered above (code-side default when the model returns an unlisted access subtopic)",
     "usability.ads_frequency": "Too many, too long, too loud or repeated ads interrupting listening",
     "usability.ui_navigation": "Layout, redesigns, home feed, finding things, confusing navigation, design changes",
     "usability.library_playlist_queue": "Managing playlists, library, liked songs, queue order, sorting, editing",

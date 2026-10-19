@@ -1,0 +1,56 @@
+{"t": 1792379564.39, "ts": "2026-10-18 20:12:44", "msg": "=== invocation 1 (initial) run=dev500 stages=['ingest', 'enrich', 'verify', 'group', 'rank', 'recommend', 'export'] opts={'batch_size': 50, 'transport': 'batch', 'batch_requests': 200, 'poll_seconds': 15, 'workers': 1, 'jev_rps': 8.0, 'jev_concurrency': 16, 'budget_usd': 0.3, 'max_attempts': 4, 'max_minutes': 0, 'verify_sample': 50, 'verify_seed': 'verify-seed-v1'}", "invocation": 1, "phase": "initial"}
+{"t": 1792379564.4, "ts": "2026-10-18 20:12:44", "msg": "ingest: 500 rows, 500 nonempty, 0 empty quarantined, 479 distinct texts (0.0s)"}
+{"t": 1792379564.424, "ts": "2026-10-18 20:12:44", "msg": "enrich: 479 distinct pending texts -> 10 requests (<= 50 reviews each); transport=batch workers=1 retry_round=0; label_config=enrich-v2|claude-haiku-5-5:effort=low,thinking=disabled,max_tokens=2000:enrich-codes-v1|extract-v2|schema-v1|prompts=48fd9d6b"}
+{"t": 1792379565.656, "ts": "2026-10-18 20:12:45", "msg": "enrich: submitted batch 1/1 msgbatch_012jmWejSvsomJiLdeoY4Ah9 (10 requests, 479 reviews, reserved $0.0084)"}
+{"t": 1792379581.086, "ts": "2026-10-18 20:13:01", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379596.444, "ts": "2026-10-18 20:13:16", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379611.796, "ts": "2026-10-18 20:13:31", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379627.195, "ts": "2026-10-18 20:13:47", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379642.596, "ts": "2026-10-18 20:14:02", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379658.027, "ts": "2026-10-18 20:14:18", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379673.341, "ts": "2026-10-18 20:14:33", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379688.747, "ts": "2026-10-18 20:14:48", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379704.099, "ts": "2026-10-18 20:15:04", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379719.495, "ts": "2026-10-18 20:15:19", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379735.535, "ts": "2026-10-18 20:15:35", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379750.897, "ts": "2026-10-18 20:15:50", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379766.257, "ts": "2026-10-18 20:16:06", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379781.663, "ts": "2026-10-18 20:16:21", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379797.012, "ts": "2026-10-18 20:16:37", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379812.423, "ts": "2026-10-18 20:16:52", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379827.768, "ts": "2026-10-18 20:17:07", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379843.164, "ts": "2026-10-18 20:17:23", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379858.456, "ts": "2026-10-18 20:17:38", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379873.799, "ts": "2026-10-18 20:17:53", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379889.123, "ts": "2026-10-18 20:18:09", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379904.503, "ts": "2026-10-18 20:18:24", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379919.871, "ts": "2026-10-18 20:18:39", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379935.219, "ts": "2026-10-18 20:18:55", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379950.557, "ts": "2026-10-18 20:19:10", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379965.866, "ts": "2026-10-18 20:19:25", "msg": "enrich: msgbatch_012jmWejSvsomJiLdeoY4Ah9 in_progress: processing=10 succeeded=0 errored=0"}
+{"t": 1792379981.891, "ts": "2026-10-18 20:19:41", "msg": "enrich: collected msgbatch_012jmWejSvsomJiLdeoY4Ah9 | texts done 477 failed 2 | spent $0.0034 | 1.1 texts/s overall"}
+{"t": 1792379981.891, "ts": "2026-10-18 20:19:41", "msg": "enrich: retry round for 2 reviews that failed once"}
+{"t": 1792379981.892, "ts": "2026-10-18 20:19:41", "msg": "enrich: 2 distinct pending texts -> 1 requests (<= 50 reviews each); transport=batch workers=1 retry_round=1; label_config=enrich-v2|claude-haiku-5-5:effort=low,thinking=disabled,max_tokens=2000:enrich-codes-v1|extract-v2|schema-v1|prompts=48fd9d6b"}
+{"t": 1792379982.427, "ts": "2026-10-18 20:19:42", "msg": "enrich: submitted batch 1/1 msgbatch_012Spr35aZ9PX3BhpMusM1YP (1 requests, 2 reviews, reserved $0.0008)"}
+{"t": 1792379997.816, "ts": "2026-10-18 20:19:57", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380014.156, "ts": "2026-10-18 20:20:14", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380029.547, "ts": "2026-10-18 20:20:29", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380044.892, "ts": "2026-10-18 20:20:44", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380060.253, "ts": "2026-10-18 20:21:00", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380075.593, "ts": "2026-10-18 20:21:15", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380090.891, "ts": "2026-10-18 20:21:30", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380106.21, "ts": "2026-10-18 20:21:46", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380121.543, "ts": "2026-10-18 20:22:01", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380136.862, "ts": "2026-10-18 20:22:16", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380152.31, "ts": "2026-10-18 20:22:32", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380167.891, "ts": "2026-10-18 20:22:47", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380183.244, "ts": "2026-10-18 20:23:03", "msg": "enrich: msgbatch_012Spr35aZ9PX3BhpMusM1YP in_progress: processing=1 succeeded=0 errored=0"}
+{"t": 1792380199.215, "ts": "2026-10-18 20:23:19", "msg": "enrich: collected msgbatch_012Spr35aZ9PX3BhpMusM1YP | texts done 2 failed 0 | spent $0.0034 | 0.0 texts/s overall"}
+{"t": 1792380205.412, "ts": "2026-10-18 20:23:25", "msg": "verify: 50 sampled; agreement {'topic': 0.88, 'intent': 0.94, 'severity_exact': 0.78, 'severity_mae': 0.24, 'sentiment_within_0.5': 0.94}; 9 disagreements flagged"}
+{"t": 1792380216.536, "ts": "2026-10-18 20:23:36", "msg": "group: 236 complaint/cancellation records -> 26 issues (membership.csv, issues.json)"}
+{"t": 1792380216.541, "ts": "2026-10-18 20:23:36", "msg": "rank: 26 issues ranked from 236 memberships; top = ISS-billing-free_tier_restrictions(116), ISS-other-general_negative(116), ISS-usability-ads_frequency(53)"}
+{"t": 1792380231.287, "ts": "2026-10-18 20:23:51", "msg": "memo: priority=playback; check=pass"}
+{"t": 1792380231.322, "ts": "2026-10-18 20:23:51", "msg": "export: no interrupted invocation found - checkpoint_before/after not written"}
+{"t": 1792380231.369, "ts": "2026-10-18 20:23:51", "msg": "export: wrote ingestion_report.json and data_manifest.json (git 19c036d5, uncommitted pipeline changes: False)"}
+{"t": 1792380231.369, "ts": "2026-10-18 20:23:51", "msg": "export: {'completed': 500, 'quarantined': 0, 'pending': 0} -> /Users/adityasankar/code/AgenticAI/spotify-review-pipeline/runs/dev500/grading"}
+{"t": 1792380231.372, "ts": "2026-10-18 20:23:51", "msg": "=== invocation 1 ended: completed; completed=500 pending=0 quarantined=0 spent=$0.0438 wall=667.0s"}

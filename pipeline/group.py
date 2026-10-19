@@ -23,8 +23,8 @@ EXAMPLES_PER_ISSUE = 8
 
 
 def issue_id(subtopic):
-    topic, sub = subtopic.split(".", 1)
-    return f"ISS-{topic}-{sub}"
+    topic, _, sub = subtopic.partition(".")
+    return f"ISS-{topic}-{sub or 'other'}"   # a bare topic (should not occur after consistency()) maps to <topic>.other
 
 
 def build_membership(store):

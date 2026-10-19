@@ -50,16 +50,23 @@ Generated offline from `cost/pilot_calls.jsonl` + `rates.csv` (no API key, no mo
 
 Scope: 660,622 rows accounted for; 660,609 nonempty classifications; 13 empty-text quarantines; exact-text reuse reduces first-pass work to 484,189 distinct texts.
 
-Controls: total budget **$9.00** (Anthropic cap $4.50, TypeSafe cap $4.50); max in-flight Message Batches (workers) **4**; 200 requests per batch; output-token cap **2000** per request; max retry/fallback fraction **5%** (same model; no stronger-model fallback is configured); verify sample 200; Jev rate 8.0/s.
+Controls: total budget **$9.00** (Anthropic cap $4.50, TypeSafe cap $4.50); max in-flight Message Batches (workers) **8**; 200 requests per batch; output-token cap **2000** per request; max retry/fallback fraction **5%** (same model; no stronger-model fallback is configured); verify sample 200; Jev rate 8.0/s.
 
 | scenario | texts | retry | requests | batches | enrich $ | verify $ | group+memo $ | **total $** | enrich at standard tier $ | worst case at output cap $ | hours | budget |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| base | 484,189 | 1% | 9,781 | 49 | 4.31 | 0.0065 | 0.0371 | **4.35** | 8.62 | 6.60 | 1.5 | ok |
-| base_no_reuse | 660,609 | 1% | 13,345 | 67 | 5.88 | 0.0065 | 0.0371 | **5.93** | 11.76 | 9.01 | 2.0 | **OVER BUDGET** |
-| conservative | 484,189 | 5% | 10,168 | 51 | 4.48 | 0.0067 | 0.0371 | **4.53** | 8.96 | 6.86 | 4.6 | **OVER BUDGET** |
-| conservative_no_reuse | 660,609 | 5% | 13,874 | 70 | 6.12 | 0.0067 | 0.0371 | **6.16** | 12.23 | 9.36 | 6.4 | **OVER BUDGET** |
+| base | 484,189 | 1% | 9,781 | 49 | 4.31 | 0.0065 | 0.0371 | **4.35** | 8.62 | 6.60 | 0.8 | ok |
+| base_no_reuse | 660,609 | 1% | 13,345 | 67 | 5.88 | 0.0065 | 0.0371 | **5.93** | 11.76 | 9.01 | 1.1 | **OVER BUDGET** |
+| conservative | 484,189 | 5% | 10,168 | 51 | 4.48 | 0.0067 | 0.0371 | **4.53** | 8.96 | 6.86 | 2.5 | **OVER BUDGET** |
+| conservative_no_reuse | 660,609 | 5% | 13,874 | 70 | 6.12 | 0.0067 | 0.0371 | **6.16** | 12.23 | 9.36 | 3.2 | **OVER BUDGET** |
 
 Assumptions: per-text enrichment cost, retry fraction and batch turnaround are the measured means of the source run (pilot unless calibrated); base retry = max(measured, 1%) capped by the fallback cap; conservative retry = max(3x measured, 5%, cap) and 3x batch turnaround. Time = ceil(batches / workers) x turnaround + verify + fixed overhead (ingest, group, memo once). Verification and group/memo are never multiplied by the review count.
+
+## 3. Refreshed estimates from larger development runs
+
+| run | origin texts | enrich $/text | in tok/text | out tok/text | retry | batch turnaround s | base total $ | conservative total $ | conservative hours |
+|---|---|---|---|---|---|---|---|---|---|
+| dev500 | 479 | 0.00000711 | 44.5 | 18.0 | 0.42% | 398 | 3.52 | 3.66 | 2.3 |
+| dev10k | 8,447 | 0.00000714 | 45.2 | 18.2 | 0.19% | 503 | 3.54 | 3.68 | 3.0 |
 
 ## Batching and caching: what each word means here
 

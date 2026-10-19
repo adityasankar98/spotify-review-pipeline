@@ -1,0 +1,61 @@
+{
+ "priority_area": "playback",
+ "recommendation": "Fund playback reliability next quarter, starting with music that stops, pauses or changes on its own, false no-internet errors, and app crashes and freezes. Playback has the highest severity of the large areas, and its complaint share is growing.",
+ "memo_markdown": "## Recommendation\n\n**Priority area: playback.** Fund first: (1) music that stops, pauses or changes on its own, (2) false no-internet errors while online, and (3) app crashes, freezes and failed loads.\n\nThe baseline ranking puts free-tier restrictions first, but that is largely a monetisation-design choice rather than a defect. Playback is the best place for engineering effort.\n\n## Why\n\n- Playback has 42 complaints [T007] with a mean severity of 3.357143 [T009]. 20 of them are severity 4 or higher [T010]. Usability has 0 such complaints [T022], billing/support has 4 [T004], and other has 0 [T016].\n- The three playback issues have severity sums of 42 [C018], 32 [C022] and 32 [C026]. Their mean severities are 3.500000 [C019], 3.555556 [C023] and 4.000000 [C027].\n- The trend is upward. Playback complaints rose from 6 of 129 completed records in the early window to 20 of 227 in the late window. Early window share was 4.65% and late window share 8.81% (trend comparison, full months only; the pack gives no claim ID for these figures).\n\nCustomer examples:\n- \"Continously pauses songs and podcasts randomly.\" [R:f1abd13b-2391-4b04-8109-efa7f3cfed0b]\n- \"It keeps saying I don't have internet connection while I do, takes FOREVER to look up a song.\" [R:98d936e1-fd1d-475a-89ee-0e1517cb60d3]\n- \"Also when I'm playing a playlist from my phone to the Xbox series x it randomly starts playing different music.\" [R:a0cbc9d6-51bb-46f0-9ba9-ad4f4593c266]\n\n## Alternatives considered\n\n- **Billing/support:** 50 complaints [T001] and a severity sum of 146 [T002], the highest of any area, driven by free-tier restrictions (39 complaints [C001], priority score 116 [C004]). Mean severity is 2.920000 [T003] and only 4 are severity 4+ [T004]. It ranks lower because these complaints are mostly about product policy, not breakage. It would win if leadership wants to revisit free-tier limits, or if revenue data showed these users convert or churn. There are 6 cancellation-language records [T005].\n- **Usability:** 54 complaints [T019] with a severity sum of 123 [T020], but mean severity is only 2.277778 [T021] and none are severity 4+ [T022]. Ads (26 complaints [C009]) and layout redesigns (19 [C013]) are annoyances rather than blockers.\n- **Access:** the most severe per complaint at a mean of 4.125000 [T033], with 8 complaints [T031]. The volume is too small to lead; login failure alone has 7 [C029]. Worth a small parallel fix.\n- **Other/general dissatisfaction:** 62 complaints [T013] at a mean of 2.000000 [T015]. It is not actionable without more detail.\n\n## Limitations\n\n- The data is self-selected public reviews and may not represent all users.\n- There is no revenue, plan or churn data. Cancellation language is stated intent, not observed churn.\n- Classification coverage: 500 of 500 source rows completed, 21 via exact-text reuse, and 70 flagged as needing review. 236 are complaint or cancellation records.\n- Verifier agreement on a 50-review sample was 0.88 for topic, 0.94 for intent, and 0.78 for exact severity (mean absolute error 0.24). Label noise is therefore real, especially for severity.\n- The baseline score weights count by severity, so it favours high-volume issues. Ranking playback first relies on its severity profile and trend, not the baseline score alone.",
+ "cards": [
+  {
+   "title": "Fix random pauses and track changes",
+   "rationale": "Music that stops, pauses or switches on its own has 12 complaints [C017] at a mean severity of 3.500000 [C019].",
+   "claim_ids": [
+    "C017",
+    "C019"
+   ],
+   "review_ids": [
+    "f1abd13b-2391-4b04-8109-efa7f3cfed0b",
+    "a0cbc9d6-51bb-46f0-9ba9-ad4f4593c266"
+   ]
+  },
+  {
+   "title": "Eliminate false no-internet errors",
+   "rationale": "9 complaints [C021] at a mean severity of 3.555556 [C023] describe the app reporting no connection while online.",
+   "claim_ids": [
+    "C021",
+    "C023"
+   ],
+   "review_ids": [
+    "98d936e1-fd1d-475a-89ee-0e1517cb60d3",
+    "05fa5b8a-a49b-43be-bab5-38af789a65a7"
+   ]
+  },
+  {
+   "title": "Stabilise crashes and load failures",
+   "rationale": "Crashes and freezes have the highest mean severity among the top playback issues at 4.000000 [C027], across 8 complaints [C025].",
+   "claim_ids": [
+    "C025",
+    "C027"
+   ],
+   "review_ids": []
+  },
+  {
+   "title": "Playback leads on severity",
+   "rationale": "Playback has 20 severity 4+ complaints [T010], versus 4 for billing/support [T004] and 0 for usability [T022].",
+   "claim_ids": [
+    "T010",
+    "T004",
+    "T022"
+   ],
+   "review_ids": []
+  },
+  {
+   "title": "Revisit free-tier limits as a separate decision",
+   "rationale": "Free-tier restrictions have 39 complaints [C001] and a priority score of 116 [C004], but this is a policy question needing revenue data.",
+   "claim_ids": [
+    "C001",
+    "C004"
+   ],
+   "review_ids": [
+    "7a5919ad-16d4-4f29-8e6e-1041415d7eee"
+   ]
+  }
+ ]
+}

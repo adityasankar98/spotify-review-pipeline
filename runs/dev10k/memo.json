@@ -1,0 +1,64 @@
+{
+ "priority_area": "billing_support",
+ "recommendation": "Fund billing_support next quarter, starting with the free-tier restrictions issue, then pursue ad frequency as a related monetization-friction item and fix false connection errors/playback stops as a secondary track. Playback is the main alternative if severity is weighted over volume.",
+ "memo_markdown": "## Recommendation\n\n**Priority area: billing/support.** Fund first: (1) free-tier restrictions on basic playback controls (ISS-billing-free_tier_restrictions), (2) review of ad frequency (ISS-usability-ads_frequency), which shares the free-user paywall theme, and (3) a smaller watch item on playback stops/skips (ISS-playback-stops_pauses_skips). The generic \"general dissatisfaction\" issue ranks first but names no actionable problem, so it is not fundable as is.\n\n## Why\n\n- Free-tier restrictions is the top specific issue: 701 complaints [C005], severity sum 2,082 [C008], mean severity 2.970043 [C007].\n- The billing_support group has 882 complaints [T013], a severity sum of 2,570 [T014], and 169 cancellation-language records [T017], the most of any group. That is stated intent, not observed churn.\n- Ads frequency adds 564 complaints [C009] with a priority score of 1,210 [C012].\n- Trend: billing_support complaints rose from 107 [early window, 4.04% share] to 590 [late window, 13.04% share] across full months, and the late window had 4,525 completed records versus 2,649 early. Note the late-window total is larger.\n\nCustomer examples:\n- \"Doesn't even make sense to include basic features of the app into a premium subscription.\" [R:8f0b1f60-07bd-421e-a5c1-35a1b119ab78]\n- \"With the recent update, basic features (such as shuffle, looping, moving the song marker (rewind-forward) and more) have been disabled for free users.\" [R:4349285f-b3cf-43aa-b93e-e4bacaf7f56e]\n- \"Seems like I'm listening more ads than actual music.\" [R:2c33acbd-4776-4269-adb9-a3bc59845f9a]\n\n## Alternatives considered\n\n- **Playback:** 607 complaints [T019], severity sum 2,004 [T020], mean severity 3.301483 [T021], and 240 severe (4+) records [T022] versus 98 for billing_support [T016]. It is the most severe large group, and would take priority if leadership values severity over volume or if its late share rises. Its share fell from 7.02% to 4.69% in the trend window, so it is not worsening.\n- **Usability:** 1,084 complaints [T007], severity sum 2,614 [T008], but mean severity is only 2.411439 [T009] and just 30 severe records [T010]. Note that this group includes ads. UI navigation alone scores 633 [C020].\n- **Access:** only 151 complaints [T031] but mean severity 3.874172 [T033] and 131 severe records [T034]. Login failure is small in volume (118 [C025]) yet severe; a cheap targeted fix could run in parallel. It would rank higher if volume grows.\n\n## Limitations\n\n- Reviews are self-selected and public; there is no revenue, plan, or churn data, and cancellation language is intent only.\n- Of 10,000 source rows, 9,999 were completed and 1 quarantined; 1,552 completed via exact text reuse and 1,661 were flagged needs-review, out of 4,462 complaint or cancellation records.\n- Verifier agreement on a 200-review sample: topic 0.825, intent 0.865, exact severity 0.725 (MAE 0.33). Label noise is therefore real, especially for severity.\n- The baseline score is count multiplied by severity, so it weights volume heavily. The \"other\" group (1,328 complaints [T001]) is unclassified and may hide actionable issues.",
+ "cards": [
+  {
+   "title": "Fix free-tier control restrictions",
+   "rationale": "701 complaints [C005] with a priority score of 2,082 [C008], the top specific issue. Users feel basic controls moved behind the paywall.",
+   "claim_ids": [
+    "C005",
+    "C008",
+    "C007"
+   ],
+   "review_ids": [
+    "8f0b1f60-07bd-421e-a5c1-35a1b119ab78",
+    "4349285f-b3cf-43aa-b93e-e4bacaf7f56e"
+   ]
+  },
+  {
+   "title": "Rising billing/support share",
+   "rationale": "Billing_support has 169 cancellation-language records [T017], the most of any group, and 882 complaints [T013].",
+   "claim_ids": [
+    "T013",
+    "T017"
+   ],
+   "review_ids": [
+    "3257da13-8a76-45ae-8acf-3fe83dfdcd5e"
+   ]
+  },
+  {
+   "title": "Review ad frequency",
+   "rationale": "564 complaints [C009] and a priority score of 1,210 [C012] make ads the third-ranked issue.",
+   "claim_ids": [
+    "C009",
+    "C012"
+   ],
+   "review_ids": [
+    "2c33acbd-4776-4269-adb9-a3bc59845f9a",
+    "ad20b8e7-de23-4de8-9117-df8d71b17b47"
+   ]
+  },
+  {
+   "title": "Watch playback severity",
+   "rationale": "Playback has 240 severe records [T022] and mean severity 3.301483 [T021]; the strongest alternative on severity.",
+   "claim_ids": [
+    "T021",
+    "T022"
+   ],
+   "review_ids": [
+    "a0cbc9d6-51bb-46f0-9ba9-ad4f4593c266",
+    "5f501da2-4732-4daa-8712-367e48cbeb5c"
+   ]
+  },
+  {
+   "title": "Low-cost login fix",
+   "rationale": "Login failure has mean severity 3.932203 [C027] across 118 complaints [C025]; small but severe.",
+   "claim_ids": [
+    "C025",
+    "C027"
+   ],
+   "review_ids": []
+  }
+ ]
+}

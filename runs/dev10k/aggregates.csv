@@ -1,0 +1,36 @@
+rank,issue_id,topic,name,complaint_count,severity_sum,mean_severity,priority_score,share_of_complaints_pct,cancellation_count,severity_4plus_count,needs_review_count
+1,ISS-other-general_negative,other,General dissatisfaction with the app,1272,2545,2.000786,2545,28.5,74,0,185
+2,ISS-billing-free_tier_restrictions,billing,Free tier limits basic playback controls,701,2082,2.970043,2082,15.7,151,57,38
+3,ISS-usability-ads_frequency,usability,Too many ads interrupting listening,564,1210,2.145390,1210,12.6,43,3,48
+4,ISS-playback-stops_pauses_skips,playback,"Playback stops, skips or plays wrong songs",236,780,3.305085,780,5.3,15,80,22
+5,ISS-usability-ui_navigation,usability,Confusing layout changes after updates,240,633,2.637500,633,5.4,32,15,9
+6,ISS-playback-crash_freeze,playback,"App crashes, freezes or shows blank screen",133,488,3.669173,488,3.0,1,91,6
+7,ISS-access-login_failure,access,Cannot log in or stay logged in,118,464,3.932203,464,2.6,7,111,6
+8,ISS-usability-library_playlist_queue,usability,Playlist and library management difficulties,157,439,2.796178,439,3.5,9,6,6
+9,ISS-usability-controls_widgets,usability,Playback controls missing or unreliable,105,286,2.723810,286,2.4,1,4,7
+10,ISS-playback-connection_errors,playback,False no-internet errors when online,82,285,3.475610,285,1.8,3,43,8
+11,ISS-catalog-missing_content,catalog,Songs and albums unavailable or greyed out,83,236,2.843373,236,1.9,4,5,9
+12,ISS-catalog-recommendations,catalog,Recommended songs replace chosen playlist tracks,92,234,2.543478,234,2.1,4,0,5
+13,ISS-billing-premium_entitlement,billing,Premium benefits missing after paying,62,195,3.145161,195,1.4,8,22,10
+14,ISS-catalog-lyrics,catalog,Lyrics missing or not displaying,66,191,2.893939,191,1.5,3,0,3
+15,ISS-playback-devices_bluetooth_car_cast,playback,Device connection problems with speakers and cars,57,177,3.105263,177,1.3,7,12,3
+16,ISS-billing-price_cost,billing,Subscription price seen as too high,81,167,2.061728,167,1.8,3,0,12
+17,ISS-downloads-downloads_disappear,downloads,Downloaded music disappears or re-downloads,48,164,3.416667,164,1.1,5,21,5
+18,ISS-playback-performance_battery_data,playback,"Slow, laggy and resource-heavy app",54,150,2.777778,150,1.2,1,8,4
+19,ISS-downloads-download_failure_offline,downloads,Downloads and offline playback fail,42,138,3.285714,138,0.9,2,13,4
+20,ISS-catalog-search_discovery,catalog,Search fails to find or misidentifies songs,37,109,2.945946,109,0.8,2,4,4
+21,ISS-other-unrelated_unclear,other,"Unrelated, unclear or boycott-style text",47,91,1.936170,91,1.1,6,0,42
+22,ISS-playback-audio_quality_volume,playback,Poor sound quality or volume problems,33,87,2.636364,87,0.7,4,3,5
+23,ISS-billing-charges_refunds,billing,Unexpected charges and payment problems,24,83,3.458333,83,0.5,4,14,9
+24,ISS-access-signup_verification,access,Signup and OTP verification failures,17,61,3.588235,61,0.4,0,10,1
+25,ISS-catalog-content_policy,catalog,Songs removed or artists censored by platform,21,55,2.619048,55,0.5,4,1,9
+26,ISS-access-account_locked_or_hacked,access,"Account hacked, locked, or unexpectedly logged out",14,54,3.857143,54,0.3,2,10,1
+27,ISS-usability-other,usability,Miscellaneous usability and settings issues,18,46,2.555556,46,0.4,1,2,3
+28,ISS-support-unhelpful,support,Support fails to resolve account problems,13,41,3.153846,41,0.3,3,5,2
+29,ISS-playback-other,playback,Miscellaneous playback malfunctions,12,37,3.083333,37,0.3,0,3,1
+30,ISS-catalog-podcasts_audiobooks,catalog,Unwanted podcasts and limited audiobook access,12,33,2.750000,33,0.3,0,1,0
+31,ISS-downloads-other,downloads,Offline storage and SD card restrictions,8,24,3.000000,24,0.2,0,0,3
+32,ISS-other-general_positive,other,General praise without specific feature,9,16,1.777778,16,0.2,2,0,1
+33,ISS-access-other,access,Other access restrictions and lyric gating,2,6,3.000000,6,0.0,0,0,1
+34,ISS-catalog-other,catalog,Artist not found and phantom playback,1,3,3.000000,3,0.0,0,0,0
+35,ISS-billing-other,billing,Persistent upsell prompts to buy plans,1,2,2.000000,2,0.0,0,0,0

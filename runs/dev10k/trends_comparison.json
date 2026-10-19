@@ -1,0 +1,84 @@
+{
+ "excluded_partial_months": [
+  "2022-05",
+  "2023-11"
+ ],
+ "early": {
+  "months": [
+   "2022-06",
+   "2022-07",
+   "2022-08",
+   "2022-09",
+   "2022-10",
+   "2022-11"
+  ],
+  "completed_records": 2649,
+  "access": {
+   "complaints": 35,
+   "share_pct": "1.32"
+  },
+  "billing_support": {
+   "complaints": 107,
+   "share_pct": "4.04"
+  },
+  "catalog": {
+   "complaints": 65,
+   "share_pct": "2.45"
+  },
+  "downloads": {
+   "complaints": 42,
+   "share_pct": "1.59"
+  },
+  "other": {
+   "complaints": 93,
+   "share_pct": "3.51"
+  },
+  "playback": {
+   "complaints": 186,
+   "share_pct": "7.02"
+  },
+  "usability": {
+   "complaints": 263,
+   "share_pct": "9.93"
+  }
+ },
+ "late": {
+  "months": [
+   "2023-05",
+   "2023-06",
+   "2023-07",
+   "2023-08",
+   "2023-09",
+   "2023-10"
+  ],
+  "completed_records": 4525,
+  "access": {
+   "complaints": 78,
+   "share_pct": "1.72"
+  },
+  "billing_support": {
+   "complaints": 590,
+   "share_pct": "13.04"
+  },
+  "catalog": {
+   "complaints": 143,
+   "share_pct": "3.16"
+  },
+  "downloads": {
+   "complaints": 33,
+   "share_pct": "0.73"
+  },
+  "other": {
+   "complaints": 1008,
+   "share_pct": "22.28"
+  },
+  "playback": {
+   "complaints": 212,
+   "share_pct": "4.69"
+  },
+  "usability": {
+   "complaints": 461,
+   "share_pct": "10.19"
+  }
+ }
+}

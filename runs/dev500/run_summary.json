@@ -1,0 +1,117 @@
+{
+  "run": "dev500",
+  "label_config": "enrich-v2|claude-haiku-5-5:effort=low,thinking=disabled,max_tokens=2000:enrich-codes-v1|extract-v2|schema-v1|prompts=48fd9d6b",
+  "input": "data/raw/checkpoint_500.csv",
+  "input_sha256": "a94e31663ee7b7eaa77e23b7a8425b530cc0c866ed5e714953172a0afef6a12f",
+  "records": {
+    "total": 500,
+    "completed": 500,
+    "pending": 0,
+    "quarantined": 0,
+    "completed_via_cache": 21,
+    "completed_origin_by_source": {
+      "haiku": 479
+    },
+    "needs_review": 70
+  },
+  "quarantine_reasons": {},
+  "calls": [
+    {
+      "role": "enrich",
+      "model": "claude-haiku-5-5",
+      "outcome": "succeeded",
+      "n": 11,
+      "i": 21396,
+      "o": 8661,
+      "cr": 34144,
+      "cw": 0,
+      "c": 0.00340577
+    },
+    {
+      "role": "group",
+      "model": "claude-haiku-5-5",
+      "outcome": "succeeded",
+      "n": 1,
+      "i": 12016,
+      "o": 2363,
+      "cr": 0,
+      "cw": 701,
+      "c": 0.002470725
+    },
+    {
+      "role": "memo",
+      "model": "claude-sonnet-5-5",
+      "outcome": "succeeded",
+      "n": 1,
+      "i": 6626,
+      "o": 2012,
+      "cr": 0,
+      "cw": 1198,
+      "c": 0.036367
+    },
+    {
+      "role": "verify",
+      "model": "jev-latest",
+      "outcome": "succeeded",
+      "n": 50,
+      "i": 37717,
+      "o": 9820,
+      "cr": null,
+      "cw": null,
+      "c": 0.0015841140000000002
+    }
+  ],
+  "spent_usd_total": 0.043828,
+  "controls": {
+    "batch_size": 50,
+    "transport": "batch",
+    "batch_requests": 200,
+    "poll_seconds": 15,
+    "workers": 1,
+    "jev_rps": 8.0,
+    "jev_concurrency": 16,
+    "budget_usd": 0.3,
+    "max_attempts": 4,
+    "max_minutes": 0,
+    "verify_sample": 50,
+    "verify_seed": "verify-seed-v1"
+  },
+  "last_invocation_timings_s": {
+    "ingest": 0.0,
+    "enrich": 634.79,
+    "verify": 6.2,
+    "group": 11.12,
+    "rank": 0.01,
+    "recommend": 14.75,
+    "export": 0.08,
+    "wall_clock_total": 666.98
+  },
+  "invocations": [
+    {
+      "invocation": 1,
+      "phase": "initial",
+      "started_at": 1792379564.3903732,
+      "ended_at": 1792380231.371325,
+      "status": "completed",
+      "argv": "[\"/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/pipeline/__main__.py\", \"run\", \"--input\", \"data/raw/checkpoint_500.csv\", \"--run\", \"dev500\", \"--workers\", \"1\", \"--verify-sample\", \"50\", \"--budget-usd\", \"0.30\", \"--poll-seconds\", \"15\"]",
+      "completed_before": 0,
+      "completed_after": 500
+    }
+  ],
+  "models": {
+    "enrich_primary": "jev-latest",
+    "enrich_fallback": "claude-haiku-5-5",
+    "verify": "claude-haiku-5-5",
+    "group": "claude-haiku-5-5",
+    "memo": "claude-sonnet-5-5"
+  },
+  "prompt_versions": {
+    "jev": "jev-q-v2",
+    "fallback": "fallback-v1",
+    "verify": "verify-v1",
+    "group": "group-v1",
+    "memo": "memo-v1",
+    "schema": "schema-v1",
+    "extract": "extract-v2"
+  }
+}
