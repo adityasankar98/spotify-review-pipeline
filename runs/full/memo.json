@@ -1,0 +1,68 @@
+{
+ "priority_area": "billing_support",
+ "recommendation": "Fund billing_support first, led by free-tier feature restrictions (ISS-billing-free_tier_restrictions). Treat the generic 'other' issue as not fundable. Fund ads frequency as a second item only if scope permits, and keep playback stops/pauses as the first alternative if leadership prioritizes severity over volume.",
+ "memo_markdown": "## Recommendation\n\n**Priority area: billing_support.** Fund first: (1) **free-tier restrictions** (ISS-billing-free_tier_restrictions), the highest-ranked specific issue; (2) **ads frequency and length** (ISS-usability-ads_frequency), which is closely tied to the free/premium experience; (3) as a reliability companion, **music stops/pauses/skips** (ISS-playback-stops_pauses_skips). The rank 1 issue, ISS-other-general_negative (86,666 complaints [C001], priority score 173,771 [C004]), is generic criticism with no specific product problem. We report it but it is not a fundable priority.\n\n## Why\n\nFree-tier restrictions have 47,460 complaints [C005], a severity sum of 138,070 [C006], and mean severity 2.909187 [C007]. At topic-group level, billing_support has 58,239 complaints [T007], a severity sum of 167,534 [T008], 4,853 severity 4+ records [T010], and 12,786 cancellation-language records [T011], the most of any group. It is 19.8% of all complaints [T012].\n\nThe trend is sharp. Billing_support rose from 6,165 complaints (3.51%) in the early window to 39,530 (13.12%) in the late window, based on full months only. Other also rose, from 5,397 to 71,188, and its late-window share is the largest, but it is non-specific.\n\nCustomers say:\n- \"The new updates are terrible I can't even select the songs I want.\" [R:1fdec127-9ebc-4cc1-87ab-f23c8e8c0624]\n- \"...limit the skips of songs and to remove the ability to go back...\" [R:40e7479a-4547-4936-ba92-c2711aa7037e]\n- \"Now suddenly... the ads have started playing after 2 songs and I find it annoying.\" [R:f7ccd28b-4083-4d9b-9833-d6899fe9244e]\n\nAds frequency has 36,113 complaints [C009] and a priority score of 77,831 [C012].\n\n## Alternatives considered\n\n- **Usability:** 66,061 complaints [T013], the largest specific group by volume, but mean severity is lower at 2.390730 [T015] and only 1,491 severity 4+ records [T016]. Its volume is mainly ads, which we already include, plus navigation and queue issues (12,110 [C029] and 11,226 [C025] complaints).\n- **Playback:** 38,451 complaints [T019] at mean severity 3.289719 [T021], with 15,390 severity 4+ records [T022]. Stops/pauses/skips has 14,242 complaints [C013] and a score of 47,394 [C016]. It ranks lower on volume and score and its late share fell, from 13,284 (7.56%) to 12,316 (4.09%). It would rise if severity is weighted over breadth, or if the quarter targets driving and offline use.\n- **Access:** only 10,311 complaints [T031], but the highest mean severity at 3.868684 [T033] and 8,989 severity 4+ records [T034]. Login failure has 8,528 complaints [C021]. It is a good targeted fix, but its reach is small. Quotes: \"For some inexplicable reason, I was logged out of my account.\" [R:77f29c25-d52e-4380-997c-77022d5ddcf1]\n\n## Limitations\n\n- Reviews are self-selected and public, so they are not representative of all users.\n- There is no revenue, plan, or churn data. Cancellation language is stated intent, not observed churn.\n- Of 660,622 source rows, 660,503 were completed and 119 quarantined. 176,420 were completed via exact text reuse, and 104,769 were flagged needs-review.\n- A verifier sample of 200 showed topic agreement of 0.75 and severity MAE of 0.26. The 50-case golden set showed topic agreement of 0.62 and severity MAE of 0.38, so label noise is material, particularly in topic assignment.\n- The baseline score weights complaint count by severity, which favors high-volume, moderate-severity issues. Rankings may shift under other weightings.\n- Issues were assigned one per review, and the share of 'other' is large (31.1% [T006]).",
+ "cards": [
+  {
+   "title": "Fix free-tier restrictions first",
+   "rationale": "47,460 complaints [C005] with a severity sum of 138,070 [C006] make it the top specific issue. Billing_support has 12,786 cancellation-language records [T011].",
+   "claim_ids": [
+    "C005",
+    "C006",
+    "T011"
+   ],
+   "review_ids": [
+    "1fdec127-9ebc-4cc1-87ab-f23c8e8c0624",
+    "40e7479a-4547-4936-ba92-c2711aa7037e"
+   ]
+  },
+  {
+   "title": "Reduce ad frequency and length",
+   "rationale": "36,113 complaints [C009] and a priority score of 77,831 [C012] put ads third overall.",
+   "claim_ids": [
+    "C009",
+    "C012"
+   ],
+   "review_ids": [
+    "f7ccd28b-4083-4d9b-9833-d6899fe9244e",
+    "b8533570-ea2e-4d06-b841-a83dda5ea8cc"
+   ]
+  },
+  {
+   "title": "Stabilize playback stops and pauses",
+   "rationale": "14,242 complaints [C013] at mean severity 3.327763 [C015]. Playback has 15,390 severity 4+ records [T022].",
+   "claim_ids": [
+    "C013",
+    "C015",
+    "T022"
+   ],
+   "review_ids": [
+    "58af4b3e-a46c-49ef-a177-74786ae9767e",
+    "d3dcc154-712b-4b06-8612-c1bdb90f2eed"
+   ]
+  },
+  {
+   "title": "Targeted login fix",
+   "rationale": "Access has the highest mean severity, 3.868684 [T033], with 8,528 login complaints [C021], but small reach.",
+   "claim_ids": [
+    "T033",
+    "C021"
+   ],
+   "review_ids": [
+    "77f29c25-d52e-4380-997c-77022d5ddcf1",
+    "1e451504-cbd5-4857-b82a-2123dcdac002"
+   ]
+  },
+  {
+   "title": "Do not fund generic dissatisfaction",
+   "rationale": "ISS-other-general_negative ranks first with 86,666 complaints [C001] but names no specific problem, so it is not actionable.",
+   "claim_ids": [
+    "C001",
+    "C004"
+   ],
+   "review_ids": [
+    "830060e9-e332-4551-bc50-a92e374a1b78"
+   ]
+  }
+ ]
+}

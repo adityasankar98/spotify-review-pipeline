@@ -1,0 +1,50 @@
+{
+ "run": "full",
+ "command": "python -m pipeline run --input data/raw/spotify_reviews_18months.csv --run full --stages enrich --workers 8 --batch-requests 200 --budget-usd 4.40",
+ "interrupt_sent_at_s": 470.9534649848938,
+ "exit_codes": {
+  "interrupted": 2,
+  "resume": 0
+ },
+ "checkpoints": {
+  "inv1_start": {
+   "taken_at": "2026-10-13 00:22:37",
+   "completed": 0,
+   "pending": 660609,
+   "quarantined": 13
+  },
+  "inv1_end": {
+   "taken_at": "2026-10-13 00:22:37",
+   "completed": 0,
+   "pending": 660609,
+   "quarantined": 13
+  },
+  "inv2_start": {
+   "taken_at": "2026-10-18 21:19:26",
+   "completed": 0,
+   "pending": 660609,
+   "quarantined": 13
+  },
+  "inv2_end": {
+   "taken_at": "2026-10-18 21:27:23",
+   "completed": 206059,
+   "pending": 454550,
+   "quarantined": 13
+  },
+  "inv3_start": {
+   "taken_at": "2026-10-18 21:27:24",
+   "completed": 206059,
+   "pending": 454550,
+   "quarantined": 13
+  },
+  "inv3_end": {
+   "taken_at": "2026-10-18 22:18:17",
+   "completed": 660503,
+   "pending": 0,
+   "quarantined": 119
+  }
+ },
+ "recording": "session.cast",
+ "player": "replay.html",
+ "recorded_at": "2026-10-18 22:18:24 PDT"
+}

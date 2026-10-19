@@ -12,3 +12,8 @@ node_modules/
 # simulated (mock) plumbing runs and local logs are never results
 runs/mock*/
 runs/*.log
+# full run: duplicates and very large files (enriched table is a release asset; see README)
+runs/full/grading/
+runs/full/enriched.jsonl.gz
+runs/full/calls_full.jsonl
+runs/full/checkpoints/inv[2-9]_*.json

@@ -1,0 +1,185 @@
+{
+ "input_path": "data/raw/spotify_reviews_18months.csv",
+ "file_sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6",
+ "bytes": 97400616,
+ "records": 660622,
+ "unique_review_ids": 660622,
+ "duplicate_review_ids": 0,
+ "empty_review_text": 13,
+ "nonempty_review_text": 660609,
+ "missing_app_version": 159701,
+ "distinct_nonempty_texts": 484189,
+ "reviews_with_repeated_text": 192342,
+ "texts_repeated": 15922,
+ "top_repeated_texts": [
+  {
+   "text": "Good",
+   "count": 12845
+  },
+  {
+   "text": "Nice",
+   "count": 5551
+  },
+  {
+   "text": "Excellent",
+   "count": 4096
+  },
+  {
+   "text": "Great",
+   "count": 3948
+  },
+  {
+   "text": "Awesome",
+   "count": 3359
+  },
+  {
+   "text": "Love it",
+   "count": 3136
+  },
+  {
+   "text": "Very good",
+   "count": 2769
+  },
+  {
+   "text": "Nice app",
+   "count": 2134
+  },
+  {
+   "text": "Amazing",
+   "count": 1973
+  },
+  {
+   "text": "Worst app",
+   "count": 1901
+  }
+ ],
+ "reviews_by_rating": {
+  "1": 242620,
+  "2": 31034,
+  "3": 33268,
+  "4": 54140,
+  "5": 299560
+ },
+ "reviews_by_month": {
+  "2022-05": 15461,
+  "2022-06": 30338,
+  "2022-07": 32784,
+  "2022-08": 30732,
+  "2022-09": 26933,
+  "2022-10": 27572,
+  "2022-11": 27349,
+  "2022-12": 31744,
+  "2023-01": 28609,
+  "2023-02": 20889,
+  "2023-03": 27238,
+  "2023-04": 25014,
+  "2023-05": 28062,
+  "2023-06": 27117,
+  "2023-07": 85079,
+  "2023-08": 30438,
+  "2023-09": 41634,
+  "2023-10": 89104,
+  "2023-11": 34525
+ },
+ "first_review": "2022-05-17 00:01:07",
+ "last_review": "2023-11-15 23:16:10",
+ "text_length_chars": {
+  "min": 1,
+  "p25": 12,
+  "median": 32,
+  "p75": 92,
+  "p90": 207,
+  "p99": 490,
+  "max": 1693,
+  "mean": 74.8
+ },
+ "quarantined": [
+  {
+   "review_id": "5d085a1f-1737-45a6-a3fb-5211b327ec27",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "be032618-08ae-4dde-b0b2-d2ddcd8ea5a6",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "f7c94991-0fc2-49a5-b47e-510e97a1632c",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "f5b40f1f-6621-456f-b1f2-0b3a9361c793",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "7121867d-b162-4b15-a45f-6352dcff92c1",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "f0df3892-1cfd-44f6-b3bb-a2eef7e69f6e",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "a3b536ac-b508-4e02-8550-ff7ea0bf79c2",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "b9587209-7961-4fd2-903c-fcd0fa924721",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "1687e070-9c26-4657-9ecc-0141405bcd4b",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "34bf6347-1625-46cd-b6fa-82913e2f665d",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "e4a05a09-be34-40a3-9b4a-e3976dea1b82",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "1bbad718-5df1-4669-841d-d1d6a040945a",
+   "reason": "empty_review_text"
+  },
+  {
+   "review_id": "7c26b1a0-8e0b-426d-976c-15b526f94e30",
+   "reason": "empty_review_text"
+  }
+ ],
+ "pending_queue": 660609,
+ "seconds": 9.42,
+ "note": "All source rows retained; empty/whitespace-only texts quarantined with reason empty_review_text; missing app_version does not block classification.",
+ "course_expected_check": {
+  "records": {
+   "expected": 660622,
+   "observed": 660622,
+   "match": true
+  },
+  "empty_review_text": {
+   "expected": 13,
+   "observed": 13,
+   "match": true
+  },
+  "missing_app_version": {
+   "expected": 159701,
+   "observed": 159701,
+   "match": true
+  },
+  "duplicate_review_ids": {
+   "expected": 0,
+   "observed": 0,
+   "match": true
+  },
+  "distinct_nonempty_texts": {
+   "expected": 484189,
+   "observed": 484189,
+   "match": true
+  },
+  "file_sha256": {
+   "expected": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6",
+   "observed": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6",
+   "match": true
+  }
+ }
+}

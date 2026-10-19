@@ -1,0 +1,11 @@
+{
+ "version": "a5-audit-v1",
+ "analysis_count": 660622,
+ "analysis_sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6",
+ "classification_input_fields": [
+  "review_text"
+ ],
+ "allow_multi_issue": false,
+ "label_config": "enrich-v2|claude-haiku-5-5:effort=low,thinking=disabled,max_tokens=2000:enrich-codes-v1|extract-v2|schema-v1|prompts=48fd9d6b",
+ "run_dir": "runs/full"
+}

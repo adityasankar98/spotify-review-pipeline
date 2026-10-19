@@ -1,0 +1,37 @@
+rank,issue_id,topic,name,complaint_count,severity_sum,mean_severity,priority_score,share_of_complaints_pct,cancellation_count,severity_4plus_count,needs_review_count
+1,ISS-other-general_negative,other,General dissatisfaction with the app,86666,173771,2.005065,173771,29.5,5898,98,10513
+2,ISS-billing-free_tier_restrictions,billing,Free tier locked features behind premium,47460,138070,2.909187,138070,16.1,11121,2373,2223
+3,ISS-usability-ads_frequency,usability,Too many and too long ads,36113,77831,2.155207,77831,12.3,2137,184,2712
+4,ISS-playback-stops_pauses_skips,playback,"Music stops, pauses, or skips unexpectedly",14242,47394,3.327763,47394,4.8,944,5310,1026
+5,ISS-playback-crash_freeze,playback,"App crashes, freezes, or fails to open playlists",9863,35564,3.605799,35564,3.4,484,6504,715
+6,ISS-access-login_failure,access,Unable to log in or staying logged out,8528,33263,3.900446,33263,2.9,509,7724,459
+7,ISS-usability-library_playlist_queue,usability,Queue and playlist management problems,11226,31922,2.843577,31922,3.8,673,758,440
+8,ISS-usability-ui_navigation,usability,Disliked layout and navigation redesigns,12110,30121,2.487283,30121,4.1,1382,303,568
+9,ISS-catalog-recommendations,catalog,Recommendations replacing chosen songs,7780,20760,2.668380,20760,2.6,353,123,416
+10,ISS-usability-controls_widgets,usability,Missing or changed playback controls,6058,16722,2.760317,16722,2.1,310,237,348
+11,ISS-catalog-missing_content,catalog,Songs and albums unavailable or removed,5903,16684,2.826359,16684,2.0,309,438,571
+12,ISS-playback-connection_errors,playback,False 'no internet connection' errors while online,4555,15427,3.386828,15427,1.5,166,2121,436
+13,ISS-catalog-lyrics,catalog,Lyrics fail to load or are missing,4865,13837,2.844193,13837,1.7,86,19,196
+14,ISS-downloads-downloads_disappear,downloads,Downloaded songs vanish or must be re-downloaded,3266,11394,3.488671,11394,1.1,266,1650,206
+15,ISS-downloads-download_failure_offline,downloads,Downloads fail or offline mode breaks,3389,11099,3.275007,11099,1.2,85,1188,285
+16,ISS-playback-devices_bluetooth_car_cast,playback,Device connection and control problems,3542,10905,3.078769,10905,1.2,345,764,218
+17,ISS-billing-price_cost,billing,Premium subscription seen as too expensive,5057,10782,2.132094,10782,1.7,661,38,672
+18,ISS-playback-performance_battery_data,playback,Slow performance and battery or data drain,3558,9926,2.789770,9926,1.2,150,418,289
+19,ISS-billing-premium_entitlement,billing,Premium purchase or benefits not applying,3016,9581,3.176724,9581,1.0,512,1172,509
+20,ISS-other-unrelated_unclear,other,Unrelated or unclear review text,4189,8122,1.938888,8122,1.4,569,27,3625
+21,ISS-billing-charges_refunds,billing,Unexpected charges and payment problems,2012,7159,3.558151,7159,0.7,396,1148,417
+22,ISS-catalog-search_discovery,catalog,Search returns wrong or unplayable results,1676,4803,2.865752,4803,0.6,47,159,151
+23,ISS-playback-audio_quality_volume,playback,Poor sound quality and volume problems,1853,4796,2.588235,4796,0.6,76,104,196
+24,ISS-access-account_locked_or_hacked,access,"Account hacked, locked, or unexpectedly altered",1017,3878,3.813176,3878,0.3,117,720,187
+25,ISS-catalog-content_policy,catalog,Objections to platform content and artist removals,1149,2919,2.540470,2919,0.4,151,101,255
+26,ISS-access-signup_verification,access,Signup and verification codes failing,694,2566,3.697406,2566,0.2,15,531,69
+27,ISS-playback-other,playback,Miscellaneous playback control glitches,838,2481,2.960621,2481,0.3,14,169,110
+28,ISS-catalog-podcasts_audiobooks,catalog,Unwanted podcasts and audiobooks cluttering the app,752,1987,2.642287,1987,0.3,44,52,38
+29,ISS-support-unhelpful,support,Support replies fail to resolve problems,569,1577,2.771529,1577,0.2,86,95,54
+30,ISS-downloads-other,downloads,Download storage location and limit problems,502,1366,2.721116,1366,0.2,25,49,55
+31,ISS-usability-other,usability,Miscellaneous usability annoyances,554,1338,2.415162,1338,0.2,21,9,80
+32,ISS-other-general_positive,other,General praise and mixed opinions,639,1247,1.951487,1247,0.2,50,0,114
+33,ISS-catalog-other,catalog,Miscellaneous catalog and library quirks,246,664,2.699187,664,0.1,18,28,40
+34,ISS-support-unreachable,support,No way to reach human support,100,307,3.070000,307,0.0,10,26,5
+35,ISS-access-other,access,Miscellaneous access complaints and ad frustrations,72,183,2.541667,183,0.0,7,14,11
+36,ISS-billing-other,billing,Miscellaneous billing and plan complaints,25,58,2.320000,58,0.0,0,1,10
