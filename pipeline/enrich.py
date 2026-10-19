@@ -292,11 +292,19 @@ async def _run_batches(store, prov, opts, invocation, log, chunks, state, retry_
             try:
                 reservation = prov.ledger.admit(_worst_case(prov, len(group), "batch"))
             except BudgetStop as e:
+                if inflight and prov.ledger.stop_reason in ("provider_cap", "spend_cap"):
+                    # worst-case reservations of in-flight batches are blocking admission; their actual cost is
+                    # far lower, so wait for them to settle and try again instead of abandoning the queue
+                    if not state.get("waiting_logged"):
+                        log(f"enrich: admission paused until in-flight batches settle - {e}")
+                        state["waiting_logged"] = True
+                    break
                 log(f"enrich: STOP admitting new batches - {e}")
                 gi = len(groups)
                 if not inflight:
                     state["stop"] = prov.ledger.stop_reason or "spend_cap"
                 break
+            state["waiting_logged"] = False
             requests, mapping = [], {}
             for j, chunk in enumerate(group):
                 cid = f"inv{invocation}-g{gi}-q{j}"
