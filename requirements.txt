@@ -1,0 +1,5 @@
+# Python 3.12 (tested 3.12.14). Install: uv venv --python 3.12 && uv pip install -r requirements.txt
+anthropic==1.13.0
+typesafe-sdk==0.7.4
+python-dotenv==1.2.4
+psycopg[binary]==3.3.6

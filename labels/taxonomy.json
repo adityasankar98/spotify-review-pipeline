@@ -1,0 +1,75 @@
+{
+  "version": "labels-v1",
+  "source": "GRADING_CONTRACT.md common labels (verbatim definitions) + our boundary notes and illustrative examples. Examples are written by us; none is drawn from the golden 50.",
+  "topics": {
+    "access": {
+      "definition": "Login, signup, password or account access",
+      "boundary": "Cannot log in, verification code never arrives, account hacked/locked, forced logout. A subscription that will not activate is billing, not access.",
+      "examples": ["It keeps logging me out and the reset email never comes.", "Can't sign in with Facebook anymore."]
+    },
+    "usability": {
+      "definition": "Navigation, controls, layout, queue/playlist management, ad interruptions",
+      "boundary": "UI redesigns, buttons moved, queue/shuffle controls, too many or too long ads, widget/lockscreen controls. Explicitly premium-only controls (e.g. 'can't pick songs without premium') go to billing.",
+      "examples": ["The new home screen is cluttered and I can't find my library.", "Three ads after every song is ridiculous."]
+    },
+    "playback": {
+      "definition": "Playback failure, crashes, lag, connection failures, audio quality, resource use",
+      "boundary": "Songs stop/skip by themselves, app crashes or freezes, won't connect, Bluetooth/car/Chromecast playback, battery or data drain, sound quality.",
+      "examples": ["Music stops every time I lock my phone.", "App crashes on launch since the update."]
+    },
+    "downloads": {
+      "definition": "Downloading, saved music, offline listening, disappearing downloads",
+      "boundary": "Downloads vanish, offline mode doesn't work, can't download, storage location. Liked songs/library disappearing also counts as saved music.",
+      "examples": ["Downloaded songs stop playing when I go offline.", "All my downloads disappeared again."]
+    },
+    "catalog": {
+      "definition": "Missing songs/artists, search/discovery, recommendations, lyrics availability",
+      "boundary": "Song greyed out/unavailable, search returns wrong results, poor recommendations/Discover Weekly, lyrics missing, podcasts/audiobook content availability, content policy/removal of artists.",
+      "examples": ["Lyrics are gone for most songs now.", "Search never finds the artist I type."]
+    },
+    "billing": {
+      "definition": "Price, charges, subscriptions, paywalls, premium entitlement; explicitly premium-only controls go here",
+      "boundary": "Charged twice, price increase, refund, premium not activating, 'have to pay premium to choose songs/skip', free-tier skip limits framed as a paywall. Merely mentioning that the user is premium is NOT billing.",
+      "examples": ["They charged me after I cancelled.", "You can't even play the song you pick unless you pay."]
+    },
+    "support": {
+      "definition": "Contacting support and the support response",
+      "boundary": "Customer service unreachable, no reply, bot-only support, unhelpful agent.",
+      "examples": ["Support just sends me the same copy-paste answer.", "There is no way to contact a human."]
+    },
+    "other": {
+      "definition": "General praise/criticism, unrelated content, or no supported specific topic",
+      "boundary": "'Great app', 'worst app', emoji only, unrelated text, unsupported language with no recoverable meaning, political/boycott slogans with no product issue.",
+      "examples": ["Best app ever!", "Bad."]
+    }
+  },
+  "topic_rules": [
+    "Classify the review text itself; stars/metadata never substitute for the text.",
+    "Choose the problem with the highest supported severity; on a tie, the first specific problem mentioned.",
+    "For a positive review, choose the first specific praised feature; general praise is other.",
+    "Mentioning a paid plan alone does not make the topic billing. A subscription failing to activate does; music crashing for a paying customer is playback."
+  ],
+  "intents": {
+    "cancellation": "Explicitly leaving, uninstalling, cancelling, switching to a competitor, or threatening to do so.",
+    "complaint": "Negative experience, including mixed praise/criticism. General 'bad app' is a complaint (topic other).",
+    "request": "Desired change or feature without a reported failure.",
+    "praise": "Positive experience with no complaint.",
+    "unclear": "Bare boycott slogans, unrelated or meaningless text, or language we cannot interpret."
+  },
+  "intent_precedence": ["cancellation", "complaint", "request", "praise", "unclear"],
+  "severity": {
+    "1": {"meaning": "No reported problem: praise, neutral/unclear content, or a pure feature request", "examples": ["Love it", "Please add a sleep timer to podcasts"]},
+    "2": {"meaning": "Dislike, generic criticism, minor annoyance, or a cosmetic issue; no supported functional loss", "examples": ["Worst app", "Don't like the new colours", "Too many ads"]},
+    "3": {"meaning": "A degraded or restricted function; some use or workaround remains", "examples": ["Songs skip sometimes", "Lyrics missing on some tracks", "Shuffle keeps repeating the same songs", "Can only skip 6 times an hour without premium"]},
+    "4": {"meaning": "A clearly blocked core task, such as inability to log in or play music", "examples": ["Can't log in at all", "App crashes every time I open it", "No song will play"]},
+    "5": {"meaning": "Explicit serious financial, privacy, or data harm; an expensive plan, a crash, or angry language alone is insufficient", "examples": ["Charged three times and refused a refund", "My account was hacked and my card was used", "They lost my entire 10-year library"]}
+  },
+  "severity_rules": [
+    "Stars, angry language, or cancellation intent alone do not establish severity.",
+    "Missing context should set needs_review; do not invent impact."
+  ],
+  "sentiment": "Float in [-1, 1] from the text's emotional tone: -1 very negative, -0.5 negative, 0 neutral/mixed, 0.5 positive, 1 very positive. Evaluation tolerance: |pred - human| <= 0.5.",
+  "evidence_quote": "An exact, unmodified substring of review_text that supports the topic/intent. Short reviews may use the full text.",
+  "entities": "Product features, devices or named services explicitly mentioned (e.g. 'shuffle', 'lyrics', 'Android Auto', 'premium'). No inferred entities.",
+  "needs_review": "True when the text is ambiguous, unsupported-language, sarcastic, or lacks context for a confident label."
+}

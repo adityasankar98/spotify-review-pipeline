@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+data/raw/
+data/state/
+.DS_Store
+node_modules/
+.vercel/

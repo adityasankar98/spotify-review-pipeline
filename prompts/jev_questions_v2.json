@@ -1,0 +1,62 @@
+{
+ "version": "jev-q-v2",
+ "design": "Compact question set for the $10 total budget: Jev bills input tokens per call, and the question text is resent with every review, so definitions are condensed to short criteria. Full definitions live in labels/taxonomy.json; subtopics are assigned by code (pipeline/extract.py).",
+ "state_format": "The raw review_text string only. No rating, date, ID or other metadata is sent.",
+ "questions": {
+  "topic": {
+   "type": "choice",
+   "instructions": "Main problem in this Spotify review (most severe, else first); if praise, first praised feature.",
+   "criteria": {
+    "access": "login, account access",
+    "usability": "navigation, controls, playlists, ads",
+    "playback": "won't play, stops, crashes, lag, connection, audio",
+    "downloads": "downloads, offline",
+    "catalog": "missing songs, search, recommendations, lyrics, podcasts",
+    "billing": "price, charges, premium-only limits like shuffle/skips",
+    "support": "customer support",
+    "other": "general or unrelated"
+   }
+  },
+  "intent": {
+   "type": "choice",
+   "instructions": "Intent; precedence cancellation > complaint > request > praise > unclear.",
+   "criteria": {
+    "cancellation": "leaving, uninstalling, cancelling or threatening to",
+    "complaint": "negative experience, incl. mixed",
+    "request": "wants a change, no failure",
+    "praise": "positive only",
+    "unclear": "slogan, unrelated, unintelligible"
+   }
+  },
+  "severity": {
+   "type": "choice",
+   "instructions": "Problem severity; stars, anger or quitting alone don't raise it.",
+   "criteria": {
+    "1": "no problem, praise, unclear, pure request",
+    "2": "generic criticism, minor annoyance",
+    "3": "degraded function, some use remains",
+    "4": "core task blocked",
+    "5": "explicit financial, privacy or data harm"
+   }
+  },
+  "sentiment": {
+   "type": "score",
+   "instructions": "Tone.",
+   "criteria": [
+    "very negative",
+    "negative",
+    "neutral",
+    "positive",
+    "very positive"
+   ]
+  }
+ },
+ "mapping": {
+  "topic": "argmax choice",
+  "intent": "argmax choice",
+  "severity": "int(argmax choice)",
+  "sentiment": "score/2 - 1 (0..4 -> -1..1)",
+  "needs_review": "topic or intent confidence below threshold, or non-Latin script",
+  "subtopic": "code lexicon within the chosen topic (extract.subtopic)"
+ }
+}

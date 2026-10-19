@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Golden 50 Labeler</title>
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--ink:#1d1d1b;--mute:#6b6b66;--line:#ddd;--acc:#1db954;--warn:#c0392b}
+@media (prefers-color-scheme:dark){:root{--bg:#141414;--card:#1e1e1e;--ink:#eee;--mute:#9a9a9a;--line:#333}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,sans-serif}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;max-width:1300px;margin:0 auto;padding:16px}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.review{font-size:18px;white-space:pre-wrap;padding:14px;border:1px dashed var(--line);border-radius:8px;user-select:text}
+.meta{color:var(--mute);font-size:13px;margin:6px 0 12px}
+h3{margin:14px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts button{border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 10px;border-radius:6px;cursor:pointer;font:inherit}
+.opts button.on{background:var(--acc);border-color:var(--acc);color:#000;font-weight:600}
+.opts button.alt{outline:2px dashed var(--acc)}
+input[type=text],textarea{width:100%;padding:7px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--ink);font:inherit}
+.nav{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.nav button{padding:8px 14px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.err{color:var(--warn);font-size:13px;min-height:18px}
+.def{font-size:13px;margin:4px 0}.def b{display:inline-block;min-width:92px}
+.dots{display:flex;flex-wrap:wrap;gap:3px;margin:8px 0}.dots span{width:14px;height:14px;border-radius:3px;background:var(--line);cursor:pointer}
+.dots span.done{background:var(--acc)}.dots span.cur{outline:2px solid var(--ink)}
+.small{font-size:12px;color:var(--mute)}
+</style></head><body>
+<div class="wrap">
+<div>
+  <div class="card">
+    <div class="nav"><button id="prev">← Prev (k)</button><div><b id="pos"></b> · <span id="done"></span> labeled</div><button id="next">Next (j) →</button></div>
+    <div class="dots" id="dots"></div>
+    <div class="review" id="text"></div>
+    <div class="meta" id="meta"></div>
+    <h3>Topic (keys 1–8)</h3><div class="opts" id="topic"></div>
+    <h3>Intent (q w e r t)</h3><div class="opts" id="intent"></div>
+    <h3>Severity (a s d f g)</h3><div class="opts" id="severity"></div>
+    <h3>Sentiment (z x c v b)</h3><div class="opts" id="sentiment"></div>
+    <h3>Evidence quote — exact substring</h3>
+    <div class="opts" style="margin-bottom:6px"><button id="useSel">Use highlighted text (u)</button><button id="useAll">Use full text (o)</button></div>
+    <textarea id="quote" rows="2"></textarea>
+    <h3>Entities (comma-separated, only explicitly mentioned)</h3><input type="text" id="entities" placeholder="e.g. shuffle, premium, Android Auto">
+    <h3>Flags</h3>
+    <label><input type="checkbox" id="needs_review"> needs_review (ambiguous / lacks context / unsupported language)</label><br>
+    <label><input type="checkbox" id="ambiguous"> ambiguous: other labels also acceptable → shift-click alternates above</label>
+    <h3>Notes</h3><input type="text" id="notes">
+    <div class="err" id="err"></div>
+  </div>
+</div>
+<div class="card" id="defs"><b>Definitions</b><div class="small">Classify the text only; stars are shown for context but must not decide labels. Highest-severity specific problem wins; ties → first mentioned. Praise → first specific praised feature, else other. Paid-plan mention alone ≠ billing.</div></div>
+</div>
+<script>
+let rows=[],tax={},i=0;
+const TOP=["access","usability","playback","downloads","catalog","billing","support","other"];
+const INT=["cancellation","complaint","request","praise","unclear"];
+const SEV=["1","2","3","4","5"],SEN=["-1","-0.5","0","0.5","1"];
+const KEYS={topic:"12345678",intent:"qwert",severity:"asdfg",sentiment:"zxcvb"};
+const ALT={topic:"alt_topics",intent:"alt_intents",severity:"alt_severities"};
+const $=id=>document.getElementById(id);
+function opts(field,vals){const el=$(field);el.innerHTML="";vals.forEach(v=>{const b=document.createElement("button");b.textContent=v;b.onclick=e=>{if(e.shiftKey&&ALT[field]){toggleAlt(field,v)}else{rows[i][field]=v;save()}render()};el.appendChild(b)})}
+function toggleAlt(field,v){const k=ALT[field];let a=(rows[i][k]||"").split("|").filter(Boolean);a=a.includes(v)?a.filter(x=>x!==v):a.concat(v);rows[i][k]=a.join("|");rows[i].ambiguous=a.length?"true":rows[i].ambiguous;save()}
+function render(){const r=rows[i];$("text").textContent=r.review_text;$("meta").textContent=`★${r.review_rating} · likes ${r.review_likes} · v${r.app_version||"?"} · ${r.review_timestamp} · ${r.review_id}`;
+ for(const f of ["topic","intent","severity","sentiment"]){[...$(f).children].forEach(b=>{b.classList.toggle("on",r[f]===b.textContent);b.classList.toggle("alt",!!(ALT[f]&&(r[ALT[f]]||"").split("|").includes(b.textContent)))})}
+ $("quote").value=r.evidence_quote;$("entities").value=r.entities;$("notes").value=r.notes;$("needs_review").checked=r.needs_review==="true";$("ambiguous").checked=r.ambiguous==="true";
+ $("pos").textContent=`${i+1} / ${rows.length}`;const d=rows.filter(isDone).length;$("done").textContent=d;
+ $("dots").innerHTML="";rows.forEach((x,j)=>{const s=document.createElement("span");if(isDone(x))s.classList.add("done");if(j===i)s.classList.add("cur");s.onclick=()=>{i=j;render()};$("dots").appendChild(s)})}
+function isDone(r){return r.topic&&r.intent&&r.severity&&r.sentiment&&r.evidence_quote}
+async function save(){const r=rows[i];r.evidence_quote=$("quote").value;r.entities=$("entities").value;r.notes=$("notes").value;r.needs_review=$("needs_review").checked?"true":"false";r.ambiguous=$("ambiguous").checked?"true":"false";
+ const res=await fetch("/api/save",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(r)});const j=await res.json();$("err").textContent=j.error||""}
+document.addEventListener("keydown",e=>{if(["INPUT","TEXTAREA"].includes(e.target.tagName))return;const k=e.key;
+ for(const f in KEYS){const p=KEYS[f].indexOf(k);if(p>=0){rows[i][f]=[TOP,INT,SEV,SEN][Object.keys(KEYS).indexOf(f)][p];save();render();return}}
+ if(k==="j")go(1);if(k==="k")go(-1);if(k==="u")useSel();if(k==="o"){$("quote").value=rows[i].review_text;save()}});
+function useSel(){const s=window.getSelection().toString();if(s){$("quote").value=s;save()}}
+async function go(d){await save();i=Math.max(0,Math.min(rows.length-1,i+d));render()}
+$("prev").onclick=()=>go(-1);$("next").onclick=()=>go(1);$("useSel").onclick=useSel;$("useAll").onclick=()=>{$("quote").value=rows[i].review_text;save()};
+["quote","entities","notes"].forEach(id=>$(id).addEventListener("change",save));["needs_review","ambiguous"].forEach(id=>$(id).addEventListener("change",save));
+fetch("/api/data").then(r=>r.json()).then(d=>{rows=d.rows;tax=d.taxonomy;opts("topic",TOP);opts("intent",INT);opts("severity",SEV);opts("sentiment",SEN);
+ const D=$("defs");const add=(h,o)=>{const t=document.createElement("h3");t.textContent=h;D.appendChild(t);for(const k in o){const p=document.createElement("div");p.className="def";p.innerHTML=`<b>${k}</b> `;p.append(typeof o[k]==="string"?o[k]:(o[k].definition||o[k].meaning)+(o[k].boundary?" — "+o[k].boundary:""));D.appendChild(p)}};
+ add("Topics",tax.topics);add("Intent (precedence top→bottom)",tax.intents);add("Severity",tax.severity);const s=document.createElement("div");s.className="def";s.textContent=tax.sentiment;D.appendChild(s);
+ i=Math.max(0,rows.findIndex(r=>!isDone(r)));render()});
+</script></body></html>

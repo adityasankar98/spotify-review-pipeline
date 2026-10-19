@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spotify Review Priorities</title>
+<meta name="description" content="Where should Spotify's next quarter of product effort go? Evidence from 660,622 Google Play reviews, classified and ranked by a multi-agent pipeline.">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f6f6f4;--surface:#fcfcfb;--surface-2:#f0efec;--line:#e2e1dc;--grid:#ebeae6;
+  --ink:#0b0b0b;--ink-2:#52514e;--ink-3:#7a7974;
+  --accent:#1a7f4b;--accent-soft:#e3f2ea;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--muted-bar:#c9c8c2;
+  --good:#1a7f4b;--bad:#c0392b;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --bg:#111110;--surface:#1a1a19;--surface-2:#242422;--line:#33332f;--grid:#2a2a27;
+    --ink:#ffffff;--ink-2:#c3c2b7;--ink-3:#8f8e86;--accent:#3ccf7f;--accent-soft:#163626;
+    --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--muted-bar:#4a4a45;--good:#3ccf7f;--bad:#ff7a6b;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#111110;--surface:#1a1a19;--surface-2:#242422;--line:#33332f;--grid:#2a2a27;
+  --ink:#ffffff;--ink-2:#c3c2b7;--ink-3:#8f8e86;--accent:#3ccf7f;--accent-soft:#163626;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--muted-bar:#4a4a45;--good:#3ccf7f;--bad:#ff7a6b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 16px 64px}
+header h1{font-size:24px;margin:0 0 4px;letter-spacing:-.01em}
+header p{margin:0;color:var(--ink-2)}
+.meta{font-size:12px;color:var(--ink-3);margin-top:6px;word-break:break-all}
+section{margin-top:28px}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2);margin:0 0 10px;font-weight:600}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.kpi .v{font-size:24px;font-weight:650;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.kpi .l{font-size:12px;color:var(--ink-2)}
+.kpi .s{font-size:11px;color:var(--ink-3)}
+.rec-head{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:12px}
+.area{font-size:28px;font-weight:700;text-transform:capitalize;margin:4px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:12px}
+.rc h3{margin:0 0 6px;font-size:15px}
+.rc p{margin:0 0 8px;color:var(--ink-2);font-size:14px}
+.chip{display:inline-block;margin:2px 4px 2px 0;padding:1px 7px;border:1px solid var(--line);border-radius:6px;font:12px ui-monospace,monospace;
+  background:var(--surface-2);color:var(--ink);cursor:pointer}
+.chip:hover,.chip:focus{border-color:var(--ink-3);outline:none}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+svg text{fill:var(--ink-2);font-size:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;color:var(--ink-2);font-weight:600;border-bottom:1px solid var(--line);padding:6px 8px;white-space:nowrap}
+.tbl td{border-bottom:1px solid var(--grid);padding:6px 8px;font-variant-numeric:tabular-nums;vertical-align:top}
+.tbl tr.row{cursor:pointer}.tbl tr.row:hover td{background:var(--surface-2)}
+.num{text-align:right}
+.scroll{overflow-x:auto}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);margin-bottom:6px}
+.legend i{display:inline-block;width:12px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+#tip{position:fixed;pointer-events:none;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;
+  box-shadow:0 4px 18px rgba(0,0,0,.12);display:none;z-index:20;max-width:280px}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);max-width:760px;width:calc(100% - 32px);padding:0}
+dialog::backdrop{background:rgba(0,0,0,.35)}
+.dlg-h{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.dlg-b{padding:12px 16px;max-height:70vh;overflow:auto}
+.btn{border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:8px;padding:5px 10px;cursor:pointer;font:inherit;font-size:13px}
+.quote{border-left:3px solid var(--line);padding:2px 10px;margin:8px 0;color:var(--ink)}
+.small{font-size:12px;color:var(--ink-3)}
+.memo h1,.memo h2,.memo h3{text-transform:none;letter-spacing:0;color:var(--ink);font-size:16px;margin:16px 0 6px}
+.memo table{border-collapse:collapse;font-size:12px}.memo td,.memo th{border:1px solid var(--line);padding:2px 6px}
+.ok{color:var(--good);font-weight:600}.fail{color:var(--bad);font-weight:600}
+.err{color:var(--bad)}
+.sevbar{display:flex;gap:2px;height:8px;margin:6px 0 2px}
+.sevbar span{display:block;height:8px;border-radius:2px;background:var(--s1)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Where should Spotify's next quarter go?</h1>
+    <p>Evidence from 660,622 Google Play reviews (May 2022 – Nov 2023), classified, verified, grouped and ranked by a multi-agent pipeline. Every number comes from the database; every recommendation cites claim IDs and review IDs you can open.</p>
+    <div class="meta" id="runmeta">Loading…</div>
+  </header>
+
+  <section><h2>Overall metrics</h2><div class="kpis" id="kpis"></div></section>
+
+  <section>
+    <h2>AI-generated recommendation</h2>
+    <div class="card" id="rec"><span class="small">Loading…</span></div>
+    <div class="cards" id="reccards"></div>
+  </section>
+
+  <section class="grid2">
+    <div class="card">
+      <h2>Priority score by product area</h2>
+      <div class="small" style="margin-bottom:6px">Severity-weighted complaints (Σ severity of complaint + cancellation reviews). The four areas in the question are highlighted.</div>
+      <div id="areas"></div>
+    </div>
+    <div class="card">
+      <h2>Complaint share by month</h2>
+      <div class="small" style="margin-bottom:6px">% of classified reviews each month that are complaints in the area. Full calendar months only.</div>
+      <div class="legend" id="trendlegend"></div>
+      <div id="trend"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Issue ranking (baseline: count × mean severity)</h2>
+    <div class="card scroll"><table class="tbl" id="issues"><thead><tr>
+      <th>#</th><th>Issue</th><th>Area</th><th class="num">Complaints</th><th class="num">Mean sev.</th><th class="num">Score</th><th class="num">Share</th><th class="num">Cancel</th><th class="num">Sev ≥4</th></tr></thead><tbody></tbody></table>
+      <div class="small" style="margin-top:6px">Click an issue to see its member reviews and evidence quotes. Ties break by issue ID.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Decision memo</h2>
+    <div class="card memo" id="memo"><span class="small">Loading…</span></div>
+  </section>
+
+  <section>
+    <h2>Quality &amp; coverage</h2>
+    <div class="card" id="quality"></div>
+  </section>
+
+  <section>
+    <h2>Look up a review</h2>
+    <div class="card"><form id="lookup" style="display:flex;gap:8px;flex-wrap:wrap">
+      <input id="rid" placeholder="review_id (UUID)" style="flex:1;min-width:220px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);color:var(--ink)">
+      <button class="btn">Open</button></form></div>
+  </section>
+</div>
+<div id="tip"></div>
+<dialog id="dlg"><div class="dlg-h"><b id="dlgt"></b><button class="btn" id="dlgx">Close</button></div><div class="dlg-b" id="dlgb"></div></dialog>
+<script>
+const $ = (id) => document.getElementById(id);
+const fmt = (n) => Number(n).toLocaleString("en-US");
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const AREA_LABEL = {access:"Access",usability:"Usability",playback:"Playback",billing_support:"Billing / support",downloads:"Downloads",catalog:"Catalog",other:"Other / general"};
+const QUESTION = new Set(["access","usability","playback","billing_support"]);
+let CLAIMS = {};
+async function get(path){const r=await fetch(path);if(!r.ok)throw new Error(path+" → "+r.status);return r.json();}
+const tip=$("tip");
+function showTip(e,html){tip.innerHTML=html;tip.style.display="block";const x=Math.min(e.clientX+14,innerWidth-300);tip.style.left=x+"px";tip.style.top=(e.clientY+14)+"px";}
+function hideTip(){tip.style.display="none";}
+function chipClaim(id){const c=CLAIMS[id];return `<span class="chip" tabindex="0" data-claim="${esc(id)}" title="${c?esc(c.subject+" · "+c.metric+" = "+c.value):"unknown claim"}">${esc(id)}</span>`;}
+function chipReview(id){return `<span class="chip" tabindex="0" data-review="${esc(id)}">R:${esc(id.slice(0,8))}…</span>`;}
+document.addEventListener("click",(e)=>{const r=e.target.closest("[data-review]");if(r)openReview(r.dataset.review);const c=e.target.closest("[data-claim]");if(c)openClaim(c.dataset.claim);});
+document.addEventListener("keydown",(e)=>{if(e.key==="Enter"){const r=e.target.closest?.("[data-review]");if(r)openReview(r.dataset.review);const c=e.target.closest?.("[data-claim]");if(c)openClaim(c.dataset.claim);}});
+$("dlgx").onclick=()=>$("dlg").close();
+function dialog(title,html){$("dlgt").textContent=title;$("dlgb").innerHTML=html;$("dlg").showModal();}
+function openClaim(id){const c=CLAIMS[id];dialog("Claim "+id,c?`<p><b>${esc(c.subject)}</b><br>${esc(c.metric)} = <b>${esc(c.value)}</b></p><p class="small">Computed by code from saved records and issue membership (rank.py) and stored in the claims table. ${c.subject.startsWith("ISS-")?`<span class="chip" data-issue-open="${esc(c.subject)}">open issue evidence</span>`:""}</p>`:"<p>Unknown claim.</p>");}
+document.addEventListener("click",(e)=>{const t=e.target.closest("[data-issue-open]");if(t){$("dlg").close();openIssue(t.dataset.issueOpen);}});
+async function openReview(id){dialog("Review "+id,"Loading…");try{const {review:r}=await get("/api/review?id="+encodeURIComponent(id));
+  $("dlgb").innerHTML=`<div class="quote">${esc(r.evidence_quote||"(no quote)")}</div>
+  <table class="tbl">${[["status",r.status+(r.reason?" — "+r.reason:"")],["topic / subtopic",(r.topic||"")+" / "+(r.subtopic||"")],["intent",r.intent],["severity",r.severity],["sentiment",r.sentiment],["needs_review",r.needs_review],["issue",r.issue_id||"—"],["stars (metadata only)",r.review_rating],["helpful votes",r.review_likes],["month",r.review_month],["app version",r.app_version||"missing"],["label source",r.label_source],["cache source",r.cache_source_id||"—"]].map(([k,v])=>`<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join("")}</table>
+  <p class="small">The evidence quote is an exact substring of the original review text (checked in code). Full review text is in the public source dataset.</p>`;}catch(e){$("dlgb").innerHTML=`<p class="err">${esc(e.message)}</p>`;}}
+async function openIssue(id,offset=0,sev=""){dialog(id,"Loading…");try{const d=await get(`/api/issue?id=${encodeURIComponent(id)}&offset=${offset}${sev?"&severity="+sev:""}`);const i=d.issue;
+  const total=d.severity_distribution.reduce((a,b)=>a+b.n,0);
+  $("dlgb").innerHTML=`<p><b>${esc(i.name)}</b><br><span class="small">${esc(i.description||"")}</span></p>
+  <p>${fmt(i.complaint_count)} complaints · mean severity ${esc(i.mean_severity)} · score ${fmt(i.priority_score)} · rank ${i.rank}</p>
+  <div class="small">Severity distribution: ${d.severity_distribution.map(s=>`<span class="chip" data-sev="${s.severity}">sev ${s.severity}: ${fmt(s.n)} (${(100*s.n/total).toFixed(1)}%)</span>`).join("")} <span class="chip" data-sev="">all</span></div>
+  ${d.members.map(m=>`<div class="quote">${esc(m.evidence_quote)}<div class="small">${chipReview(m.review_id)} ${esc(m.intent)} · severity ${m.severity} · ${m.review_month} · ${fmt(m.review_likes)} helpful${m.cache_source_id?" · exact-text reuse of "+esc(m.cache_source_id.slice(0,8))+"…":""}</div></div>`).join("")}
+  <div style="display:flex;gap:8px;margin-top:8px">${offset>0?`<button class="btn" id="prevp">← Prev</button>`:""}${d.members.length===25?`<button class="btn" id="nextp">Next →</button>`:""}</div>`;
+  $("dlgb").querySelectorAll("[data-sev]").forEach(c=>c.onclick=()=>openIssue(id,0,c.dataset.sev));
+  if($("prevp"))$("prevp").onclick=()=>openIssue(id,Math.max(0,offset-25),sev);if($("nextp"))$("nextp").onclick=()=>openIssue(id,offset+25,sev);
+  }catch(e){$("dlgb").innerHTML=`<p class="err">${esc(e.message)}</p>`;}}
+$("lookup").onsubmit=(e)=>{e.preventDefault();const v=$("rid").value.trim();if(v)openReview(v);};
+
+function mdToHtml(md){const lines=esc(md).split("\n");let out=[],list=false,table=false;
+  const inline=(s)=>s.replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/\*(.+?)\*/g,"<i>$1</i>").replace(/`(.+?)`/g,"<code>$1</code>")
+    .replace(/\[([CT]\d{3})\]/g,(_,id)=>chipClaim(id)).replace(/\[R:([A-Za-z0-9-]+)\]/g,(_,id)=>chipReview(id));
+  for(const l of lines){
+    if(/^\|/.test(l)){if(/^\|[\s|:-]+\|$/.test(l))continue;if(!table){out.push("<table>");table=true;}out.push("<tr>"+l.slice(1,-1).split("|").map(c=>"<td>"+inline(c.trim())+"</td>").join("")+"</tr>");continue;}
+    if(table){out.push("</table>");table=false;}
+    if(/^\s*[-*] /.test(l)){if(!list){out.push("<ul>");list=true;}out.push("<li>"+inline(l.replace(/^\s*[-*] /,""))+"</li>");continue;}
+    if(list){out.push("</ul>");list=false;}
+    const h=l.match(/^(#{1,4}) (.*)/);if(h){out.push(`<h3>${inline(h[2])}</h3>`);continue;}
+    if(/^\d+\. /.test(l)){out.push("<p>"+inline(l)+"</p>");continue;}
+    if(l.trim()==="---"){out.push("<hr>");continue;}
+    if(l.trim())out.push("<p>"+inline(l)+"</p>");}
+  if(list)out.push("</ul>");if(table)out.push("</table>");return out.join("");}
+
+function barChart(el,rows){const W=520,rowH=34,padL=130,padR=70,H=rows.length*rowH+24;const max=Math.max(...rows.map(r=>r.value));
+  const x=(v)=>padL+(W-padL-padR)*v/max;let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Priority score by product area">`;
+  for(let t=0;t<=4;t++){const v=max*t/4,xx=x(v);s+=`<line x1="${xx}" x2="${xx}" y1="0" y2="${H-20}" stroke="var(--grid)"/>`;}
+  rows.forEach((r,i)=>{const y=i*rowH+6,w=Math.max(2,x(r.value)-padL),h=20;
+    s+=`<text x="${padL-8}" y="${y+h/2+4}" text-anchor="end">${esc(r.label)}</text>`;
+    s+=`<path d="M${padL},${y} h${w-4} a4,4 0 0 1 4,4 v${h-8} a4,4 0 0 1 -4,4 h-${w-4} z" fill="${r.hi?"var(--s1)":"var(--muted-bar)"}"/>`;
+    s+=`<text x="${padL+w+6}" y="${y+h/2+4}" style="fill:var(--ink);font-variant-numeric:tabular-nums">${fmt(r.value)}</text>`;
+    s+=`<rect x="0" y="${y-4}" width="${W}" height="${rowH}" fill="transparent" data-i="${i}"/>`;});
+  s+=`<line x1="${padL}" x2="${padL}" y1="0" y2="${H-20}" stroke="var(--line)"/></svg>`;el.innerHTML=s;
+  el.querySelectorAll("rect[data-i]").forEach(r=>{const d=rows[r.dataset.i];r.addEventListener("mousemove",e=>showTip(e,d.tip));r.addEventListener("mouseleave",hideTip);});}
+
+function lineChart(el,months,series){const W=520,H=240,pl=40,pr=80,pt=10,pb=28;const all=series.flatMap(s=>s.values);const max=Math.max(...all)*1.1||1;
+  const x=(i)=>pl+(W-pl-pr)*i/Math.max(1,months.length-1),y=(v)=>pt+(H-pt-pb)*(1-v/max);
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Monthly complaint share by area">`;
+  const ticks=4;for(let t=0;t<=ticks;t++){const v=max*t/ticks;s+=`<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"/><text x="${pl-6}" y="${y(v)+4}" text-anchor="end">${v.toFixed(1)}%</text>`;}
+  months.forEach((m,i)=>{if(i%3===0)s+=`<text x="${x(i)}" y="${H-8}" text-anchor="middle">${m}</text>`;});
+  series.forEach(se=>{s+=`<path d="${se.values.map((v,i)=>(i?"L":"M")+x(i)+","+y(v)).join("")}" fill="none" stroke="${se.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const li=se.values.length-1;s+=`<circle cx="${x(li)}" cy="${y(se.values[li])}" r="4" fill="${se.color}" stroke="var(--surface)" stroke-width="2"/>`;
+    s+=`<text x="${x(li)+8}" y="${y(se.values[li])+4}">${esc(se.short)}</text>`;});
+  s+=`<line id="xh" y1="${pt}" y2="${H-pb}" stroke="var(--ink-3)" stroke-width="1" style="display:none"/><rect x="${pl}" y="${pt}" width="${W-pl-pr}" height="${H-pt-pb}" fill="transparent" id="hit"/></svg>`;
+  el.innerHTML=s;const svg=el.querySelector("svg"),hit=el.querySelector("#hit"),xh=el.querySelector("#xh");
+  hit.addEventListener("mousemove",e=>{const pt2=svg.createSVGPoint();pt2.x=e.clientX;pt2.y=e.clientY;const p=pt2.matrixTransform(svg.getScreenCTM().inverse());
+    const i=Math.max(0,Math.min(months.length-1,Math.round((p.x-pl)/((W-pl-pr)/Math.max(1,months.length-1)))));xh.setAttribute("x1",x(i));xh.setAttribute("x2",x(i));xh.style.display="";
+    showTip(e,`<b>${months[i]}</b> (n=${fmt(series[0].den[i])} classified)<br>`+series.map(se=>`<i style="display:inline-block;width:10px;height:3px;background:${se.color};margin-right:6px;vertical-align:middle"></i>${esc(se.name)}: ${se.values[i].toFixed(2)}%`).join("<br>"));});
+  hit.addEventListener("mouseleave",()=>{xh.style.display="none";hideTip();});}
+
+async function main(){
+  try{
+    const [ov,iss,tr]=await Promise.all([get("/api/overview"),get("/api/issues"),get("/api/trends")]);
+    CLAIMS=Object.fromEntries(ov.claims.map(c=>[c.claim_id,c]));
+    const m=ov.meta, rs=m.run_summary||{}, rec=rs.records||{};
+    const st=Object.fromEntries(ov.status.map(s=>[s.status,s.n]));const total=(st.completed||0)+(st.quarantined||0);
+    $("runmeta").textContent=`run: ${rs.run} · input sha256 ${rs.input_sha256} · label_config ${rs.label_config}`;
+    const complaints=iss.issues.reduce((a,b)=>a+b.complaint_count,0);
+    const v=m.verify_report||{}, g=m.golden_eval||{};
+    const k=[["Source reviews",fmt(total),"all IDs accounted for"],["Classified",fmt(st.completed||0),`${(100*(st.completed||0)/total).toFixed(3)}% of rows`],
+      ["Quarantined",fmt(st.quarantined||0),Object.entries(rs.quarantine_reasons||{}).map(([r,n])=>`${r.split(":")[0]}: ${n}`).join(", ")],
+      ["Exact-text reuse",fmt(rec.completed_via_cache||0),"completed without a new model call"],
+      ["Complaints + cancellations",fmt(complaints),`${iss.issues.length} issues`],
+      ["Verifier agreement",v.agreement?`${(100*v.agreement.topic).toFixed(0)}% topic`:"—",v.sample_size?`n=${v.sample_size} blind re-labels`:""],
+      ["Golden-set agreement",g.topic_agreement!=null?`${(100*g.topic_agreement).toFixed(0)}% topic`:"—",g.intent_agreement!=null?`intent ${(100*g.intent_agreement).toFixed(0)}% · sev MAE ${g.severity_mae}`:""],
+      ["API spend (all stages)",rs.spent_usd_total!=null?"$"+Number(rs.spent_usd_total).toFixed(2):"—","logged per call"]];
+    $("kpis").innerHTML=k.map(([l,v2,s])=>`<div class="card kpi"><div class="l">${esc(l)}</div><div class="v">${esc(v2)}</div><div class="s">${esc(s)}</div></div>`).join("");
+    const head=ov.recommendations.find(r=>r.kind==="headline");
+    const chk=m.memo_check||{};
+    $("rec").innerHTML=head?`<div class="rec-head"><div><span class="pill">Recommended priority</span><div class="area">${esc(AREA_LABEL[head.priority_area]||head.priority_area)}</div></div>
+      <div style="flex:1;min-width:260px"><p style="margin:0 0 6px">${esc(head.body)}</p><div class="small">Written by ${esc(head.model)} from a bounded evidence pack of saved aggregates. Automated citation/number check: <span class="${chk.status==="pass"?"ok":"fail"}">${esc(chk.status||"?")}</span>. Click a chip to see the computed value or the source review.</div></div></div>`:"No recommendation stored.";
+    $("reccards").innerHTML=ov.recommendations.filter(r=>r.kind==="card").map(c=>`<div class="card rc"><h3>${esc(c.title)}</h3><p>${esc(c.body)}</p><div>${(c.claim_ids||[]).map(chipClaim).join("")}${(c.review_ids||[]).map(chipReview).join("")}</div></div>`).join("");
+    const areas=ov.topics.filter(t=>!t.group.startsWith("topic:")).map(t=>({key:t.group,label:AREA_LABEL[t.group]||t.group,value:+t.severity_sum,hi:QUESTION.has(t.group),
+      tip:`<b>${esc(AREA_LABEL[t.group]||t.group)}</b><br>score (Σ severity) ${fmt(t.severity_sum)}<br>${fmt(t.complaint_count)} complaints · mean ${t.mean_severity}<br>${t.share_of_all_complaints_pct}% of all complaints<br>severity ≥4: ${fmt(t.severity_4plus_count)} · cancellation intent: ${fmt(t.cancellation_count)}`})).sort((a,b)=>b.value-a.value);
+    barChart($("areas"),areas);
+    const months=tr.months.map(r=>r.month);const cols=[["playback","Playback","var(--s1)"],["billing_support","Billing / support","var(--s2)"],["usability","Usability","var(--s3)"],["access","Access","var(--s4)"]];
+    const series=cols.map(([kk,name,color])=>({name,short:name.split(" ")[0],color,values:tr.months.map(r=>+r[kk+"_share_pct"]),den:tr.months.map(r=>+r.completed_records)}));
+    $("trendlegend").innerHTML=series.map(s=>`<span><i style="background:${s.color}"></i>${esc(s.name)}</span>`).join("");
+    lineChart($("trend"),months,series);
+    $("issues").querySelector("tbody").innerHTML=iss.issues.map(i=>`<tr class="row" data-issue="${esc(i.issue_id)}"><td>${i.rank}</td><td><b>${esc(i.name)}</b><div class="small">${esc(i.issue_id)}</div></td><td>${esc(i.topic)}</td><td class="num">${fmt(i.complaint_count)}</td><td class="num">${(+i.mean_severity).toFixed(3)}</td><td class="num"><b>${fmt(i.priority_score)}</b></td><td class="num">${esc(i.share_pct)}%</td><td class="num">${fmt(i.cancellation_count)}</td><td class="num">${fmt(i.severity_4plus_count)}</td></tr>`).join("");
+    $("issues").querySelectorAll("tr.row").forEach(r=>r.onclick=()=>openIssue(r.dataset.issue));
+    $("memo").innerHTML=mdToHtml(m.memo_markdown||"No memo stored.");
+    const cmp=m.trends_comparison||{};
+    $("quality").innerHTML=`<p>Completed <b>${fmt(st.completed||0)}</b> of ${fmt(total)} source rows; quarantined ${fmt(st.quarantined||0)} (${Object.entries(rs.quarantine_reasons||{}).map(([r,n])=>esc(r)+": "+n).join("; ")}). Records flagged needs_review: ${fmt(rec.needs_review||0)}.</p>
+      <p>Independent verifier (${esc(v.verifier_model||"")}, blind to first labels, n=${v.sample_size||"—"}): ${v.agreement?Object.entries(v.agreement).map(([a,b])=>esc(a)+" "+b).join(" · "):"—"}.</p>
+      <p>Golden set (50 human labels): ${g.cases?`topic ${g.topic_agreement}, intent ${g.intent_agreement}, severity exact ${g.severity_exact}, severity MAE ${g.severity_mae}`:"—"}.</p>
+      <p class="small">Models: ${esc(JSON.stringify(rs.models||{}))}. Stars are metadata and never used as labels. Cancellation language is stated intent, not observed churn. Reviews are self-selected public feedback; no revenue or plan data.</p>`;
+  }catch(e){document.querySelector(".wrap").insertAdjacentHTML("afterbegin",`<p class="err">Failed to load data from the backend: ${esc(e.message)}</p>`);}
+}
+main();
+</script>
+</body>
+</html>
