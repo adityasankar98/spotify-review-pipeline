@@ -15,7 +15,7 @@ from pathlib import Path
 from . import settings
 from .providers import BudgetStop, CallFailed
 
-SYSTEM = (settings.PROMPTS / "memo_v1.md").read_text()
+SYSTEM = (settings.PROMPTS / "memo_v2.md").read_text()
 SCHEMA = {"type": "object", "additionalProperties": False,
           "required": ["priority_area", "recommendation", "memo_markdown", "cards"],
           "properties": {

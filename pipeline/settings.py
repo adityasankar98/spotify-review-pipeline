@@ -28,7 +28,7 @@ JEV_QUESTIONS_VERSION = "jev-q-v2"  # Jev questions, now used by the independent
 FALLBACK_PROMPT_VERSION = "fallback-v1"  # superseded JSON prompt; kept for the measured format comparison
 VERIFY_PROMPT_VERSION = "verify-v1"
 GROUP_PROMPT_VERSION = "group-v1"
-MEMO_PROMPT_VERSION = "memo-v1"
+MEMO_PROMPT_VERSION = "memo-v2"
 SCHEMA_VERSION = "schema-v1"
 EXTRACT_VERSION = "extract-v2"  # quote + entities + code subtopic rules
 
