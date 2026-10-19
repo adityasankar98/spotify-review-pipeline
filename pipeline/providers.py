@@ -186,7 +186,8 @@ class Providers:
 
     async def close(self):
         if self._jev is not None:
-            await self._jev.close()
+            closer = getattr(self._jev, "aclose", None) or getattr(self._jev, "close")
+            await closer()
         if self._anth is not None:
             await self._anth.close()
 

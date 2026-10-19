@@ -9,3 +9,6 @@ data/state/
 .DS_Store
 node_modules/
 .vercel/
+# simulated (mock) plumbing runs and local logs are never results
+runs/mock*/
+runs/*.log

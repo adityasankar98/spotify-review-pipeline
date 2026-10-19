@@ -1,0 +1,212 @@
+[2026-10-18 19:57:34] === invocation 1 (initial) run=pilot100 stages=['ingest', 'enrich', 'verify', 'group', 'rank', 'recommend', 'export'] opts={'batch_size': 50, 'transport': 'batch', 'batch_requests': 200, 'poll_seconds': 10, 'workers': 1, 'jev_rps': 8.0, 'jev_concurrency': 16, 'budget_usd': 0.5, 'max_attempts': 4, 'max_minutes': 0, 'verify_sample': 20, 'verify_seed': 'verify-seed-v1'}
+[2026-10-18 19:57:34] ingest: 100 rows, 100 nonempty, 0 empty quarantined, 100 distinct texts (0.0s)
+[2026-10-18 19:57:34] enrich: 100 distinct pending texts -> 2 requests (<= 50 reviews each); transport=batch workers=1 retry_round=0; label_config=enrich-v2|claude-haiku-5-5:effort=low,thinking=disabled,max_tokens=2000:enrich-codes-v1|extract-v2|schema-v1|prompts=48fd9d6b
+[2026-10-18 19:57:35] enrich: submitted batch 1/1 msgbatch_017J9yqd9VuPciYhu4SYeJU6 (2 requests, 100 reviews, reserved $0.0017)
+[2026-10-18 19:57:45] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:57:56] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:58:06] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:58:16] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:58:27] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:58:37] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:58:47] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:58:58] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:59:08] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:59:18] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:59:29] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:59:39] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 19:59:49] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:00:00] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:00:10] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:00:20] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:00:31] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:00:41] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:00:52] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:01:02] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:01:12] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:01:22] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:01:33] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:01:43] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:01:53] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:02:04] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:02:14] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:02:24] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:02:35] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:02:45] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:02:55] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:03:06] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:03:16] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:03:26] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:03:37] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:03:47] enrich: msgbatch_017J9yqd9VuPciYhu4SYeJU6 in_progress: processing=2 succeeded=0 errored=0
+[2026-10-18 20:03:58] enrich: collected msgbatch_017J9yqd9VuPciYhu4SYeJU6 | texts done 100 failed 0 | spent $0.0009 | 0.3 texts/s overall
+[2026-10-18 20:04:01] verify: 20 sampled; agreement {'topic': 0.95, 'intent': 0.95, 'severity_exact': 0.8, 'severity_mae': 0.2, 'sentiment_within_0.5': 1.0}; 1 disagreements flagged
+[2026-10-18 20:04:08] group: 50 complaint/cancellation records -> 16 issues (membership.csv, issues.json)
+[2026-10-18 20:04:08] rank: 16 issues ranked from 50 memberships; top = ISS-other-general_negative(22), ISS-billing-free_tier_restrictions(21), ISS-usability-ads_frequency(12)
+[2026-10-18 20:04:23] memo: priority=usability; check=pass
+[2026-10-18 20:04:23] export: no interrupted invocation found - checkpoint_before/after not written
+[2026-10-18 20:04:23] export: {'completed': 100, 'quarantined': 0, 'pending': 0} -> /Users/adityasankar/code/AgenticAI/spotify-review-pipeline/runs/pilot100/grading
+[2026-10-18 20:04:23] === invocation 1 ended: completed; completed=100 pending=0 quarantined=0 spent=$0.0376 wall=408.6s
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/pipeline/__main__.py", line 3, in <module>
+    main()
+  File "/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/pipeline/cli.py", line 214, in main
+    sys.exit(a.fn(a) or 0)
+             ^^^^^^^
+  File "/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/pipeline/cli.py", line 78, in cmd_run
+    status = asyncio.run(_model_stages(store, opts, stages, inv, phase, log, run_dir, timings))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/adityasankar/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/adityasankar/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/adityasankar/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/pipeline/cli.py", line 131, in _model_stages
+    await prov.close()
+  File "/Users/adityasankar/code/AgenticAI/spotify-review-pipeline/pipeline/providers.py", line 189, in close
+    closer = getattr(self._jev, "aclose", None) or getattr(self._jev, "close")
+          ^^^^^^^^^^^^^^^
+AttributeError: 'AsyncTypeSafeClient' object has no attribute 'close'. Did you mean: 'aclose'?
+[2026-10-18 20:04:23] === invocation 2 (resume) run=pilot100 stages=['ingest', 'enrich', 'verify', 'group', 'rank', 'recommend', 'export'] opts={'batch_size': 50, 'transport': 'batch', 'batch_requests': 200, 'poll_seconds': 10, 'workers': 1, 'jev_rps': 8.0, 'jev_concurrency': 16, 'budget_usd': 0.5, 'max_attempts': 4, 'max_minutes': 0, 'verify_sample': 20, 'verify_seed': 'verify-seed-v1'}
+[2026-10-18 20:04:23] ingest: already ingested /Users/adityasankar/code/AgenticAI/spotify-review-pipeline/data/raw/cost_100.csv - skipping (state is reused)
+[2026-10-18 20:04:23] enrich: 0 distinct pending texts -> 0 requests (<= 50 reviews each); transport=batch workers=1 retry_round=0; label_config=enrich-v2|claude-haiku-5-5:effort=low,thinking=disabled,max_tokens=2000:enrich-codes-v1|extract-v2|schema-v1|prompts=48fd9d6b
+[2026-10-18 20:04:23] verify: reusing cached verifier output for 20 sampled records (0 new calls)
+[2026-10-18 20:04:23] verify: 20 sampled; agreement {'topic': 0.95, 'intent': 0.95, 'severity_exact': 0.8, 'severity_mae': 0.2, 'sentiment_within_0.5': 1.0}; 1 disagreements flagged
+[2026-10-18 20:04:23] group: reusing cached issue names for 16 issues (0 new calls)
+[2026-10-18 20:04:23] group: 50 complaint/cancellation records -> 16 issues (membership.csv, issues.json)
+[2026-10-18 20:04:23] rank: 16 issues ranked from 50 memberships; top = ISS-other-general_negative(22), ISS-billing-free_tier_restrictions(21), ISS-usability-ads_frequency(12)
+[2026-10-18 20:04:23] memo: reusing cached memo for identical evidence pack (0 new calls)
+[2026-10-18 20:04:23] memo: priority=usability; check=pass
+[2026-10-18 20:04:23] export: no interrupted invocation found - checkpoint_before/after not written
+[2026-10-18 20:04:23] export: wrote ingestion_report.json and data_manifest.json (git 39601dc1, uncommitted pipeline changes: True)
+[2026-10-18 20:04:23] export: {'completed': 100, 'quarantined': 0, 'pending': 0} -> /Users/adityasankar/code/AgenticAI/spotify-review-pipeline/runs/pilot100/grading
+[2026-10-18 20:04:23] === invocation 2 ended: completed; completed=100 pending=0 quarantined=0 spent=$0.0376 wall=0.1s
+{
+ "input_sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
+ "ids": 100,
+ "verify_sample": 20,
+ "pilot_started": "2026-10-18 19:57:34 PDT",
+ "command": "-m pipeline run --input /Users/adityasankar/code/AgenticAI/spotify-review-pipeline/data/raw/cost_100.csv --run pilot100 --workers 1 --transport batch --poll-seconds 10 --verify-sample 20 --budget-usd 0.5",
+ "cold": {
+  "wall_clock_s": 408.79,
+  "exit_code": 1,
+  "workers": 1,
+  "completed": 100,
+  "quarantined": 0,
+  "pending": 0,
+  "cache_hits": 0,
+  "stage_seconds": {
+   "ingest": 0.0,
+   "enrich": 384.1,
+   "verify": 2.47,
+   "group": 7.57,
+   "rank": 0.0,
+   "recommend": 14.41,
+   "export": 0.01,
+   "wall_clock_total": 408.59
+  }
+ },
+ "warm": {
+  "wall_clock_s": 0.14,
+  "exit_code": 0,
+  "workers": 1,
+  "completed": 100,
+  "quarantined": 0,
+  "pending": 0,
+  "cache_hits": 0,
+  "stage_seconds": {
+   "ingest": 0.0,
+   "enrich": 0.0,
+   "verify": 0.0,
+   "group": 0.0,
+   "rank": 0.0,
+   "recommend": 0.0,
+   "export": 0.05,
+   "wall_clock_total": 0.07
+  },
+  "new_enrich_calls": 0,
+  "new_other_calls": 0
+ },
+ "unique_texts": 100
+}
+# 100-review cost and runtime calculator
+
+Generated offline from `cost/pilot_calls.jsonl` + `rates.csv` (no API key, no model calls). Pilot run: 2026-10-18 19:57:34 PDT.
+
+## 1. Measured pilot (cost_100.csv, unchanged)
+
+- Input SHA-256 `c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e` (matches manifest: True); 100 source IDs; 100 unique nonempty texts
+- **cold**: wall-clock **408.8 s**, workers 1, completed 100, quarantined 0, pending 0, result-cache hits 0, exit code 1
+- **warm**: wall-clock **0.1 s**, workers 1, completed 100, quarantined 0, pending 0, result-cache hits 0, exit code 0
+- Warm rerun: **0 new enrichment calls**; downstream calls in warm run: 0 (verify/group/memo outputs are cached by input + config hash)
+- Declared verification sample: 20 records (seeded hash order); enrichment retry policy: invalid/missing lines retried once, then quarantined
+
+### Per stage (cold run)
+
+| stage | provider | model (resolved) | tier | settings | prompt/schema | reviews/request | workers | requests ok | attempts | failed | review slots | input | cache write | cache read | output | cost | unknown charges |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| enrich | anthropic | claude-haiku-5-5 | batch | `{"effort": "low", "max_tokens": 2000, "thinking": "disabled", "tier": "batch"}` | enrich-codes-v1 | <=50 | 1 | 2 | 2 | 0 | 100 | 4,537 | 3,104 | 3,104 | 1,777 | $0.000881 | 0 |
+| verify | typesafe | jev-1.13.0 | n/a | `{"retry": "pipeline", "timeout_s": 30}` | jev-q-v2 | 1 | 1 | 20 | 20 | 0 | 20 | 15,284 | 0 | 0 | 3,927 | $0.000642 | 0 |
+| group | anthropic | claude-haiku-5-5 | standard | `{"effort": "low", "max_tokens": 8000, "thinking": "disabled"}` | group-v1 | aggregate pack | 1 | 1 | 1 | 0 | 0 | 5,107 | 701 | 0 | 1,389 | $0.001293 | 0 |
+| memo | anthropic | claude-sonnet-5-5 | standard | `{"effort": "medium", "max_tokens": 12000, "thinking": "adaptive"}` | memo-v1 | aggregate pack | 1 | 1 | 1 | 0 | 0 | 6,164 | 1,198 | 0 | 1,944 | $0.0348 | 0 |
+
+**API spend: cold $0.0376, warm (incremental) $0.000000.** Local compute (MacBook, ingestion + validation + SQLite): **unknown, not metered** (not counted as $0).
+
+### Billing arithmetic (cold run): item cost = billed units x price per unit
+
+| rate key | item | billed units | USD per 1M | item cost | price source (checked) |
+|---|---|---|---|---|---|
+| claude-haiku-5-5 | cache_write_tokens | 701 | 0.1250 | $0.000088 | https://platform.claude.com/docs/en/about-claude/pricing (2026-10-18) |
+| claude-haiku-5-5 | input_tokens | 5,107 | 0.1000 | $0.000511 | https://platform.claude.com/docs/en/about-claude/pricing (2026-10-18) |
+| claude-haiku-5-5 | output_tokens | 1,389 | 0.5000 | $0.000695 | https://platform.claude.com/docs/en/about-claude/pricing (2026-10-18) |
+| claude-haiku-5-5:batch | cache_read_tokens | 3,104 | 0.0050 | $0.000016 | https://platform.claude.com/docs/en/build-with-claude/batch-processing (2026-10-18) |
+| claude-haiku-5-5:batch | cache_write_tokens | 3,104 | 0.0625 | $0.000194 | https://platform.claude.com/docs/en/build-with-claude/batch-processing (2026-10-18) |
+| claude-haiku-5-5:batch | input_tokens | 4,537 | 0.0500 | $0.000227 | https://platform.claude.com/docs/en/build-with-claude/batch-processing (2026-10-18) |
+| claude-haiku-5-5:batch | output_tokens | 1,777 | 0.2500 | $0.000444 | https://platform.claude.com/docs/en/build-with-claude/batch-processing (2026-10-18) |
+| claude-sonnet-5-5 | cache_write_tokens | 1,198 | 2.5000 | $0.002995 | https://platform.claude.com/docs/en/about-claude/pricing (2026-10-18) |
+| claude-sonnet-5-5 | input_tokens | 6,164 | 2.0000 | $0.0123 | https://platform.claude.com/docs/en/about-claude/pricing (2026-10-18) |
+| claude-sonnet-5-5 | output_tokens | 1,944 | 10.0000 | $0.0194 | https://platform.claude.com/docs/en/about-claude/pricing (2026-10-18) |
+| jev-latest | input_tokens | 15,284 | 0.0420 | $0.000642 | https://www.eesel.ai/blog/typesafe-jev-pricing (TypeSafe homepage price $42 per billion input tokens; no official pricing page found) (2026-10-18) |
+| jev-latest | output_tokens | 3,927 | 0.0000 | $0.000000 | https://www.eesel.ai/blog/typesafe-jev-pricing (2026-10-18) |
+
+### Unit metrics
+
+- Cost per 1,000 input rows: **$0.3758**; per completed record: $0.000376
+- Enrichment only: $0.000009 per distinct text (45.4 input + 17.8 output tokens per review; 3104 cached system-prompt tokens per request); same usage at standard tier would be $0.000018
+- Throughput: cold 0.24 records/s end to end (dominated by Message Batch turnaround 383 s); warm 714.3 records/s
+- Stage seconds (cold): {"ingest": 0.0, "enrich": 384.1, "verify": 2.47, "group": 7.57, "rank": 0.0, "recommend": 14.41, "export": 0.01, "wall_clock_total": 408.59}
+- Summed call latencies are not used as wall-clock time; wall-clock is measured around each whole run.
+
+## 2. Full-run projection (estimate, not measured)
+
+Scope: 660,622 rows accounted for; 660,609 nonempty classifications; 13 empty-text quarantines; exact-text reuse reduces first-pass work to 484,189 distinct texts.
+
+Controls: total budget **$9.00** (Anthropic cap $4.50, TypeSafe cap $4.50); max in-flight Message Batches (workers) **4**; 200 requests per batch; output-token cap **2000** per request; max retry/fallback fraction **5%** (same model; no stronger-model fallback is configured); verify sample 200; Jev rate 8.0/s.
+
+| scenario | texts | retry | requests | batches | enrich $ | verify $ | group+memo $ | **total $** | enrich at standard tier $ | worst case at output cap $ | hours | budget |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| base | 484,189 | 1% | 9,781 | 49 | 4.31 | 0.0065 | 0.0361 | **4.35** | 8.61 | 6.60 | 1.4 | ok |
+| base_no_reuse | 660,609 | 1% | 13,345 | 67 | 5.88 | 0.0065 | 0.0361 | **5.92** | 11.75 | 9.01 | 1.8 | **OVER BUDGET** |
+| conservative | 484,189 | 5% | 10,168 | 51 | 4.48 | 0.0067 | 0.0361 | **4.52** | 8.95 | 6.86 | 4.2 | **OVER BUDGET** |
+| conservative_no_reuse | 660,609 | 5% | 13,874 | 70 | 6.11 | 0.0067 | 0.0361 | **6.15** | 12.22 | 9.36 | 5.8 | **OVER BUDGET** |
+
+Assumptions: per-text enrichment cost, retry fraction and batch turnaround are the measured means of the source run (pilot unless calibrated); base retry = max(measured, 1%) capped by the fallback cap; conservative retry = max(3x measured, 5%, cap) and 3x batch turnaround. Time = ceil(batches / workers) x turnaround + verify + fixed overhead (ingest, group, memo once). Verification and group/memo are never multiplied by the review count.
+
+## Batching and caching: what each word means here
+
+- **CSV chunks** (memory): ingestion streams the CSV into SQLite; this does not affect API cost.
+- **Multi-review requests**: each enrichment request carries <= 50 reviews, so the ~3k-token instructions are paid once per 50 reviews; every returned id is validated.
+- **Provider Batch API**: those requests are submitted through the Message Batches API at 50% of standard price, with asynchronous turnaround (measured above).
+- **Saved-result cache** (ours): exact review text + identical label_config reuses one validated result (`cache_source_id`); every original ID stays a separate record.
+- **Provider prompt caching** (Anthropic's): the repeated system prompt is billed at cache-write/cache-read rates when the provider reports it; only reported usage is counted.
+
+## Replay
+- Offline (default): `python cost/calculator.py` (edit `cost/rates.csv` or pass flags)
+- Paid pilot (explicit): `python cost/calculator.py pilot --confirm-paid`
+- Self-test (offline): `python cost/calculator.py selftest` (2x rates -> 2x API cost, same time; projected volume does not change measured results)
+

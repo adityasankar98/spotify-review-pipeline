@@ -1,6 +1,9 @@
 """Golden-set evaluation (offline, no model calls).
 
+    python evals/golden_eval.py --from-run full      # export the full run's predictions for the 50 IDs, then evaluate
     python evals/golden_eval.py                       # evaluates every evals/golden/predictions_*.jsonl
+The enrichment setup was chosen and frozen on development data before this evaluation was run; the golden
+labels were not used to choose prompts, thresholds or models.
 Compares predictions against evals/golden/golden_50_human.csv (human labels; never a model input).
 Ambiguous cases may list accepted alternates (alt_topics / alt_intents / alt_severities, '|' separated).
 Missing predictions count as incorrect.
@@ -111,7 +114,31 @@ def load_preds(path):
     return {json.loads(l)["review_id"]: json.loads(l) for l in open(path, encoding="utf-8") if l.strip()}
 
 
+def export_run_predictions(run):
+    """Write predictions_final.jsonl from a run database's saved records (reads only the 50 golden IDs)."""
+    import sqlite3
+    ids = [r["review_id"] for r in csv.DictReader(open(G / "golden_50_input.csv", encoding="utf-8", newline=""))]
+    con = sqlite3.connect(ROOT / "data" / "state" / f"{run}.sqlite")
+    con.row_factory = sqlite3.Row
+    rows = {r["review_id"]: r for r in con.execute(
+        f"SELECT * FROM records WHERE review_id IN ({','.join('?' * len(ids))})", ids)}
+    with open(G / "predictions_final.jsonl", "w", encoding="utf-8") as f:
+        for rid in ids:
+            r = rows.get(rid)
+            if r is None or r["status"] != "completed":
+                continue        # missing/quarantined predictions count as incorrect in evaluate()
+            f.write(json.dumps({"review_id": rid, "topic": r["topic"], "intent": r["intent"], "severity": r["severity"],
+                                "sentiment": r["sentiment"], "evidence_quote": r["evidence_quote"],
+                                "entities": json.loads(r["entities"] or "[]"), "needs_review": bool(r["needs_review"]),
+                                "subtopic": r["subtopic"], "label_config": r["label_config"],
+                                "cache_source_id": r["cache_source_id"]}, ensure_ascii=False) + "\n")
+    print(f"exported {sum(1 for r in rows.values() if r['status'] == 'completed')} completed predictions of {len(ids)} from run '{run}'")
+
+
 def main():
+    import sys
+    if "--from-run" in sys.argv:
+        export_run_predictions(sys.argv[sys.argv.index("--from-run") + 1])
     human, total = load_human()
     print(f"human-labeled cases: {len(human)} / {total}")
     if len(human) < total:

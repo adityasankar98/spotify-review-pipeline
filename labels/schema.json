@@ -1,0 +1,194 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "schema-v1",
+ "title": "Enriched review record (grading/records.jsonl and enriched.jsonl.gz)",
+ "description": "One record per source review_id. Completed records carry validated labels; quarantined records carry a reason. Validated in code (pipeline/enrich.py parse/commit, pipeline/export.py).",
+ "oneOf": [
+  {
+   "title": "completed",
+   "type": "object",
+   "additionalProperties": true,
+   "required": [
+    "review_id",
+    "source_sha256",
+    "status",
+    "topic",
+    "intent",
+    "sentiment",
+    "severity",
+    "entities",
+    "evidence_quote",
+    "needs_review",
+    "label_config"
+   ],
+   "properties": {
+    "review_id": {
+     "type": "string",
+     "description": "original source ID, unchanged"
+    },
+    "source_sha256": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$",
+     "description": "SHA-256 of compact UTF-8 JSON of the six original field strings (course row_sha helper)"
+    },
+    "status": {
+     "const": "completed"
+    },
+    "topic": {
+     "enum": [
+      "access",
+      "usability",
+      "playback",
+      "downloads",
+      "catalog",
+      "billing",
+      "support",
+      "other"
+     ]
+    },
+    "subtopic": {
+     "enum": [
+      "access.login_failure",
+      "access.account_locked_or_hacked",
+      "access.signup_verification",
+      "usability.ads_frequency",
+      "usability.ui_navigation",
+      "usability.library_playlist_queue",
+      "usability.controls_widgets",
+      "usability.other",
+      "playback.crash_freeze",
+      "playback.stops_pauses_skips",
+      "playback.connection_errors",
+      "playback.devices_bluetooth_car_cast",
+      "playback.audio_quality_volume",
+      "playback.performance_battery_data",
+      "playback.other",
+      "downloads.downloads_disappear",
+      "downloads.download_failure_offline",
+      "downloads.other",
+      "catalog.missing_content",
+      "catalog.search_discovery",
+      "catalog.recommendations",
+      "catalog.lyrics",
+      "catalog.podcasts_audiobooks",
+      "catalog.content_policy",
+      "catalog.other",
+      "billing.free_tier_restrictions",
+      "billing.price_cost",
+      "billing.charges_refunds",
+      "billing.premium_entitlement",
+      "billing.other",
+      "support.unreachable",
+      "support.unhelpful",
+      "other.general_negative",
+      "other.general_positive",
+      "other.unrelated_unclear"
+     ],
+     "description": "optional custom subtopic; prefix must equal topic"
+    },
+    "intent": {
+     "enum": [
+      "cancellation",
+      "complaint",
+      "request",
+      "praise",
+      "unclear"
+     ],
+     "description": "precedence cancellation > complaint > request > praise > unclear"
+    },
+    "sentiment": {
+     "type": "number",
+     "minimum": -1,
+     "maximum": 1,
+     "description": "model code -2..2 mapped by code to -1..1 (x/2)"
+    },
+    "severity": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 5
+    },
+    "entities": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "description": "explicitly named features/devices/services, matched by code; each is a case-insensitive substring of the text"
+    },
+    "evidence_quote": {
+     "type": "string",
+     "minLength": 1,
+     "description": "exact substring of review_text, extracted by code"
+    },
+    "needs_review": {
+     "type": "boolean"
+    },
+    "label_config": {
+     "type": "string",
+     "description": "model + effort/thinking + max_tokens + prompt version + extractor + schema + prompt digest"
+    },
+    "cache_source_id": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "description": "set when the labels were reused from a completed record with identical text and identical label_config"
+    }
+   }
+  },
+  {
+   "title": "quarantined",
+   "type": "object",
+   "additionalProperties": true,
+   "required": [
+    "review_id",
+    "source_sha256",
+    "status",
+    "reason"
+   ],
+   "properties": {
+    "review_id": {
+     "type": "string"
+    },
+    "source_sha256": {
+     "type": "string"
+    },
+    "status": {
+     "const": "quarantined"
+    },
+    "reason": {
+     "type": "string",
+     "minLength": 1,
+     "description": "empty_review_text, or enrichment_failed: <validation problem> after one retry"
+    }
+   }
+  }
+ ],
+ "model_output_line": {
+  "format": "<id> <topic> <subtopic> <intent> <severity> <sentiment> <needs_review>",
+  "regex": "^(r\\d+)\\s+([AUPDCBSO])\\s+([a-z_]+)\\s+([XCRPU])\\s+([1-5])\\s+(-2|-1|0|1|2)\\s+([01])\\s*$",
+  "topic_codes": {
+   "A": "access",
+   "U": "usability",
+   "P": "playback",
+   "D": "downloads",
+   "C": "catalog",
+   "B": "billing",
+   "S": "support",
+   "O": "other"
+  },
+  "intent_codes": {
+   "X": "cancellation",
+   "C": "complaint",
+   "R": "request",
+   "P": "praise",
+   "U": "unclear"
+  },
+  "validation": [
+   "id must be one of the request's local ids (r1..r50), each exactly once",
+   "codes must match the regex",
+   "subtopic must be listed under the topic, else set to the topic default and logged",
+   "consistency rules: praise/request/unclear -> severity 1; complaint -> severity >= 2 (logged)",
+   "missing or malformed lines -> one retry round, then quarantine with the reason"
+  ]
+ }
+}

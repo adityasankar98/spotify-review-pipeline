@@ -88,4 +88,55 @@ def run(store, prov, opts, run_dir, log):
         (g / "checkpoint_after.json").write_text(json.dumps({"invocation": invs[-1]["invocation"], "completed_ids": after_ids}))
     else:
         log("export: no interrupted invocation found - checkpoint_before/after not written")
+    _write_manifest(store, run_dir, log)
     log(f"export: {n} -> {g}")
+
+
+COURSE_EXPECTED = {"records": 660622, "empty_review_text": 13, "missing_app_version": 159701, "duplicate_review_ids": 0,
+                   "distinct_nonempty_texts": 484189,
+                   "file_sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6"}
+
+
+def _sha(path):
+    import hashlib
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def _write_manifest(store, run_dir, log):
+    """ingestion_report.json (full-file profile + check against the course's published counts) and
+    data_manifest.json (ties source checksum, code version, prompts, models, settings and outputs together)."""
+    import subprocess
+    rep = dict(store.get_meta("ingestion_report") or {})
+    if rep.get("file_sha256") == COURSE_EXPECTED["file_sha256"]:
+        rep["course_expected_check"] = {k: {"expected": v, "observed": rep.get(k), "match": rep.get(k) == v}
+                                        for k, v in COURSE_EXPECTED.items()}
+    (run_dir / "ingestion_report.json").write_text(json.dumps(rep, indent=1, ensure_ascii=False))
+
+    def git(*a):
+        try:
+            return subprocess.run(["git", *a], cwd=settings.ROOT, capture_output=True, text=True, timeout=10).stdout.strip()
+        except Exception:  # noqa: BLE001
+            return None
+    dirty = git("status", "--porcelain", "--", "pipeline", "prompts", "labels", "cost/calculator.py")
+    outputs = {}
+    for f in sorted(run_dir.rglob("*")):
+        if f.is_file() and f.name != "data_manifest.json" and "checkpoints" not in f.parts:
+            outputs[str(f.relative_to(run_dir))] = {"bytes": f.stat().st_size, "sha256": _sha(f)}
+    inv = [dict(r) for r in store.db.execute("SELECT invocation, phase, status, started_at, ended_at, completed_before, completed_after FROM invocations")]
+    man = {"run_id": run_dir.name, "source": {"path": store.get_meta("input_path"), "sha256": store.get_meta("input_sha256"),
+                                              "rows": store.count()},
+           "code_version": {"git_commit": git("rev-parse", "HEAD"), "uncommitted_changes_in_pipeline_code": bool(dirty)},
+           "label_config": settings.LABEL_CONFIG,
+           "models": {"enrich": settings.HAIKU, "verify": settings.JEV_MODEL, "group": settings.HAIKU, "memo": settings.SONNET},
+           "resolved_models": sorted({r[0] for r in store.db.execute("SELECT DISTINCT model_resolved FROM calls WHERE model_resolved IS NOT NULL")}),
+           "prompts": {f.name: _sha(f) for f in sorted(settings.PROMPTS.glob("*")) if f.is_file()},
+           "labels": {f.name: _sha(f) for f in sorted(settings.LABELS.glob("*.json"))},
+           "defaults": settings.DEFAULTS, "provider_caps_usd": settings.PROVIDER_CAPS_USD,
+           "invocations": inv, "outputs": outputs}
+    (run_dir / "data_manifest.json").write_text(json.dumps(man, indent=1, default=str))
+    log(f"export: wrote ingestion_report.json and data_manifest.json (git {str(man['code_version']['git_commit'])[:8]}, "
+        f"uncommitted pipeline changes: {man['code_version']['uncommitted_changes_in_pipeline_code']})")
