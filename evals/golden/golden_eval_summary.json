@@ -1,0 +1,34 @@
+{
+ "setup": "final",
+ "cases": 50,
+ "missing_predictions": 0,
+ "ambiguous_cases": 2,
+ "topic_agreement": 0.62,
+ "intent_agreement": 0.74,
+ "joint_topic_intent_severity": 0.46,
+ "severity_exact": 0.68,
+ "severity_mae": 0.38,
+ "sentiment_mae": 0.24,
+ "sentiment_within_0.5": 0.94,
+ "quote_exact_substring_rate": 1.0,
+ "unsupported_entity_additions": 0,
+ "needs_review": {
+  "tp": 6,
+  "fp": 6,
+  "fn": 0
+ },
+ "topic_macro_f1_unambiguous": 0.464,
+ "intent_macro_f1_unambiguous": 0.491,
+ "topic_confusion": {
+  "access->playback": 1,
+  "catalog->other": 4,
+  "other->catalog": 2,
+  "other->usability": 2,
+  "playback->billing": 1,
+  "playback->usability": 1,
+  "usability->billing": 3,
+  "usability->downloads": 1,
+  "usability->other": 3,
+  "usability->playback": 1
+ }
+}
