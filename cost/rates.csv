@@ -1,12 +1,16 @@
 model,item,usd_per_unit,unit_size,unit,currency,tier,source,checked_date,notes
-jev-latest,input_tokens,0.042,1000000,tokens,USD,standard,https://www.eesel.ai/blog/typesafe-jev-pricing (TypeSafe homepage price $42 per billion input tokens; no official pricing page found),2026-10-13,"Secondary-source rate; output is free. Reconcile with the TypeSafe console bill."
-jev-latest,output_tokens,0.0,1000000,tokens,USD,standard,https://www.eesel.ai/blog/typesafe-jev-pricing,2026-10-13,Output tokens are not billed
-claude-haiku-5-5,input_tokens,0.10,1000000,tokens,USD,standard (prompt <=100K),https://platform.claude.com/docs/en/about-claude/pricing,2026-10-13,Uncached input only
-claude-haiku-5-5,cache_write_tokens,0.125,1000000,tokens,USD,standard 5m cache write (1.25x),https://platform.claude.com/docs/en/about-claude/pricing,2026-10-13,
-claude-haiku-5-5,cache_read_tokens,0.01,1000000,tokens,USD,standard cache read (0.1x),https://platform.claude.com/docs/en/about-claude/pricing,2026-10-13,
-claude-haiku-5-5,output_tokens,0.50,1000000,tokens,USD,standard,https://platform.claude.com/docs/en/about-claude/pricing,2026-10-13,Includes any thinking tokens (billed as output)
-claude-sonnet-5-5,input_tokens,2.00,1000000,tokens,USD,standard,https://platform.claude.com/docs/en/about-claude/pricing,2026-10-13,
-claude-sonnet-5-5,cache_write_tokens,2.50,1000000,tokens,USD,standard 5m cache write,https://platform.claude.com/docs/en/about-claude/pricing,2026-10-13,
-claude-sonnet-5-5,cache_read_tokens,0.20,1000000,tokens,USD,standard cache read,https://platform.claude.com/docs/en/about-claude/pricing,2026-10-13,
-claude-sonnet-5-5,output_tokens,10.00,1000000,tokens,USD,standard,https://platform.claude.com/docs/en/about-claude/pricing,2026-10-13,Includes thinking tokens
-local,compute_seconds,0.0,1,seconds,USD,n/a,local MacBook Air (no metered cost),2026-10-13,"Local CPU/electricity not metered: reported as unknown, not zero, in the report"
+jev-latest,input_tokens,0.042,1000000,tokens,USD,standard,https://www.eesel.ai/blog/typesafe-jev-pricing (TypeSafe homepage price $42 per billion input tokens; no official pricing page found),2026-10-18,"Secondary-source rate; output is free. Reconcile with the TypeSafe console bill."
+jev-latest,output_tokens,0.0,1000000,tokens,USD,standard,https://www.eesel.ai/blog/typesafe-jev-pricing,2026-10-18,Output tokens are not billed
+claude-haiku-5-5,input_tokens,0.10,1000000,tokens,USD,standard (prompt <=100K),https://platform.claude.com/docs/en/about-claude/pricing,2026-10-18,Uncached input only
+claude-haiku-5-5,cache_write_tokens,0.125,1000000,tokens,USD,standard 5m cache write (1.25x),https://platform.claude.com/docs/en/about-claude/pricing,2026-10-18,
+claude-haiku-5-5,cache_read_tokens,0.01,1000000,tokens,USD,standard cache read (0.1x),https://platform.claude.com/docs/en/about-claude/pricing,2026-10-18,
+claude-haiku-5-5,output_tokens,0.50,1000000,tokens,USD,standard,https://platform.claude.com/docs/en/about-claude/pricing,2026-10-18,Includes any thinking tokens (billed as output)
+claude-haiku-5-5:batch,input_tokens,0.05,1000000,tokens,USD,Message Batches API (50% of standard),https://platform.claude.com/docs/en/build-with-claude/batch-processing,2026-10-18,Uncached input; batch discount applies to all token usage
+claude-haiku-5-5:batch,cache_write_tokens,0.0625,1000000,tokens,USD,Message Batches API 5m cache write,https://platform.claude.com/docs/en/build-with-claude/batch-processing,2026-10-18,Caching in batches is best-effort
+claude-haiku-5-5:batch,cache_read_tokens,0.005,1000000,tokens,USD,Message Batches API cache read,https://platform.claude.com/docs/en/build-with-claude/batch-processing,2026-10-18,
+claude-haiku-5-5:batch,output_tokens,0.25,1000000,tokens,USD,Message Batches API (50% of standard),https://platform.claude.com/docs/en/build-with-claude/batch-processing,2026-10-18,
+claude-sonnet-5-5,input_tokens,2.00,1000000,tokens,USD,standard,https://platform.claude.com/docs/en/about-claude/pricing,2026-10-18,
+claude-sonnet-5-5,cache_write_tokens,2.50,1000000,tokens,USD,standard 5m cache write,https://platform.claude.com/docs/en/about-claude/pricing,2026-10-18,
+claude-sonnet-5-5,cache_read_tokens,0.20,1000000,tokens,USD,standard cache read,https://platform.claude.com/docs/en/about-claude/pricing,2026-10-18,
+claude-sonnet-5-5,output_tokens,10.00,1000000,tokens,USD,standard,https://platform.claude.com/docs/en/about-claude/pricing,2026-10-18,Includes thinking tokens
+local,compute_seconds,0.0,1,seconds,USD,n/a,local MacBook Air (no metered cost),2026-10-18,"Local CPU/electricity not metered: reported as unknown, not zero, in the report"

@@ -38,9 +38,85 @@ class MockJev:
         pass
 
 
+_TL = {"access": "A", "usability": "U", "playback": "P", "downloads": "D", "catalog": "C", "billing": "B", "other": "O"}
+_SUB = {"access": "login_failure", "usability": "ads_frequency", "playback": "crash_freeze", "downloads": "downloads_disappear",
+        "catalog": "missing_content", "billing": "free_tier_restrictions", "other": "general_negative"}
+
+
+def _code_lines(user):
+    items = json.loads(user.split("<reviews>\n", 1)[1].rsplit("\n</reviews>", 1)[0])
+    out = []
+    for it in items:
+        t = it["text"].lower()
+        topic = next((k for k, rx in KW if re.search(rx, t)), "other")
+        neg = bool(re.search(r"not|n't|bad|worst|hate|stop|crash|annoy", t))
+        intent = "C" if neg else ("P" if re.search(r"good|great|love|best|nice", t) else "U")
+        sub = _SUB[topic] if (neg or topic != "other") else ("general_positive" if intent == "P" else "unrelated_unclear")
+        out.append(f"{it['id']} {_TL[topic]} {sub} {intent} {3 if neg else 1} {-1 if neg else 1} 0")
+    return "\n".join(out)
+
+
+def _msg(model, text, user, system):
+    sys_len = sum(len(b["text"]) for b in system) if isinstance(system, list) else len(system)
+    return SimpleNamespace(content=[SimpleNamespace(type="text", text=text)], stop_reason="end_turn", model=model + "-mock",
+                           _request_id=f"mock-{uuid.uuid4()}",
+                           usage=SimpleNamespace(input_tokens=len(user) // 4, output_tokens=len(text) // 4,
+                                                 cache_read_input_tokens=sys_len // 4, cache_creation_input_tokens=0))
+
+
+class _Batches:
+    """File-backed mock of the Message Batches API so interrupt/resume can be tested across processes."""
+    DIR = None
+
+    def _dir(self):
+        from . import settings
+        d = settings.STATE_DIR / "mock_batches"
+        d.mkdir(parents=True, exist_ok=True)
+        return d
+
+    async def create(self, requests):
+        bid = f"msgbatch_mock_{uuid.uuid4().hex[:12]}"
+        res = []
+        for r in requests:
+            p = r["params"]
+            text = _code_lines(p["messages"][0]["content"])
+            res.append({"custom_id": r["custom_id"], "text": text, "user": p["messages"][0]["content"], "model": p["model"],
+                        "system_len": sum(len(b["text"]) for b in p["system"])})
+        polls = int(__import__("os").environ.get("MOCK_BATCH_POLLS", "1"))
+        (self._dir() / f"{bid}.json").write_text(json.dumps({"results": res, "polls_left": polls}))
+        return SimpleNamespace(id=bid, processing_status="in_progress")
+
+    async def retrieve(self, bid):
+        f = self._dir() / f"{bid}.json"
+        d = json.loads(f.read_text())
+        status = "ended" if d["polls_left"] <= 0 else "in_progress"
+        d["polls_left"] -= 1
+        f.write_text(json.dumps(d))
+        n = len(d["results"])
+        return SimpleNamespace(id=bid, processing_status=status, request_counts=SimpleNamespace(
+            processing=0 if status == "ended" else n, succeeded=n if status == "ended" else 0, errored=0))
+
+    async def results(self, bid):
+        d = json.loads((self._dir() / f"{bid}.json").read_text())
+
+        async def gen():
+            for r in d["results"]:
+                msg = SimpleNamespace(content=[SimpleNamespace(type="text", text=r["text"])], stop_reason="end_turn",
+                                      model=r["model"] + "-mock",
+                                      usage=SimpleNamespace(input_tokens=len(r["user"]) // 4, output_tokens=len(r["text"]) // 4,
+                                                            cache_read_input_tokens=r["system_len"] // 4, cache_creation_input_tokens=0))
+                yield SimpleNamespace(custom_id=r["custom_id"], result=SimpleNamespace(type="succeeded", message=msg))
+        return gen()
+
+
 class _Messages:
-    async def create(self, model, system, messages, output_config, max_tokens, **kw):
+    def __init__(self):
+        self.batches = _Batches()
+
+    async def create(self, model, system, messages, max_tokens, output_config=None, **kw):
         user = messages[0]["content"]
+        if "format" not in (output_config or {}):
+            return _msg(model, _code_lines(user), user, system)
         req = output_config["format"]["schema"]["required"]
         if "results" in req:
             items = json.loads(user.split("<reviews>\n", 1)[1].rsplit("\n</reviews>", 1)[0])

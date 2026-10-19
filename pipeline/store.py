@@ -6,6 +6,8 @@ Tables
   calls        every attempted model call (success or failure) with usage and cost
   invocations  each start/stop of the program against this database (initial vs resume)
   artifacts    cached downstream outputs (verify/group/memo) keyed by input+config hash
+  batches      submitted Message Batches: id, which review IDs each request carries, status. An interrupted
+               run leaves open batches here; a resume collects their results instead of resubmitting.
 """
 import json
 import sqlite3
@@ -35,6 +37,9 @@ CREATE TABLE IF NOT EXISTS invocations(
   completed_before INTEGER, completed_after INTEGER);
 CREATE TABLE IF NOT EXISTS artifacts(key TEXT PRIMARY KEY, kind TEXT, created_at REAL, payload TEXT);
 CREATE TABLE IF NOT EXISTS meta(k TEXT PRIMARY KEY, v TEXT);
+CREATE TABLE IF NOT EXISTS batches(
+  batch_id TEXT PRIMARY KEY, invocation INTEGER, submitted_at REAL, ended_at REAL, status TEXT NOT NULL,
+  request_count INTEGER, requests TEXT, reserved_usd REAL, label_config TEXT, retry_round INTEGER DEFAULT 0);
 """
 
 

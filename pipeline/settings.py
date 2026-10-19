@@ -23,8 +23,9 @@ SONNET = "claude-sonnet-5-5"
 MODEL_ALLOWLIST = {JEV_MODEL, HAIKU, SONNET}
 
 # ---- prompt / schema versions ----
-JEV_QUESTIONS_VERSION = "jev-q-v2"  # compact set for the $10 budget (v1 kept for reference)
-FALLBACK_PROMPT_VERSION = "fallback-v1"
+ENRICH_PROMPT_VERSION = "enrich-codes-v1"  # Haiku primary enricher, coded one-line-per-review output
+JEV_QUESTIONS_VERSION = "jev-q-v2"  # Jev questions, now used by the independent verifier
+FALLBACK_PROMPT_VERSION = "fallback-v1"  # superseded JSON prompt; kept for the measured format comparison
 VERIFY_PROMPT_VERSION = "verify-v1"
 GROUP_PROMPT_VERSION = "group-v1"
 MEMO_PROMPT_VERSION = "memo-v1"
@@ -39,33 +40,36 @@ def _prompt_digest(*names):
     return h.hexdigest()[:8]
 
 
-# label_config names everything that determines a completed classification: the Jev questions,
-# the deterministic quote/entity extractor, the Haiku fallback prompt and its routing thresholds.
-# Exact-text cache reuse is only valid when this whole string is identical.
-LABEL_CONFIG = (f"enrich-v1|{JEV_MODEL}:{JEV_QUESTIONS_VERSION}|{HAIKU}:effort=low,thinking=disabled:{FALLBACK_PROMPT_VERSION}"
-                f"|{EXTRACT_VERSION}|{SCHEMA_VERSION}|prompts={_prompt_digest('jev_questions_v2.json', 'enrich_fallback_v1.md')}")
+# label_config names everything that determines a completed classification: model, effort/thinking,
+# the enrichment prompt, the deterministic quote/entity extractor and the record schema.
+# Exact-text cache reuse is only valid when this whole string is identical. The transport
+# (Batch API vs. synchronous Messages API) changes price and turnaround, not the request, so it is not part of it.
+ENRICH_MAX_TOKENS = 2000          # output cap per enrichment request (<=50 reviews, ~15-20 tokens each)
+LABEL_CONFIG = (f"enrich-v2|{HAIKU}:effort=low,thinking=disabled,max_tokens={ENRICH_MAX_TOKENS}:{ENRICH_PROMPT_VERSION}"
+                f"|{EXTRACT_VERSION}|{SCHEMA_VERSION}|prompts={_prompt_digest('enrich_codes_v1.md')}")
 
 import os as _os
 if _os.environ.get("PIPELINE_MOCK") == "1":
     LABEL_CONFIG = "MOCK|" + LABEL_CONFIG  # mock runs can never be confused with real classifications
 
-# ---- routing thresholds (chosen on development data, never on golden labels) ----
-FALLBACK_TOPIC_CONF = 0.35       # Jev topic confidence below this -> fallback candidate
-FALLBACK_INTENT_CONF = 0.35
 QUOTE_FULLTEXT_MAX_CHARS = 280   # short reviews use the full text as evidence quote
 
-# ---- project-wide spend cap: every run database's logged spend counts against it ----
-TOTAL_BUDGET_USD = 10.0
+# ---- project-wide spend caps: every run database's logged spend counts against them ----
+# Out-of-pocket limit is $10 ($5 prepaid Anthropic + $5 prepaid TypeSafe, auto-reload off). The code stops
+# earlier, leaving room for estimate error and delayed billing.
+PROVIDER_CAPS_USD = {"anthropic": 4.50, "typesafe": 4.50}
+TOTAL_BUDGET_USD = sum(PROVIDER_CAPS_USD.values())
 
 # ---- default run controls (overridable on the CLI) ----
 DEFAULTS = {
-    "batch_size": 50,             # max reviews per enrichment batch / per Haiku request (contract limit 50)
-    "workers": 1,                 # concurrent batches
+    "batch_size": 50,             # max reviews per enrichment request (contract limit 50)
+    "transport": "batch",         # batch = Message Batches API (50% price, async); sync = Messages API
+    "batch_requests": 200,        # enrichment requests per submitted Message Batch (200 x 50 = 10,000 reviews)
+    "poll_seconds": 20,           # Message Batch status polling interval
+    "workers": 1,                 # concurrent in-flight Message Batches (sync transport: concurrent requests)
     "jev_rps": 8.0,               # global Jev request rate limit
     "jev_concurrency": 16,        # max in-flight Jev requests across workers
     "budget_usd": 2.0,            # per-run spend cap: spent + reserved + next reservation must stay below this
-    "max_fallback_fraction": 0.03,  # cap on texts routed to the Haiku fallback
-    "fallback_max_tokens": 6000,  # output-token cap per fallback request (<=50 reviews)
     "max_attempts": 4,            # transient-error attempts per call (1 + 3 retries, backoff + jitter)
     "max_minutes": 0,             # wall-clock cap; 0 = none
     "verify_sample": 200,
