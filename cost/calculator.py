@@ -379,8 +379,17 @@ def pilot(args):
     if sha != PILOT_SHA:
         sys.exit("cost_100.csv checksum mismatch")
     run = "pilot100"
-    for p in (ROOT / f"data/state/{run}.sqlite", ROOT / f"data/state/{run}.sqlite-wal", ROOT / f"data/state/{run}.sqlite-shm"):
-        p.unlink(missing_ok=True)          # empty result cache for the cold run
+    # empty result cache for the cold run; an earlier pilot database is archived (not deleted) so its logged
+    # spend keeps counting toward the project-wide provider caps
+    db = ROOT / f"data/state/{run}.sqlite"
+    if db.exists():
+        import sqlite3
+        con = sqlite3.connect(db)
+        con.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+        con.close()
+        db.rename(ROOT / f"data/state/archived_{run}_{time.strftime('%Y%m%d_%H%M%S')}.sqlite")
+    for p in (ROOT / f"data/state/{run}.sqlite-wal", ROOT / f"data/state/{run}.sqlite-shm"):
+        p.unlink(missing_ok=True)
     shutil.rmtree(ROOT / "runs" / run, ignore_errors=True)
     base = [sys.executable, "-m", "pipeline", "run", "--input", str(PILOT_INPUT), "--run", run, "--workers", "1",
             "--transport", "batch", "--poll-seconds", "10", "--verify-sample", str(args.pilot_verify),
