@@ -17,3 +17,5 @@ runs/full/grading/
 runs/full/enriched.jsonl.gz
 runs/full/calls_full.jsonl
 runs/full/checkpoints/inv[2-9]_*.json
+.vercel
+.env*

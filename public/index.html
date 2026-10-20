@@ -132,6 +132,11 @@ dialog::backdrop{background:rgba(0,0,0,.35)}
     <div class="card"><form id="lookup" style="display:flex;gap:8px;flex-wrap:wrap">
       <input id="rid" placeholder="review_id (UUID)" style="flex:1;min-width:220px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);color:var(--ink)">
       <button class="btn">Open</button></form></div>
+  <section>
+    <h2>Run evidence</h2>
+    <div class="card"><p>Interruption/resume of the full run, recorded as a real terminal session:
+      <a href="/recording.html">play the recording</a>. Source code, saved outputs, evaluations and the grading export:
+      <a href="https://github.com/adityasankar98/spotify-review-pipeline">github.com/adityasankar98/spotify-review-pipeline</a>.</p></div>
   </section>
 </div>
 <div id="tip"></div>
@@ -216,17 +221,17 @@ async function main(){
     const [ov,iss,tr]=await Promise.all([get("/api/overview"),get("/api/issues"),get("/api/trends")]);
     CLAIMS=Object.fromEntries(ov.claims.map(c=>[c.claim_id,c]));
     const m=ov.meta, rs=m.run_summary||{}, rec=rs.records||{};
-    const st=Object.fromEntries(ov.status.map(s=>[s.status,s.n]));const total=(st.completed||0)+(st.quarantined||0);
+    const qreasons=rs=>{const g={};for(const [r,n] of Object.entries(rs.quarantine_reasons||{})){const k=r.split(":")[0];g[k]=(g[k]||0)+n;}return Object.entries(g);};const st=Object.fromEntries(ov.status.map(s=>[s.status,s.n]));const total=(st.completed||0)+(st.quarantined||0);
     $("runmeta").textContent=`run: ${rs.run} · input sha256 ${rs.input_sha256} · label_config ${rs.label_config}`;
     const complaints=iss.issues.reduce((a,b)=>a+b.complaint_count,0);
     const v=m.verify_report||{}, g=m.golden_eval||{};
     const k=[["Source reviews",fmt(total),"all IDs accounted for"],["Classified",fmt(st.completed||0),`${(100*(st.completed||0)/total).toFixed(3)}% of rows`],
-      ["Quarantined",fmt(st.quarantined||0),Object.entries(rs.quarantine_reasons||{}).map(([r,n])=>`${r.split(":")[0]}: ${n}`).join(", ")],
+      ["Quarantined",fmt(st.quarantined||0),qreasons(rs).map(([r,n])=>`${r}: ${fmt(n)}`).join(", ")],
       ["Exact-text reuse",fmt(rec.completed_via_cache||0),"completed without a new model call"],
       ["Complaints + cancellations",fmt(complaints),`${iss.issues.length} issues`],
       ["Verifier agreement",v.agreement?`${(100*v.agreement.topic).toFixed(0)}% topic`:"—",v.sample_size?`n=${v.sample_size} blind re-labels`:""],
       ["Golden-set agreement",g.topic_agreement!=null?`${(100*g.topic_agreement).toFixed(0)}% topic`:"—",g.intent_agreement!=null?`intent ${(100*g.intent_agreement).toFixed(0)}% · sev MAE ${g.severity_mae}`:""],
-      ["API spend (all stages)",rs.spent_usd_total!=null?"$"+Number(rs.spent_usd_total).toFixed(2):"—","logged per call"]];
+      ["API spend (full run, all stages)",rs.spent_usd_total!=null?"$"+Number(rs.spent_usd_total).toFixed(2):"—","logged per call"]];
     $("kpis").innerHTML=k.map(([l,v2,s])=>`<div class="card kpi"><div class="l">${esc(l)}</div><div class="v">${esc(v2)}</div><div class="s">${esc(s)}</div></div>`).join("");
     const head=ov.recommendations.find(r=>r.kind==="headline");
     const chk=m.memo_check||{};
@@ -244,7 +249,7 @@ async function main(){
     $("issues").querySelectorAll("tr.row").forEach(r=>r.onclick=()=>openIssue(r.dataset.issue));
     $("memo").innerHTML=mdToHtml(m.memo_markdown||"No memo stored.");
     const cmp=m.trends_comparison||{};
-    $("quality").innerHTML=`<p>Completed <b>${fmt(st.completed||0)}</b> of ${fmt(total)} source rows; quarantined ${fmt(st.quarantined||0)} (${Object.entries(rs.quarantine_reasons||{}).map(([r,n])=>esc(r)+": "+n).join("; ")}). Records flagged needs_review: ${fmt(rec.needs_review||0)}.</p>
+    $("quality").innerHTML=`<p>Completed <b>${fmt(st.completed||0)}</b> of ${fmt(total)} source rows; quarantined ${fmt(st.quarantined||0)} (${qreasons(rs).map(([r,n])=>esc(r)+": "+fmt(n)).join("; ")}; each reason is kept per record in quarantine.jsonl). Records flagged needs_review: ${fmt(rec.needs_review||0)}.</p>
       <p>Independent verifier (${esc(v.verifier_model||"")}, blind to first labels, n=${v.sample_size||"—"}): ${v.agreement?Object.entries(v.agreement).map(([a,b])=>esc(a)+" "+b).join(" · "):"—"}.</p>
       <p>Golden set (50 human labels): ${g.cases?`topic ${g.topic_agreement}, intent ${g.intent_agreement}, severity exact ${g.severity_exact}, severity MAE ${g.severity_mae}`:"—"}.</p>
       <p class="small">Models: ${esc(JSON.stringify(rs.models||{}))}. Stars are metadata and never used as labels. Cancellation language is stated intent, not observed churn. Reviews are self-selected public feedback; no revenue or plan data.</p>`;

@@ -1,6 +1,8 @@
 """Load a finished run's saved outputs into Postgres (Neon) for the dashboard backend. No model calls.
 
-    python tools/load_db.py --run full            # reads DATABASE_URL from .env
+    python tools/load_db.py --run full            # reads DATABASE_URL_ADMIN (owner) and DATABASE_URL (API role) from .env
+
+The owner role creates the tables; the API role (DATABASE_URL, used by the deployed backend) is granted SELECT only.
 
 Tables are dropped and recreated inside one transaction, so the dashboard never sees a partial load.
 """
@@ -47,9 +49,15 @@ def main():
     ap.add_argument("--run", default="full")
     a = ap.parse_args()
     load_dotenv(ROOT / ".env")
-    url = os.environ.get("DATABASE_URL")
+    api_url = os.environ.get("DATABASE_URL")
+    url = os.environ.get("DATABASE_URL_ADMIN") or api_url
     if not url:
-        sys.exit("DATABASE_URL is not set in .env")
+        sys.exit("DATABASE_URL_ADMIN (or DATABASE_URL) is not set in .env")
+    # Neon: the pooled host (-pooler) suits the serverless API; a bulk COPY uses the direct host
+    url = url.replace("-pooler.", ".", 1)
+    from urllib.parse import urlparse
+    api_role = urlparse(api_url).username if api_url else None
+    owner_role = urlparse(url).username
     run_dir = ROOT / "runs" / a.run
     st = sqlite3.connect(ROOT / "data/state" / f"{a.run}.sqlite")
     member = {}
@@ -111,6 +119,9 @@ def main():
             for k, v in meta.items():
                 con.execute("INSERT INTO run_meta VALUES(%s,%s)", (k, json.dumps(v)))
             con.execute(POST)
+            if api_role and api_role != owner_role:   # least privilege: the deployed API can only read
+                con.execute(f'GRANT USAGE ON SCHEMA public TO "{api_role}"')
+                con.execute(f'GRANT SELECT ON ALL TABLES IN SCHEMA public TO "{api_role}"')
         cnt = con.execute("SELECT count(*), count(*) FILTER (WHERE status='completed') FROM reviews").fetchone()
     print(f"loaded {n} reviews (db count {cnt[0]}, completed {cnt[1]}), {len(agg)} issues, {len(claims)} claims, "
           f"{len(memo['cards'])} recommendation cards")
