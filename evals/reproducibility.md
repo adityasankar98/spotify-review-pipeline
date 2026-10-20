@@ -8,7 +8,7 @@
 | Interruption and resume (full run) | SIGINT after the first batches were collected; identical command rerun ([recording](../runs/full/recording/)) | completed 206,059 → 660,503; 5 open batches collected, not resubmitted; **0** of the 8,135 enrichment calls submitted by the resume contain a review ID completed before the interrupt |
 | Spend controls | ledger reserves worst-case cost before each batch; per-provider caps $4.50 | admission paused and resumed under a tight cap (simulated test) and never exceeded a cap in real runs; logged spend matches both provider consoles (`cost/reconciliation.json`) |
 | Retry / recovery controls | system tests T4 (injected 429 → backoff → success) and T5 (malformed output → one retry → quarantine) on real APIs | pass ([system/report.md](system/report.md)) |
-| Memo ↔ saved calculations | `python tools/check_memo.py` | 26 claim-cited numbers equal their saved values; all other numbers in the evidence pack; 4 review IDs exist with verbatim quotes |
+| Memo ↔ saved calculations | `python tools/check_memo.py` (final memo; `--memo memo_ai_original.md` for the AI draft) | 23/23 (final) and 27/27 (AI draft) claim-cited numbers equal their saved values; all other numbers in the evidence pack; 4 review IDs each exist with verbatim quotes |
 
 Model outputs are not perfectly deterministic (one development review flipped between praise and complaint across two test
 runs). Reproducibility therefore comes from saved, versioned results (`label_config`) rather than from re-asking the model.

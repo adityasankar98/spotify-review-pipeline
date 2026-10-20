@@ -90,7 +90,11 @@ dialog::backdrop{background:rgba(0,0,0,.35)}
   <section><h2>Overall metrics</h2><div class="kpis" id="kpis"></div></section>
 
   <section>
-    <h2>AI-generated recommendation</h2>
+    <h2>Final recommendation (student-revised)</h2>
+    <div class="card" id="finalrec"><span class="small">Loading…</span></div>
+  </section>
+  <section>
+    <h2>AI-generated recommendation (original draft)</h2>
     <div class="card" id="rec"><span class="small">Loading…</span></div>
     <div class="cards" id="reccards"></div>
   </section>
@@ -120,6 +124,7 @@ dialog::backdrop{background:rgba(0,0,0,.35)}
   <section>
     <h2>Decision memo</h2>
     <div class="card memo" id="memo"><span class="small">Loading…</span></div>
+    <details class="card memo" style="margin-top:12px"><summary><b>AI-generated draft memo (original, before student revision)</b></summary><div id="memoai"></div></details>
   </section>
 
   <section>
@@ -247,7 +252,12 @@ async function main(){
     lineChart($("trend"),months,series);
     $("issues").querySelector("tbody").innerHTML=iss.issues.map(i=>`<tr class="row" data-issue="${esc(i.issue_id)}"><td>${i.rank}</td><td><b>${esc(i.name)}</b><div class="small">${esc(i.issue_id)}</div></td><td>${esc(i.topic)}</td><td class="num">${fmt(i.complaint_count)}</td><td class="num">${(+i.mean_severity).toFixed(3)}</td><td class="num"><b>${fmt(i.priority_score)}</b></td><td class="num">${esc(i.share_pct)}%</td><td class="num">${fmt(i.cancellation_count)}</td><td class="num">${fmt(i.severity_4plus_count)}</td></tr>`).join("");
     $("issues").querySelectorAll("tr.row").forEach(r=>r.onclick=()=>openIssue(r.dataset.issue));
-    $("memo").innerHTML=mdToHtml(m.memo_markdown||"No memo stored.");
+    $("memo").innerHTML=mdToHtml(m.final_memo_markdown||m.memo_markdown||"No memo stored.");
+    $("memoai").innerHTML=mdToHtml(m.memo_markdown||"No AI memo stored.");
+    const fin=ov.recommendations.find(r=>r.kind==="final"), fchk=m.final_memo_check||{};
+    $("finalrec").innerHTML=fin?`<div class="rec-head"><div><span class="pill">Final priority</span><div class="area">${esc(AREA_LABEL[fin.priority_area]||fin.priority_area)}</div></div>
+      <div style="flex:1;min-width:260px"><p style="margin:0 0 6px">${esc(fin.body)}</p><div>${(fin.claim_ids||[]).map(chipClaim).join("")}${(fin.review_ids||[]).map(chipReview).join("")}</div>
+      <div class="small" style="margin-top:6px">Revised by the student from the AI-generated draft below, after reviewing the evidence. The baseline ranking is unchanged; this recommendation departs from it on severity and revenue grounds (see memo). Offline number/citation check (tools/check_memo.py): <span class="${fchk.status==="pass"?"ok":"fail"}">${esc(fchk.status||"?")}</span>.</div></div></div>`:"No final recommendation stored (showing the AI draft below).";
     const cmp=m.trends_comparison||{};
     $("quality").innerHTML=`<p>Completed <b>${fmt(st.completed||0)}</b> of ${fmt(total)} source rows; quarantined ${fmt(st.quarantined||0)} (${qreasons(rs).map(([r,n])=>esc(r)+": "+fmt(n)).join("; ")}; each reason is kept per record in quarantine.jsonl). Records flagged needs_review: ${fmt(rec.needs_review||0)}.</p>
       <p>Independent verifier (${esc(v.verifier_model||"")}, blind to first labels, n=${v.sample_size||"—"}): ${v.agreement?Object.entries(v.agreement).map(([a,b])=>esc(a)+" "+b).join(" · "):"—"}.</p>

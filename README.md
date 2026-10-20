@@ -15,8 +15,12 @@ recomputed **without an API key**.
 
 ## Results summary (final full run)
 
-**Recommendation: billing/support first, led by free-tier restrictions (ISS-billing-free_tier_restrictions), then ads
-frequency, with playback stops/skips as the leading alternative.** Full argument: [memo.md](memo.md).
+**Final recommendation: fund playback reliability first** (music that stops/pauses/skips and crashes/freezes). Playback has 15,390
+blocked-core-task complaints [T022] vs. 4,853 for billing/support [T010]. Free-tier restrictions, the top *specific* issue in the
+baseline ranking (47,460 complaints [C005]), go to a measured pricing experiment, because reviews can't show their revenue effect.
+Full argument: [memo.md](memo.md) (student-revised final memo). The AI-generated draft, which recommended billing/support
+by following the baseline order, is kept verbatim in [memo_ai_original.md](memo_ai_original.md), and its cards remain on the dashboard.
+Both memos pass `python tools/check_memo.py` (23/23 and 27/27 claim-cited numbers equal the saved calculations).
 
 | | value | source |
 |---|---|---|
@@ -43,8 +47,8 @@ Cost evidence: measured 100-review cold/warm report [cost/report.md](cost/report
 |---|---|
 | **D1** accessible code, setup and artifacts | [Setup](#setup-and-commands); [requirements.txt](requirements.txt); [.env.example](.env.example); all outputs committed under `runs/`, `grading/`, `cost/`, `evals/` |
 | **D2** architecture, shared schema, provenance | [Architecture](#architecture); [labels/taxonomy.json](labels/taxonomy.json), [labels/subtopics.json](labels/subtopics.json), [labels/schema.json](labels/schema.json); `label_config` + `source_sha256` + `cache_source_id` on every record; [runs/full/data_manifest.json](runs/full/data_manifest.json) |
-| **D3** memo numbers ↔ calculations ↔ evidence | [memo.md](memo.md) cites `claims.csv` IDs (C###, T###); [runs/full/memo_check.json](runs/full/memo_check.json) (code check at generation) and `python tools/check_memo.py` (offline re-check of memo.md: 26 claim-cited numbers, 4 review IDs); [One review traced end to end](#one-review-traced-end-to-end) |
-| **D4** recommendation, alternatives, limitations | [memo.md](memo.md); [Limitations](#limitations) |
+| **D3** memo numbers ↔ calculations ↔ evidence | [memo.md](memo.md) (final) and [memo_ai_original.md](memo_ai_original.md) (AI draft) cite `claims.csv` IDs (C###, T###); [runs/full/memo_check.json](runs/full/memo_check.json) (code check at generation) and `python tools/check_memo.py` (offline re-check: final memo 23/23, AI draft 27/27 claim-cited numbers; 4 review IDs each); [One review traced end to end](#one-review-traced-end-to-end) |
+| **D4** recommendation, alternatives, limitations | [memo.md](memo.md): reconciles the recommendation with the baseline ranking, compares billing/support, access and usability, lists limitations; [final_recommendation.json](final_recommendation.json); [Limitations](#limitations) |
 | **T1** 50 human labels, per-field comparison, error analysis | [evals/golden/golden_50_human.csv](evals/golden/golden_50_human.csv); [evals/golden/eval_final.json](evals/golden/eval_final.json) (per case and per field); [evals/failure_analysis.md](evals/failure_analysis.md); [Golden-set evaluation](#golden-set-evaluation) |
 | **T2** independent verification + planted-error + injection tests | [runs/full/verify/](runs/full/verify/); [evals/system/report.md](evals/system/report.md) (T2 injection, T6 planted error) |
 | **T3** real 100-review cold/warm pilot, offline calculator, retry/spend/recovery controls | [cost/README.md](cost/README.md); [cost/report.md](cost/report.md); [evals/reproducibility.md](evals/reproducibility.md); `python cost/calculator.py` (offline); `python cost/calculator.py selftest`; [evals/system/report.md](evals/system/report.md) T4–T5; [resume recording](#interruption-and-resume) |
@@ -153,8 +157,9 @@ song I wanerd to play and an update later I cannot even choose a song of my choi
 4. **Issue membership:** `membership.csv` row `ISS-billing-free_tier_restrictions,126a881a-…` (one issue per review).
 5. **Ranking:** that issue has 47,460 members, severity sum 138,070, mean 2.909187, score 138,070: rank 2 overall, the top specific
    issue (`ranking.csv`; claims C005–C008). Rebuilding the ranking from saved files reproduces it byte for byte.
-6. **Memo claim:** "Free-tier restrictions have 47,460 complaints [C005], a severity sum of 138,070 [C006]…". `memo_check.json`
-   confirms every number and ID in the memo exists in the evidence pack. On the dashboard, the review lookup (`/api/review?id=126a881a-2462-458b-a8eb-064b4cd0f7d4`) returns this record and its issue.
+6. **Memo claim:** the final memo's evidence for its decision cites this issue directly: "Free-tier restrictions (47,460 complaints [C005],
+   mean severity 2.909187 [C007]) make up most of billing/support's 58,239 complaints [T007]". This is the issue the memo argues should go
+   to a pricing experiment rather than engineering effort. `python tools/check_memo.py` confirms each cited number equals the saved calculation. On the dashboard, the review lookup (`/api/review?id=126a881a-2462-458b-a8eb-064b4cd0f7d4`) returns this record and its issue.
 
 **A failed case:** review `03d3048d-e50b-4bdd-8da6-885612dfb89d` ("Over limit ads"). The model returned `r22 U U ads_frequency C 2 -1 0`
 (a doubled topic code) on the first attempt and again on the retry. The line fails validation, so the review was **quarantined**
@@ -246,9 +251,10 @@ Keys live only in a local `.env` (ignored by git); `.env.example` is blank.
   loads; the deployed API uses a **read-only** role (verified: writes are rejected).
 - **Backend:** Vercel serverless functions in [api/](api/) (`/api/overview`, `/api/issues`, `/api/issue?id=…`, `/api/review?id=…`,
   `/api/trends`, `/api/health`). Fixed, parameterized SELECTs; IDs validated; the database URL is a server-side env var.
-- **Dashboard:** [public/index.html](public/index.html) shows overall metrics, priority by product area, monthly complaint shares, the
-  baseline issue ranking (click an issue → member reviews and quotes), the AI-generated recommendation with clickable claim IDs
-  and review IDs, quality/coverage figures and a review lookup. The numbers match `ranking.csv` and `claims.csv`.
+- **Dashboard:** [public/index.html](public/index.html) shows overall metrics, the final (student-revised) recommendation, the
+  **AI-generated recommendation and cards** (original draft, with the code check status), priority by product area, monthly complaint
+  shares, the baseline issue ranking (click an issue → member reviews and quotes), both memos, quality/coverage figures and a
+  review lookup. Every recommendation shows clickable claim IDs and review IDs. The numbers match `ranking.csv` and `claims.csv`.
 - **Database setup:** create a free Neon project. Put the **owner** role's connection string (`neondb_owner`) in `.env` as
   `DATABASE_URL_ADMIN`, and a second, non-owner role's string (we use `app_user`) as `DATABASE_URL`. `python tools/load_db.py --run full`
   creates the tables as owner and grants the API role `SELECT` only. On Vercel, set only `DATABASE_URL` (`vercel env add DATABASE_URL production`).

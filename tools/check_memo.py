@@ -21,7 +21,12 @@ evidence = json.dumps(json.load(open(run / "memo_evidence_pack.json")))
 ev_nums = {n.replace(",", "") for n in re.findall(r"\d[\d,]*(?:\.\d+)?", evidence)}
 norm = lambda n: n.replace(",", "").rstrip("%")
 problems, ok = [], 0
-for num, cid in re.findall(r"(\d[\d,]*(?:\.\d+)?)%?\s*(?:complaints?|records?|cancellation-language records?|severity 4\+ records?)?\s*\[([CT]\d{3})\]", text):
+# a claim tag binds to the nearest number before it in the same clause (up to 60 non-digit characters in between)
+cited = re.findall(r"(\d[\d,]*(?:\.\d+)?)(?![\d+])%?(?:[^\[\]\d(]|\d\+){0,60}\[([CT]\d{3})\]", text)   # "severity 4+" is a label, not a value
+tags = re.findall(r"\[([CT]\d{3})\]", text)
+if len(cited) != len(tags):
+    problems.append(f"{len(tags) - len(cited)} claim tag(s) without a number right before them")
+for num, cid in cited:
     if cid not in claims:
         problems.append(f"unknown claim {cid}")
     elif norm(num) != claims[cid].rstrip("%") and float(norm(num)) != float(claims[cid]):
@@ -65,6 +70,6 @@ for line in text.splitlines():
         if not all(p in texts[rid] for p in parts):
             problems.append(f"quote for {rid} not found verbatim in the review text: {q[:60]}")
 missing = [r for r in rids if r not in texts]
-print(f"claim-cited numbers verified: {ok}; review ids cited: {len(rids)} (missing: {len(missing)}); issue ids: {len(set(re.findall(r'ISS-[a-z_]+-[a-z_]+', text)))}")
+print(f"claim tags: {len(tags)}; claim-cited numbers verified: {ok}; review ids cited: {len(rids)} (missing: {len(missing)}); issue ids: {len(set(re.findall(r'ISS-[a-z_]+-[a-z_]+', text)))}")
 print("numbers not found in saved evidence:", unsourced or "none")
 print("problems:", problems or "none")

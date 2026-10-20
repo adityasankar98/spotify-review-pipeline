@@ -89,6 +89,12 @@ def main():
             "trends_comparison": json.loads((run_dir / "trends_comparison.json").read_text()) if (run_dir / "trends_comparison.json").exists() else None,
             "golden_eval": json.loads((ROOT / "evals/golden/golden_eval_summary.json").read_text()) if (ROOT / "evals/golden/golden_eval_summary.json").exists() else None,
             "memo_markdown": (run_dir / "memo.md").read_text(), "memo_check": check}
+    import subprocess
+    chk = subprocess.run([sys.executable, str(ROOT / "tools" / "check_memo.py"), "--run", a.run], capture_output=True, text=True)
+    final_check = "pass" if (chk.returncode == 0 and "problems: none" in chk.stdout) else "fail"
+    if (ROOT / "memo.md").exists():
+        meta["final_memo_markdown"] = (ROOT / "memo.md").read_text()
+        meta["final_memo_check"] = {"status": final_check, "tool": "tools/check_memo.py", "output": chk.stdout.strip()}
     s = meta["run_summary"]
     meta["run_summary"] = {k: s[k] for k in ("run", "label_config", "input_sha256", "records", "quarantine_reasons", "spent_usd_total", "models", "prompt_versions")}
     with psycopg.connect(url) as con:
@@ -116,6 +122,12 @@ def main():
                 con.execute("INSERT INTO recommendations(kind, priority_area, title, body, claim_ids, review_ids, model, check_status) "
                             "VALUES('card',%s,%s,%s,%s,%s,%s,%s)", (memo["priority_area"], c["title"], c["rationale"], c["claim_ids"],
                                                                     c["review_ids"], "claude-sonnet-5-5", check["status"]))
+            fr = ROOT / "final_recommendation.json"
+            if fr.exists():   # student-revised final recommendation (the AI original stays in the 'headline'/'card' rows)
+                f = json.loads(fr.read_text())
+                con.execute("INSERT INTO recommendations(kind, priority_area, title, body, claim_ids, review_ids, model, check_status) "
+                            "VALUES('final',%s,%s,%s,%s,%s,%s,%s)", (f["priority_area"], f["title"], f["summary"], f["claim_ids"],
+                                                                     f["review_ids"], f["revised_by"], final_check))
             for k, v in meta.items():
                 con.execute("INSERT INTO run_meta VALUES(%s,%s)", (k, json.dumps(v)))
             con.execute(POST)

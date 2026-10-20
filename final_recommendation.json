@@ -1,0 +1,13 @@
+{
+  "status": "final",
+  "revised_by": "student (human review of the AI-generated draft)",
+  "priority_area": "playback",
+  "title": "Fund playback reliability first",
+  "summary": "Fix music that stops, pauses or skips by itself and crashes/freezes first: playback has 15,390 complaints where a core task is blocked [T022] versus 4,853 for billing/support [T010], at a higher mean severity, and the failures hit paying users with no revenue trade-off. Free-tier restrictions (47,460 complaints [C005]) are a deliberate paywall whose upgrade effect reviews cannot see: test packaging in a measured experiment instead of funding a rollback.",
+  "claim_ids": ["C013", "C015", "C017", "C019", "T022", "T010", "T021", "T009", "C005"],
+  "review_ids": ["58af4b3e-a46c-49ef-a177-74786ae9767e", "d3dcc154-712b-4b06-8612-c1bdb90f2eed"],
+  "alternatives": ["billing_support (free-tier pricing experiment)", "access (login failure)", "usability"],
+  "memo": "memo.md",
+  "ai_original_memo": "memo_ai_original.md",
+  "check": "python tools/check_memo.py"
+}
