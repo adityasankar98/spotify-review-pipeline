@@ -1,0 +1,10 @@
+{
+  "checked_on": "2026-10-19",
+  "method": "Student compared the provider console usage pages with the pipeline's logged spend (sum of cost_usd over every real call in every run database).",
+  "anthropic": {"logged_usd": 3.84, "console_usd": 3.84, "match": true},
+  "typesafe": {"logged_usd": 0.02, "console_usd": 0.02, "match": true},
+  "project_total_usd": 3.86,
+  "prepaid_limits_usd": {"anthropic": 5.0, "typesafe": 5.0},
+  "code_caps_usd": {"anthropic": 4.5, "typesafe": 4.5},
+  "note": "Project total includes the smoke tests, the output-format measurement, system tests, two 100-review pilots, the 500 and 10,000 checkpoints and the full run (full run alone: $3.62 across all stages)."
+}

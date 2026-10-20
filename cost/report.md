@@ -61,12 +61,15 @@ Controls: total budget **$9.00** (Anthropic cap $4.50, TypeSafe cap $4.50); max 
 
 Assumptions: per-text enrichment cost, retry fraction and batch turnaround are the measured means of the source run (pilot unless calibrated); base retry = max(measured, 1%) capped by the fallback cap; conservative retry = max(3x measured, 5%, cap) and 3x batch turnaround. Time = ceil(batches / workers) x turnaround + verify + fixed overhead (ingest, group, memo once). Verification and group/memo are never multiplied by the review count.
 
-## 3. Refreshed estimates from larger development runs
+## 3. Refreshed estimates from larger runs (dev500, dev10k), and the full run's actuals
+
+For `full`, the measured values are actuals; its projection columns re-project from its own unit rates and are a consistency check.
 
 | run | origin texts | enrich $/text | in tok/text | out tok/text | retry | batch turnaround s | base total $ | conservative total $ | conservative hours |
 |---|---|---|---|---|---|---|---|---|---|
 | dev500 | 479 | 0.00000711 | 44.5 | 18.0 | 0.42% | 398 | 3.52 | 3.66 | 2.3 |
 | dev10k | 8,447 | 0.00000714 | 45.2 | 18.2 | 0.19% | 503 | 3.54 | 3.68 | 3.0 |
+| full | 484,083 | 0.00000737 | 48.8 | 18.4 | 0.46% | 454 | 3.66 | 3.80 | 2.7 |
 
 ## Batching and caching: what each word means here
 
@@ -75,6 +78,21 @@ Assumptions: per-text enrichment cost, retry fraction and batch turnaround are t
 - **Provider Batch API**: those requests are submitted through the Message Batches API at 50% of standard price, with asynchronous turnaround (measured above).
 - **Saved-result cache** (ours): exact review text + identical label_config reuses one validated result (`cache_source_id`); every original ID stays a separate record.
 - **Provider prompt caching** (Anthropic's): the repeated system prompt is billed at cache-write/cache-read rates when the provider reports it; only reported usage is counted.
+
+## Reconciliation with provider dashboards
+
+```json
+{
+  "checked_on": "2026-10-19",
+  "method": "Student compared the provider console usage pages with the pipeline's logged spend (sum of cost_usd over every real call in every run database).",
+  "anthropic": {"logged_usd": 3.84, "console_usd": 3.84, "match": true},
+  "typesafe": {"logged_usd": 0.02, "console_usd": 0.02, "match": true},
+  "project_total_usd": 3.86,
+  "prepaid_limits_usd": {"anthropic": 5.0, "typesafe": 5.0},
+  "code_caps_usd": {"anthropic": 4.5, "typesafe": 4.5},
+  "note": "Project total includes the smoke tests, the output-format measurement, system tests, two 100-review pilots, the 500 and 10,000 checkpoints and the full run (full run alone: $3.62 across all stages)."
+}
+```
 
 ## Replay
 - Offline (default): `python cost/calculator.py` (edit `cost/rates.csv` or pass flags)

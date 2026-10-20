@@ -28,13 +28,13 @@ The rule: **models read language; code owns accounting and arithmetic.** A model
 1. **Why Haiku with batches instead of Jev for bulk labeling?** Jev answers one review per request, so our ~730
    tokens of instructions were resent with every review: about $15 for the full run, which is over budget. Haiku reads
    50 reviews per request, so the instructions are paid once per 50. Asking for short codes (`r4 P crash_freeze C 4 -2 0`)
-   instead of JSON cut output from 61 to about 15 tokens per review. The Batch API halves the price again. Result: about
-   $3 projected for the full run (TBD: measured).
+   instead of JSON cut output from 61 to about 15 tokens per review. The Batch API halves the price again. Result: the full
+   run's enrichment measured **$3.57** (the 10k checkpoint had projected $3.54).
 2. **Why is Jev the verifier?** Independence. A second model from a different provider, with different instructions,
    never shown the first answer, catches errors that the same model would just repeat. A sample is enough to measure
    agreement, so it costs pennies.
 3. **Why exact-text caching?** 176k reviews duplicate another review's text ("Good", "Nice app"...). Labeling each
-   distinct text once and copying the result (with `cache_source_id` provenance) cut the work by 27% without merging
+   distinct text once and copying the result (with `cache_source_id` provenance) cut the work by 27% (484k of 660k texts) without merging
    any counts. Every review still counts once in every total.
 
 ## How stop-and-resume works
@@ -46,7 +46,7 @@ the open batches instead of resubmitting them** (no double charge), skips everyt
 ## One failure to talk about (pick one)
 - **Malformed model output** (system test T5): two responses were deliberately garbled. The reviews whose lines
   were missing got one retry round. 3 then completed, and 4 failed twice and were **quarantined with the reason**,
-  never silently dropped and never guessed.
+  never silently dropped and never guessed. In the full run, 106 reviews (0.016%) ended up quarantined this way.
 - **Nondeterminism**: the same review came back *praise* in one test run and *complaint* in another. That's why results are
   cached under a fixed `label_config` and the ranking is rebuilt from saved outputs, not by re-asking the model.
 - **Jev looked cheapest per token but was the most expensive per review**: the per-request overhead dominated.

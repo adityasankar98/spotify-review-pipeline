@@ -201,7 +201,7 @@ def replay(args):
     cal = []
     for rd in args.calibrate or []:
         rd = Path(rd)
-        cc = read_jsonl(rd / "calls_full.jsonl")
+        cc = read_jsonl(rd / "calls_full.jsonl" if (rd / "calls_full.jsonl").exists() else rd / "calls_full.jsonl.gz")
         for c in cc:
             c["run_label"] = "cal"
         summ = json.loads((rd / "run_summary.json").read_text())
@@ -305,7 +305,8 @@ def replay(args):
              "max(3x measured, 5%, cap) and 3x batch turnaround. Time = ceil(batches / workers) x turnaround + verify + fixed "
              "overhead (ingest, group, memo once). Verification and group/memo are never multiplied by the review count.\n")
     if cal:
-        L.append("## 3. Refreshed estimates from larger development runs\n")
+        L.append("## 3. Refreshed estimates from larger runs (dev500, dev10k), and the full run's actuals\n")
+        L.append("For `full`, the measured values are actuals; its projection columns re-project from its own unit rates and are a consistency check.\n")
         L.append("| run | origin texts | enrich $/text | in tok/text | out tok/text | retry | batch turnaround s | base total $ | conservative total $ | conservative hours |")
         L.append("|---|---|---|---|---|---|---|---|---|---|")
         for name, summ, su, uu, pp in cal:
