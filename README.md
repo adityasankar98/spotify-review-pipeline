@@ -9,7 +9,9 @@ checked against saved calculations. Everything a grader needs is saved in this r
 recomputed **without an API key**.
 
 > **Live dashboard:** [spotify-review-pipeline-ten.vercel.app](https://spotify-review-pipeline-ten.vercel.app) (public, no login) · **Final memo:** [memo.md](memo.md) · **Grading export:** [grading/](grading/) ·
-> **Cost calculator:** [cost/report.md](cost/report.md) · **Study guide:** [docs/explain_it.md](docs/explain_it.md)
+> **Cost calculator:** [cost/](cost/README.md) · **Enriched table (76 MB):** [release asset](https://github.com/adityasankar98/spotify-review-pipeline/releases/tag/full-run-2026-10-18) · **Study guide:** [docs/explain_it.md](docs/explain_it.md)
+>
+> **Final full-corpus run:** run ID `full` → [runs/full/](runs/full/) (manifest: [data_manifest.json](runs/full/data_manifest.json), git commit recorded inside). `runs/pilot100`, `runs/dev500` and `runs/dev10k` are the required development checkpoints, each complete for its own input. [cost/attempt1_close_bug/](cost/attempt1_close_bug/) is a failed pilot attempt kept as evidence. No simulated (mock) run is included in this repository.
 
 ## Results summary (final full run)
 
@@ -21,7 +23,7 @@ frequency, with playback stops/skips as the leading alternative.** Full argument
 | Source rows accounted for | **660,622 / 660,622** (0 missing, 0 duplicate) | [grading/records.jsonl.gz](grading/records.jsonl.gz) |
 | Completed classifications | **660,503 / 660,609** nonempty (99.984%) | [runs/full/run_summary.json](runs/full/run_summary.json) |
 | Quarantined | 119 = 13 empty texts + 106 malformed model output after one retry (reasons per record) | [runs/full/quarantine.jsonl](runs/full/quarantine.jsonl) |
-| Exact-text reuse | 176,420 records via `cache_source_id`; 484,083 distinct texts labeled by the model | |
+| Exact-text reuse | 176,420 records via `cache_source_id`; 484,083 distinct texts labeled by the model | [enriched table (release)](https://github.com/adityasankar98/spotify-review-pipeline/releases/tag/full-run-2026-10-18) |
 | Golden-set agreement (50 human labels) | topic 0.62, intent 0.74, severity exact 0.68 (MAE 0.38), sentiment within ±0.5 0.94 | [evals/golden/eval_final.json](evals/golden/eval_final.json), [error analysis](evals/failure_analysis.md) |
 | Independent verifier (Jev, 200 random) | topic 0.75, intent 0.86, severity exact 0.775 (MAE 0.26); 76 flagged | [runs/full/verify/](runs/full/verify/) |
 | Full-run API cost (measured) | **$3.62** (enrich $3.57 over 9,735 calls, verify $0.006, group $0.005, memo $0.04); whole project $3.86, reconciled with both provider consoles | [cost/report.md](cost/report.md), [cost/reconciliation.json](cost/reconciliation.json) |
@@ -30,7 +32,10 @@ frequency, with playback stops/skips as the leading alternative.** Full argument
 | Course self-check | all IDs accounted, 176,420 valid cache reuses, coverage candidate 0.9999; only flag: the 106 quarantined | [evals/self_check.md](evals/self_check.md) |
 
 **Measured vs. estimated:** costs and times above are measured from logged provider usage. Projections live only in
-[cost/report.md](cost/report.md) §2–3 and are labeled as estimates.
+[cost/report.md](cost/report.md) §2–3 and are labeled as estimates. **Accounted for ≠ classified:** all 660,622 rows are accounted for,
+and 660,503 of them are completed classifications; the 119 quarantined rows are *not* classifications.
+
+Cost evidence: measured 100-review cold/warm report [cost/report.md](cost/report.md) §1 · calculator + commands [cost/README.md](cost/README.md) · offline replay `python cost/calculator.py` · dated, editable rates [cost/rates.csv](cost/rates.csv) · per-item arithmetic [cost/usage.csv](cost/usage.csv) · projection assumptions [cost/report.md](cost/report.md) §2 · projection vs. actual §3.
 
 ## Rubric → evidence map
 
@@ -38,14 +43,14 @@ frequency, with playback stops/skips as the leading alternative.** Full argument
 |---|---|
 | **D1** accessible code, setup and artifacts | [Setup](#setup-and-commands); [requirements.txt](requirements.txt); [.env.example](.env.example); all outputs committed under `runs/`, `grading/`, `cost/`, `evals/` |
 | **D2** architecture, shared schema, provenance | [Architecture](#architecture); [labels/taxonomy.json](labels/taxonomy.json), [labels/subtopics.json](labels/subtopics.json), [labels/schema.json](labels/schema.json); `label_config` + `source_sha256` + `cache_source_id` on every record; [runs/full/data_manifest.json](runs/full/data_manifest.json) |
-| **D3** memo numbers ↔ calculations ↔ evidence | [memo.md](memo.md) cites `claims.csv` IDs (C###, T###); [runs/full/memo_check.json](runs/full/memo_check.json) (code check of every number/ID); [One review traced end to end](#one-review-traced-end-to-end) |
+| **D3** memo numbers ↔ calculations ↔ evidence | [memo.md](memo.md) cites `claims.csv` IDs (C###, T###); [runs/full/memo_check.json](runs/full/memo_check.json) (code check at generation) and `python tools/check_memo.py` (offline re-check of memo.md: 26 claim-cited numbers, 4 review IDs); [One review traced end to end](#one-review-traced-end-to-end) |
 | **D4** recommendation, alternatives, limitations | [memo.md](memo.md); [Limitations](#limitations) |
-| **T1** 50 human labels, per-field comparison, error analysis | [evals/golden/golden_50_human.csv](evals/golden/golden_50_human.csv); [evals/golden/eval_final.json](evals/golden/eval_final.json); [Golden-set evaluation](#golden-set-evaluation) |
+| **T1** 50 human labels, per-field comparison, error analysis | [evals/golden/golden_50_human.csv](evals/golden/golden_50_human.csv); [evals/golden/eval_final.json](evals/golden/eval_final.json) (per case and per field); [evals/failure_analysis.md](evals/failure_analysis.md); [Golden-set evaluation](#golden-set-evaluation) |
 | **T2** independent verification + planted-error + injection tests | [runs/full/verify/](runs/full/verify/); [evals/system/report.md](evals/system/report.md) (T2 injection, T6 planted error) |
-| **T3** real 100-review cold/warm pilot, offline calculator, retry/spend/recovery controls | [cost/report.md](cost/report.md); `python cost/calculator.py` (offline); `python cost/calculator.py selftest`; [evals/system/report.md](evals/system/report.md) T4–T5; [resume recording](#interruption-and-resume) |
+| **T3** real 100-review cold/warm pilot, offline calculator, retry/spend/recovery controls | [cost/README.md](cost/README.md); [cost/report.md](cost/report.md); [evals/reproducibility.md](evals/reproducibility.md); `python cost/calculator.py` (offline); `python cost/calculator.py selftest`; [evals/system/report.md](evals/system/report.md) T4–T5; [resume recording](#interruption-and-resume) |
 | **W1** full ingestion, coverage, classification | [runs/full/ingestion_report.json](runs/full/ingestion_report.json) (checked against the course's published counts); `check_submission.py` output in [evals/self_check.md](evals/self_check.md) |
-| **W2** staged program, bounded calls, saved handoffs, resume | `python -m pipeline run --input <csv>`; ≤ 50 reviews per enrichment request; per-stage handoff files in `runs/full/`; [runs/full/recording/](runs/full/recording/) + `grading/checkpoint_before.json` / `checkpoint_after.json` |
-| **W3** reproducible ranking + deployed dashboard on a DB with grounded AI recommendations | `python -m pipeline rank --records grading/records.jsonl.gz --membership grading/membership.csv --out /tmp/rerank`; [Dashboard](#dashboard-backend-and-database) |
+| **W2** staged program, bounded calls, saved handoffs, resume | `python -m pipeline run --input <csv>`; role prompts/inputs/outputs [prompts/README.md](prompts/README.md); ≤ 50 reviews per enrichment request; per-stage handoff files in `runs/full/`; [runs/full/recording/](runs/full/recording/) + `grading/checkpoint_before.json` / `checkpoint_after.json` |
+| **W3** reproducible ranking + deployed dashboard on a DB with grounded AI recommendations | `python -m pipeline rank --records grading/records.jsonl.gz --membership grading/membership.csv --out /tmp/rerank` (byte-identical: [evals/reproducibility.md](evals/reproducibility.md)); [Dashboard](#dashboard-backend-and-database) |
 
 ## Architecture
 
@@ -73,6 +78,9 @@ flowchart LR
   CHK --> OUT[(runs/full/*, grading/,<br/>memo.md)]
   OUT --> LOAD[tools/load_db.py] --> DB[(Neon Postgres)] --> API[Vercel API<br/>api/*.js] --> UI[Dashboard<br/>public/index.html]
 ```
+
+**Roles.** Each role's prompt, model settings, saved input and saved output are listed in [prompts/README.md](prompts/README.md).
+Issue membership is code (`membership.csv`, every member review ID). `issues.json` holds the stable issue IDs, names and example IDs.
 
 **Where code decides vs. where a model judges.** Code chooses the work (pending queue, dedupe, request size, which
 batches to submit, retries, when to stop), and owns every count, sum and rank. Models are called only for language
@@ -174,7 +182,21 @@ contains a review ID completed before the interrupt) and finished the remaining 
 `priority(issue) = complaint_count × mean_severity = severity_sum` over completed **complaint and cancellation** records,
 one issue per review (`allow_multi_issue: false`); sorted by descending score, then ascending issue ID. Means use six
 decimals, half-up. Topic-group totals (billing and support combined as `billing_support`) answer the four-way question.
-Trend comparisons use full calendar months only (May 2022 and Nov 2023 are partial) with denominators.
+Trend comparisons use full calendar months only (May 2022 and Nov 2023 are partial) with denominators
+([runs/full/trends_comparison.json](runs/full/trends_comparison.json), monthly detail in `trends_monthly.csv`):
+
+| complaints + cancellations as % of completed reviews | early: Jun–Nov 2022 (n = 175,690) | late: May–Oct 2023 (n = 301,358) |
+|---|---|---|
+| billing_support | 6,165 (3.51%) | 39,530 (13.12%) |
+| usability | 17,457 (9.94%) | 27,386 (9.09%) |
+| playback | 13,284 (7.56%) | 12,316 (4.09%) |
+| catalog | 5,515 (3.14%) | 10,271 (3.41%) |
+| access | 2,137 (1.22%) | 5,666 (1.88%) |
+| downloads | 2,758 (1.57%) | 2,297 (0.76%) |
+| other (generic) | 5,397 (3.07%) | 71,188 (23.62%) |
+
+The memo's trend sentences quote this table. These are period-level shares, not issue-level baseline metrics, so they have no
+C/T claim IDs; `tools/check_memo.py` confirms every such number is in the saved evidence pack.
 
 ## Limitations
 
@@ -183,6 +205,10 @@ Trend comparisons use full calendar months only (May 2022 and Nov 2023 are parti
 - Stars are metadata only; severity follows the shared definitions, not star ratings.
 - Labels are model judgments with measurable disagreement (verifier, golden set); `needs_review` flags uncertain cases.
 - Timestamps have no timezone; months are bucketed as given.
+- `app_version` is missing for 159,701 rows (24.2%). It is kept as source data and never used for classification, so missing versions block nothing.
+- Incomplete classifications: 106 nonempty reviews are quarantined after malformed model output (reasons and attempts in
+  [runs/full/quarantine.jsonl](runs/full/quarantine.jsonl)). They are excluded from every aggregate, and the memo discloses them.
+- Label noise is material at topic level (golden 0.62, verifier 0.75), concentrated on the generic-vs-specific and billing-vs-usability boundaries.
 - Generic criticism (`other`) is the largest bucket and ranks first under the required formula but is not actionable.
 
 ## Setup and commands
@@ -223,5 +249,8 @@ Keys live only in a local `.env` (ignored by git); `.env.example` is blank.
 - **Dashboard:** [public/index.html](public/index.html) shows overall metrics, priority by product area, monthly complaint shares, the
   baseline issue ranking (click an issue → member reviews and quotes), the AI-generated recommendation with clickable claim IDs
   and review IDs, quality/coverage figures and a review lookup. The numbers match `ranking.csv` and `claims.csv`.
+- **Database setup:** create a free Neon project. Put the **owner** role's connection string (`neondb_owner`) in `.env` as
+  `DATABASE_URL_ADMIN`, and a second, non-owner role's string (we use `app_user`) as `DATABASE_URL`. `python tools/load_db.py --run full`
+  creates the tables as owner and grants the API role `SELECT` only. On Vercel, set only `DATABASE_URL` (`vercel env add DATABASE_URL production`).
 - **Reload after a new run:** `python tools/load_db.py --run full` (needs `DATABASE_URL_ADMIN` and `DATABASE_URL` in `.env`), then
   `vercel deploy --prod`.
